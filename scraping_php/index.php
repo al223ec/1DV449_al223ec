@@ -6,37 +6,48 @@ $dom = new DOMDocument();
 $scrapedPage = performCurlExec($url); 
 
 if(@$dom->loadHTML($scrapedPage)){
-	$xpath = new DOMXPath($dom); 
-	$latestBloggPostLinks = $xpath->query('//ul[@id="blogs-list"]/li/div[@class="action"]/div[@class="meta"]/a');
-	
-	$courses = array(); 
-	$titels =  $xpath->query('//div[@class="item-title"]/a');
-	
-	foreach ($titels as $value) {
-		$courses[] = new Course($value->nodeValue, $value->getAttribute('href'), null);
-	}
+	$courses = loadCourses($dom); 
+	echo "<pre>";
+	print_r($courses); 
 
-	/*
-	foreach ($variable as $key => $value) {
-		if(strpos($latestBloggPostLinks[0]->getAttribute('href'), $value->getAttribute('href')) !== false){
-			$courses[] = new Course(
-				$value->nodeValue, 
-				$value->getAttribute('href'), 
-				$latestBloggPostLink[0]->getAttribute('href')
-				);
-		}
-	}
-	if(strpos($latestBloggPostLinks[0]->getAttribute('href'), $value->getAttribute('href')) !== false){
-		$courses[] = new Course($value->nodeValue, $value->getAttribute('href'), $latestBloggPostLink[0]->getAttribute('href'));
-		array_shift($latestBloggPostLink);
-	} else{
 
-	}*/
-	die();
 } else {
 	die("Kunde inte läsa in sidan"); 
 }
 
+function loadInfo($courses){
+	//<li>Kurskod</li>
+	//<li>URL till kursplanen</li>
+
+	foreach ($courses as $course) {
+		# code...
+	}
+}
+
+function loadCourses($dom){
+	$xpath = new DOMXPath($dom); 
+	$latestBloggPostLinks = $xpath->query('//ul[@id="blogs-list"]/li/div[@class="action"]/div[@class="meta"]/a');
+
+	$titels =  $xpath->query('//div[@class="item-title"]/a');
+	$courses = array(); 
+
+	foreach ($titels as $title) {
+		$course = new Course($title->nodeValue, $title->getAttribute('href')); 
+		$courses[] = $course;
+
+		foreach ($latestBloggPostLinks as $key => $link){
+			//Osnygg lösning 
+			if((strpos($link->getAttribute('href'), $course->getURL()) !== false ||
+				strpos($link->getAttribute('href'), str_replace("https", "http", $course->getURL())) !== false )
+				&& strpos($course->getURL(), "kurs") !== false){
+				//Alla länkar jag vill spara innehåller kurs så bekräftar detta
+				$course->setPostUrl($link->getAttribute('href'));
+				break; 
+			}
+		}
+	}
+	return $courses; 
+}
 
 function performCurlExec($url){
 	$ch = curl_init();
@@ -52,20 +63,31 @@ function performCurlExec($url){
 
 class Course{
 
+	//Kursens namn
 	private $name;
+	//Den URL kurswebbplatsen har
 	private $URL; 
-	private $code; 
-
-	private $coursePlan; 
+	//Kurskod
+	private $courseCode; 
+	//URL till kursplanen
+	private $coursePlanURL; 
+	//Den inledande texten om varje kurs
 	private $text; 
-
+	//Senaste inläggets URL
 	private $postURL; 
 
-	public function __construct($name, $URL, $postURL){
+	public function __construct($name, $URL){
 		$this->name = $name; 
 		$this->URL = $URL;
-		$this->postURL = $postURL; 
 		$this->getInfo($URL); 
+	}
+
+	public function setPostUrl($postURL){
+		$this->postURL = $postURL; 
+	}
+
+	public function getURL(){
+		return $this->URL;
 	}
 
 	private function getInfo($URL){
@@ -74,36 +96,29 @@ class Course{
 		}
 
 		$dom = new DOMDocument(); 
-		var_dump($URL); 
-		/*
-		if($dom->loadHTML($scrapedPage)){
-			$xpath = new DOMXPath($dom); 
-			$items = $xpath->query('//div[@class="item-title"]/a');
-			//Namn //div[@class="item-title"]/a/text()
+		$scrapedPage = performCurlExec($URL); 
 
-		} else {
-			//die("Kunde inte läsa in sidan"); 
+		if(@$dom->loadHTML($scrapedPage)){
+			$xpath = new DOMXPath($dom); 
+
+			//Den inledande texten om varje kurs
+			$entryContent = $xpath->query('//div[@id="content"]/article/div[@class="entry-content"]/p');
+			foreach ($entryContent as $p) {
+				$this->text .= $p->nodeValue . " "; 
+			}
+
+			//Kurskoden
+			$courseCodeDOM = $xpath->query('//div[@id="header-wrapper"]/ul/li/a');
+			if($courseCodeDOM->length !== 0){
+				$this->courseCode = $courseCodeDOM->item($courseCodeDOM->length-1)->nodeValue; 
+			}
+
+			
 		}
-		*/
 	}
 }
 
 /*
-<p>Skrapningen ska ske på ett, för servern, så skonsamt sätt som möjligt samt ha en utarbetad strategi för caching.</p>
-
-<h2>Val av teknik</h2>
-
-<p>Du är helt fri att välja teknik, programmeringsspråk och servermiljö. Fokus på denna uppgift är att du löser problemet och att du förstår de koncept som tas upp i samband med uppgiften.</p>
-
-<p>Koden ska redovisas via Github samt att det ska finnas en körbar version för examinatorn att nå via en URL. Uppgiften kommer examineras muntligen på redovisningspassen. </p>
-
-<h2>Krav</h2>
-
-<ol>
-<li>Scriptet ska vara helt automatiserat och börja sin skrapning på URL:en http://coursepress.lnu.se/kurser</li>
-<li>Du ska göra regelbundna commits av din kod och synkronisera denna till GitHub.</li>
-<li><p>Informationen som ska skrapas är: </p>
-
 <ul>
 <li>Kursens namn</li>
 <li>Den URL kurswebbplatsen har</li>
