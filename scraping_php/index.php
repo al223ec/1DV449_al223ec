@@ -2,20 +2,37 @@
 
 $url = "https://coursepress.lnu.se/kurser/"; 
 
-
 $dom = new DOMDocument(); 
 $scrapedPage = performCurlExec($url); 
 
 if(@$dom->loadHTML($scrapedPage)){
 	$xpath = new DOMXPath($dom); 
-	$items = $xpath->query('//div[@class="item-title"]/a');
-	//Namn //div[@class="item-title"]/a/text()
-	echo "<pre>";
-	foreach ($items as $key => $value) {
-		print_r($value->nodeValue); 
-		print_r($value->getAttribute('href')); 	
+	$latestBloggPostLinks = $xpath->query('//ul[@id="blogs-list"]/li/div[@class="action"]/div[@class="meta"]/a');
+	
+	$courses = array(); 
+	$titels =  $xpath->query('//div[@class="item-title"]/a');
+	
+	foreach ($titels as $value) {
+		$courses[] = new Course($value->nodeValue, $value->getAttribute('href'), null);
 	}
-	echo "</pre>";
+
+	/*
+	foreach ($variable as $key => $value) {
+		if(strpos($latestBloggPostLinks[0]->getAttribute('href'), $value->getAttribute('href')) !== false){
+			$courses[] = new Course(
+				$value->nodeValue, 
+				$value->getAttribute('href'), 
+				$latestBloggPostLink[0]->getAttribute('href')
+				);
+		}
+	}
+	if(strpos($latestBloggPostLinks[0]->getAttribute('href'), $value->getAttribute('href')) !== false){
+		$courses[] = new Course($value->nodeValue, $value->getAttribute('href'), $latestBloggPostLink[0]->getAttribute('href'));
+		array_shift($latestBloggPostLink);
+	} else{
+
+	}*/
+	die();
 } else {
 	die("Kunde inte läsa in sidan"); 
 }
@@ -42,11 +59,33 @@ class Course{
 	private $coursePlan; 
 	private $text; 
 
-	public function __construct($name, $URL){
+	private $postURL; 
+
+	public function __construct($name, $URL, $postURL){
 		$this->name = $name; 
-		$this->URL = $URL; 
+		$this->URL = $URL;
+		$this->postURL = $postURL; 
+		$this->getInfo($URL); 
 	}
 
+	private function getInfo($URL){
+		if($URL == null || $URL == ""){
+			throw new \Exception("Error Processing Request URL is null");
+		}
+
+		$dom = new DOMDocument(); 
+		var_dump($URL); 
+		/*
+		if($dom->loadHTML($scrapedPage)){
+			$xpath = new DOMXPath($dom); 
+			$items = $xpath->query('//div[@class="item-title"]/a');
+			//Namn //div[@class="item-title"]/a/text()
+
+		} else {
+			//die("Kunde inte läsa in sidan"); 
+		}
+		*/
+	}
 }
 
 /*
