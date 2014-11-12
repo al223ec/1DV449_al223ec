@@ -3,56 +3,51 @@ set_time_limit(0); // to infinity
 
 include_once('course_scraper.php'); 
 include_once('web_scraper.php'); 
+include_once('course_page_scraper.php'); 
+include_once('my_page_scraper.php'); 
 
 $jsonFilePath = "data.json"; 
-$scraper = new WebScraper(); 
-/*
-$scraper->scrapeCourses();
-$courses = $scraper->getCourses(); 
-$scraper->scrapeLatestpost();
+$jsonFilePathMyPage = "myPageData.json"; 
 
-$arrayJson = array_merge($scraper->getScraperInformation(), $courses); 
-
-//echo "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime(); 
-file_put_contents($jsonFilePath, json_encode($arrayJson, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
-*/
-
-//*[@id="sidebar-user-login"]
-//*[@id="sidebar-user-pass"]
 
 $action = "a"; 
 $actionScrapeCoursePage = "WebScraper::actionScrapeCoursePage"; 
-$actionScrapeLoginPage = "WebScraper::actionScrapeLoginPage"; 
+$actionScrapeLoginPage = "WebScraper::actionScrapeLoginPage";
+
+$password = "WebScraper::password"; 
+$userName = "WebScraper::userName";
+
 $numberOfCourses = "WebScraper::numberOfCourses"; 
 $message = ""; 
 
-
 if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
-
+	$scraper = new CoursePageScraper(); 
 	$scraper->scrapeCourses(intval($_POST[$numberOfCourses]));
-	$scraper->scrapeLatestpost();
+	$scraper->scrapeLatestpost(); 
+	file_put_contents($jsonFilePath, json_encode($scraper, JSON_PRETTY_PRINT));
 
-	$message = "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime(); 
-	file_put_contents($jsonFilePath, json_encode($scraper, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
+}else if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeLoginPage){
+	$myScraper = new MyPageScraper(); 
+	$myScraper->scrapeMyPage($_POST[$userName], $_POST[$password], intval($_POST[$numberOfCourses])); 
+	
+	file_put_contents($jsonFilePathMyPage, json_encode($myScraper, JSON_PRETTY_PRINT));
 }
 
-/*
- <legend>Un och PW </legend>
-      <div class="form-group">
-        <label for="oauth_access_token" class="col-sm-2 control-label">Oauth access token:</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="oauth_access_token" name="oauthAccessToken" 
-          placeholder="Användarnamn" value="">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="oauth_access_token_secret" class="col-sm-2 control-label">Oauth access secret:</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="oauth_access_token_secret" name="oauthAccessTokenSecret" 
-          placeholder="Lösenord" value="">
-        </div>
-      </div>
-*/
+
+
+function getScrapingInformation($jsonFilePath){
+	@$string = file_get_contents($jsonFilePath);
+	if($string){
+		$jsonObjects = json_decode($string, true);
+
+		return '<ul>
+					<li> Senaste skrapningen gjordes '. date("F j, Y, g:i a", $jsonObjects['info']['time']) .  '</li>
+					<li> Skrapningen tog '. $jsonObjects['info']['totalTime'] . ' sekunder</li>
+					<li> Skrapade kurser '. $jsonObjects['info']['coursesScraped'] .'</li>
+					<li> Antalet request '. $jsonObjects['info']['numberOfReqests'] .'</li>
+				</ul>';
+	}
+}
 
 ?>
 <!DOCTYPE html>
@@ -67,10 +62,12 @@ if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
 <section>
   <div class="container">    
     <h3> Webbskrapning webbteknik 2 al223ec </h3>
-    <p><?php echo $message; ?></p>
+    <?php  echo getScrapingInformation($jsonFilePath); ?>
+    <p><a href="<?php echo $jsonFilePath; ?>"> Json fil </a></p>
+
     <form class="form-horizontal" action="?<?php echo $action; ?>=<?php echo $actionScrapeCoursePage; ?>" method="post" enctype="multipart/form-data" role="form">
       <div class="form-group">
-        <label class="col-sm-2 control-label">Antalet kurser som läses in:</label>
+        <label class="col-sm-2 control-label">Antalet kurser som skrapas:</label>
         <div class="col-sm-2">
         <select class="form-control" name="<?php echo $numberOfCourses; ?>">
            <?php for ($i=5; $i < 90; $i+=5) { ?>
@@ -85,6 +82,44 @@ if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
         <div class="col-sm-offset-2 col-sm-10">
           <p>Detta kan ta lite tid</p>
           <button type="submit" class="btn btn-default">Skrapa</button> 
+        </div>
+      </div>
+    </form>
+	<form class="form-horizontal" action="?<?php echo $action; ?>=<?php echo $actionScrapeLoginPage; ?>" method="post" enctype="multipart/form-data" role="form">
+     <legend>Skrapa mina sidor </legend>
+     <?php  echo getScrapingInformation($jsonFilePathMyPage); ?>
+	<p><a href="<?php echo $jsonFilePathMyPage; ?>"> Json fil </a></p>
+
+      <div class="form-group">
+        <label for="<?php echo $userName ?>" class="col-sm-2 control-label">Användarnamn:</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="<?php echo $userName ?>" name="<?php echo $userName ?>" 
+          placeholder="Användarnamn" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="<?php echo $password ?>" class="col-sm-2 control-label">Lösenord:</label>
+        <div class="col-sm-6">
+          <input type="password" class="form-control" id="<?php echo $password ?>" name="<?php echo $password ?>" 
+          placeholder="Lösenord" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Antalet kurser som skrapas:</label>
+        <div class="col-sm-2">
+        <select class="form-control" name="<?php echo $numberOfCourses; ?>">
+           <?php for ($i=5; $i < 90; $i+=5) { ?>
+              <option value="<?php  echo $i; ?>" >
+              <?php  echo $i; ?>
+              </option> 
+           	<?php } ?>
+		</select>
+        </div>
+      </div>
+     <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <p>Detta kan ta lite tid</p>
+          <button type="submit" class="btn btn-default">Skrapa mina sidor</button> 
         </div>
       </div>
     </form>

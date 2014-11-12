@@ -1,71 +1,93 @@
-[
-    {
+{
+    "info": {
+        "time": 1415804928,
+        "numberOfReqests": 9,
+        "totalTime": 2.625,
+        "coursesScraped": 5
+    },
+    "0": {
         "scrapedURL": "http:\/\/coursepress.lnu.se\/kurser\/",
-        "requestTime": 0.188,
+        "requestTime": 0.218,
         "httpCode": 200,
-        "time": 1415790924
+        "time": 1415804926
     },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
-        "requestTime": 0.25,
-        "httpCode": 200,
-        "time": 1415790924
-    },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
-        "requestTime": 0.438,
-        "httpCode": 200,
-        "time": 1415790925
-    },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafiska-verktyg\/",
-        "requestTime": 0.219,
-        "httpCode": 200,
-        "time": 1415790925
-    },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
-        "requestTime": 0.265,
-        "httpCode": 200,
-        "time": 1415790925
-    },
-    {
+    "1": {
         "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
         "requestTime": 0.219,
         "httpCode": 200,
-        "time": 1415790925
+        "time": 1415804926
     },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/",
-        "requestTime": 0.203,
+    "2": {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
+        "requestTime": 0.25,
         "httpCode": 200,
-        "time": 1415790926
+        "time": 1415804926
     },
-    {
+    "3": {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/operativsystem\/",
+        "requestTime": 0.156,
+        "httpCode": 200,
+        "time": 1415804926
+    },
+    "4": {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
+        "requestTime": 0.219,
+        "httpCode": 200,
+        "time": 1415804927
+    },
+    "5": {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
+        "requestTime": 0.344,
+        "httpCode": 200,
+        "time": 1415804927
+    },
+    "6": {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/?p=1475",
+        "requestTime": 0.484,
+        "httpCode": 200,
+        "time": 1415804927
+    },
+    "7": {
         "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/?p=242",
-        "requestTime": 0.328,
+        "requestTime": 0.344,
         "httpCode": 200,
-        "time": 1415790926
+        "time": 1415804928
     },
-    {
+    "8": {
         "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/?p=1901",
-        "requestTime": 0.375,
+        "requestTime": 0.391,
         "httpCode": 200,
-        "time": 1415790926
+        "time": 1415804928
     },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/?p=1473",
-        "requestTime": 0.359,
-        "httpCode": 200,
-        "time": 1415790927
+    "9": {
+        "name": "Design av grafiska gr\u00e4nssnitt",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
+        "courseCode": "1ME403",
+        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1ME403&documenttype=pdf&lang=sv",
+        "text": null,
+        "post": null
     },
-    {
-        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/?p=1801",
-        "requestTime": 0.297,
-        "httpCode": 200,
-        "time": 1415790927
+    "10": {
+        "name": "Webbteknik II",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
+        "courseCode": "1DV449",
+        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV449&documenttype=pdf&lang=sv",
+        "text": "Denna kurs fokuserar helt p\u00c3\u00a5 webben. Kursen tar upp webbens historia, utveckling och betydelse f\u00c3\u00b6r samh\u00c3\u00a4llet, problem inom forskningen kring webben (Web Science). Kursen tar ocks\u00c3\u00a5 upp optimering och s\u00c3\u00a4kerhet i webbapplikationer. Stort fokus kommer att ligga i att kunna hantera \u00c3\u00b6ppna Webb-API:er f\u00c3\u00b6r att sammanfoga data i s\u00c3\u00a5 kallade mashup-applikationer. ",
+        "post": {
+            "heading": "Gl\u00c3\u00b6m inte anm\u00c3\u00a4la er till redovisningspass",
+            "auhtor": "John H\u00c3\u00a4ggerud",
+            "time": "2014-11-12 02:26"
+        }
     },
-    {
+    "11": {
+        "name": "Operativsystem",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/operativsystem\/",
+        "courseCode": "1DV012",
+        "coursePlanURL": null,
+        "text": null,
+        "post": null
+    },
+    "12": {
         "name": "Grafisk design",
         "URL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
         "courseCode": "1DI101",
@@ -77,7 +99,7 @@
             "time": "2014-11-05 01:05"
         }
     },
-    {
+    "13": {
         "name": "Strukturerad programmering med C++",
         "URL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
         "courseCode": "1DV433",
@@ -88,45 +110,5 @@
             "auhtor": "Anne Norling",
             "time": "2014-11-07 01:26"
         }
-    },
-    {
-        "name": "Grafiska verktyg",
-        "URL": "http:\/\/coursepress.lnu.se\/kurs\/grafiska-verktyg\/",
-        "courseCode": "1ME402",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1ME402&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": null
-    },
-    {
-        "name": "Webbteknik II",
-        "URL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
-        "courseCode": "1DV449",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV449&documenttype=pdf&lang=sv",
-        "text": "Denna kurs fokuserar helt p\u00c3\u00a5 webben. Kursen tar upp webbens historia, utveckling och betydelse f\u00c3\u00b6r samh\u00c3\u00a4llet, problem inom forskningen kring webben (Web Science). Kursen tar ocks\u00c3\u00a5 upp optimering och s\u00c3\u00a4kerhet i webbapplikationer. Stort fokus kommer att ligga i att kunna hantera \u00c3\u00b6ppna Webb-API:er f\u00c3\u00b6r att sammanfoga data i s\u00c3\u00a5 kallade mashup-applikationer. ",
-        "post": {
-            "heading": "PI#2 och sl\u00c3\u00b6 webbserver",
-            "auhtor": "John H\u00c3\u00a4ggerud",
-            "time": "2014-11-11 04:29"
-        }
-    },
-    {
-        "name": "Design av grafiska gr\u00e4nssnitt",
-        "URL": "http:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
-        "courseCode": "1ME403",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1ME403&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": null
-    },
-    {
-        "name": "Databasteknik\u00a0och\u00a0administration\u00a0av\u00a0databas",
-        "URL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/",
-        "courseCode": "1DV423",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV423&documenttype=pdf&lang=sv",
-        "text": "P\u00c3\u00a5 denna webbplats hittar du all information kring kursen. De flesta sidorna med sin information \u00c3\u00a4r helt \u00c3\u00b6ppna \u2013 ett f\u00c3\u00a5tal sidor kr\u00c3\u00a4ver inloggning beroende p\u00c3\u00a5 att det \u00c3\u00a4r privat information. ",
-        "post": {
-            "heading": "Flyttad f\u00c3\u00b6rel\u00c3\u00a4sningar",
-            "auhtor": "Jacob Lindehoff",
-            "time": "2014-11-11 07:26"
-        }
     }
-]
+}
