@@ -1,7 +1,97 @@
 [
     {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurser\/",
+        "requestTime": 0.188,
+        "httpCode": 200,
+        "time": 1415790924
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
+        "requestTime": 0.25,
+        "httpCode": 200,
+        "time": 1415790924
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
+        "requestTime": 0.438,
+        "httpCode": 200,
+        "time": 1415790925
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafiska-verktyg\/",
+        "requestTime": 0.219,
+        "httpCode": 200,
+        "time": 1415790925
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
+        "requestTime": 0.265,
+        "httpCode": 200,
+        "time": 1415790925
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
+        "requestTime": 0.219,
+        "httpCode": 200,
+        "time": 1415790925
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/",
+        "requestTime": 0.203,
+        "httpCode": 200,
+        "time": 1415790926
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/?p=242",
+        "requestTime": 0.328,
+        "httpCode": 200,
+        "time": 1415790926
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/?p=1901",
+        "requestTime": 0.375,
+        "httpCode": 200,
+        "time": 1415790926
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/?p=1473",
+        "requestTime": 0.359,
+        "httpCode": 200,
+        "time": 1415790927
+    },
+    {
+        "scrapedURL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/?p=1801",
+        "requestTime": 0.297,
+        "httpCode": 200,
+        "time": 1415790927
+    },
+    {
+        "name": "Grafisk design",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/grafisk-design\/",
+        "courseCode": "1DI101",
+        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DI101&documenttype=pdf&lang=sv",
+        "text": null,
+        "post": {
+            "heading": "Kurshemsida uppdaterad",
+            "auhtor": "Morgan Rydbrink",
+            "time": "2014-11-05 01:05"
+        }
+    },
+    {
+        "name": "Strukturerad programmering med C++",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
+        "courseCode": "1DV433",
+        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV433&documenttype=pdf&lang=sv",
+        "text": "I denna grundkurs l\u00c3\u00a4r du dig skapa console-baserade datorprogram p\u00c3\u00a5 ett procedurorienterat s\u00c3\u00a4tt med programspr\u00c3\u00a5ket C++. Kursen best\u00c3\u00a5r av teorimoment (3,5p) och praktiska till\u00c3\u00a4mpningar (4p). Allt kursmaterial utom kurslitteraturen h\u00c3\u00a4mtas p\u00c3\u00a5 denna webbplats \u2013 logga in med ditt studentkonto f\u00c3\u00b6r att f\u00c3\u00a5 tillg\u00c3\u00a5ng till detta. (Bara\u00c2\u00a0registrerade kursdeltagare\u00c2\u00a0har tillg\u00c3\u00a5ng till diskussionsgrupp eller gruppindelningar -\u00c2\u00a0anonyma bes\u00c3\u00b6kare har\u00c2\u00a0begr\u00c3\u00a4nsad \u00c3\u00a5tkomst till\u00c2\u00a0webbmaterialet.) ",
+        "post": {
+            "heading": "Schema\u00c3\u00a4ndring \u00e2\u0080\u00a6",
+            "auhtor": "Anne Norling",
+            "time": "2014-11-07 01:26"
+        }
+    },
+    {
         "name": "Grafiska verktyg",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/grafiska-verktyg\/",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/grafiska-verktyg\/",
         "courseCode": "1ME402",
         "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1ME402&documenttype=pdf&lang=sv",
         "text": null,
@@ -9,7 +99,7 @@
     },
     {
         "name": "Webbteknik II",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
         "courseCode": "1DV449",
         "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV449&documenttype=pdf&lang=sv",
         "text": "Denna kurs fokuserar helt p\u00c3\u00a5 webben. Kursen tar upp webbens historia, utveckling och betydelse f\u00c3\u00b6r samh\u00c3\u00a4llet, problem inom forskningen kring webben (Web Science). Kursen tar ocks\u00c3\u00a5 upp optimering och s\u00c3\u00a4kerhet i webbapplikationer. Stort fokus kommer att ligga i att kunna hantera \u00c3\u00b6ppna Webb-API:er f\u00c3\u00b6r att sammanfoga data i s\u00c3\u00a5 kallade mashup-applikationer. ",
@@ -21,7 +111,7 @@
     },
     {
         "name": "Design av grafiska gr\u00e4nssnitt",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/design-av-grafiska-granssnitt\/",
         "courseCode": "1ME403",
         "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1ME403&documenttype=pdf&lang=sv",
         "text": null,
@@ -29,94 +119,14 @@
     },
     {
         "name": "Databasteknik\u00a0och\u00a0administration\u00a0av\u00a0databas",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/",
+        "URL": "http:\/\/coursepress.lnu.se\/kurs\/databasteknik-och-administration-av-databas\/",
         "courseCode": "1DV423",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV405&documenttype=pdf&lang=sv",
+        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV423&documenttype=pdf&lang=sv",
         "text": "P\u00c3\u00a5 denna webbplats hittar du all information kring kursen. De flesta sidorna med sin information \u00c3\u00a4r helt \u00c3\u00b6ppna \u2013 ett f\u00c3\u00a5tal sidor kr\u00c3\u00a4ver inloggning beroende p\u00c3\u00a5 att det \u00c3\u00a4r privat information. ",
         "post": {
             "heading": "Flyttad f\u00c3\u00b6rel\u00c3\u00a4sningar",
             "auhtor": "Jacob Lindehoff",
             "time": "2014-11-11 07:26"
-        }
-    },
-    {
-        "name": "Webbteknik I",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/webbteknik-i\/",
-        "courseCode": "1DV403",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV403&documenttype=pdf&lang=sv",
-        "text": "Kursen Webbteknik I \u00c3\u00a4r en kurs som inom ramen f\u00c3\u00b6r programmen \u00e2\u0080\u009dWebbprogrammerare\u00e2\u0080\u009d och \u00e2\u0080\u009dUtvecklare av digitala tj\u00c3\u00a4nster\u00e2\u0080\u009d vid Linn\u00c3\u00a9universitetet i Kalmar och genomf\u00c3\u00b6rs p\u00c3\u00a5 campus s\u00c3\u00a5v\u00c3\u00a4l som distans. En av de senaste \u00c3\u00a5rens webbtrender \u00c3\u00a4r att fler och fler applikationen flyttar fr\u00c3\u00a5n den lokala datorn till webben vilket inneb\u00c3\u00a4r att anv\u00c3\u00a4ndandet och betydelsen av Javascript \u00c3\u00b6kar. Detta st\u00c3\u00a4ller h\u00c3\u00b6gre krav p\u00c3\u00a5 webbutvecklaren i form av disciplin och kunnande. Kursen behandlar Javascript fr\u00c3\u00a5n grunden och tar dig fr\u00c3\u00a5n \u00e2\u0080\u009dHello World\u00e2\u0080\u009d till att skapa en fullfj\u00c3\u00a4drad Javascriptapplikation i form av ett webbbaserat f\u00c3\u00b6nsterhanteringssystem med Ajax. Genomg\u00c3\u00a5ende l\u00c3\u00a4r du dig ett modernt arbetss\u00c3\u00a4tt och betydelsen av att skapa tillg\u00c3\u00a4ngliga och s\u00c3\u00a4kra applikationer. I slutprojektet har du m\u00c3\u00b6jlighet att f\u00c3\u00b6rkovra dig i ett javascript bibliotek s\u00c3\u00a5 som exempelvis jQuery, men kursens m\u00c3\u00a5l \u00c3\u00a4r att l\u00c3\u00a4ra sig JavaScript fr\u00c3\u00a5n grunden. P\u00c3\u00a5 denna webbplats hittar du all information kring kursen. \u00c3\u0084r du student p\u00c3\u00a5 kursen b\u00c3\u00b6r du logga in f\u00c3\u00b6r att f\u00c3\u00a5 tillg\u00c3\u00a5ng till gruppindelningar, forum etc. \u00c3\u0084r du h\u00c3\u00a4r som bes\u00c3\u00b6kare kan du f\u00c3\u00b6lja med i kursen genom att f\u00c3\u00b6lja materialet p\u00c3\u00a5 denna webbplats. F\u00c3\u00b6rel\u00c3\u00a4sningar publiceras i takt med att de genomf\u00c3\u00b6rs p\u00c3\u00a5 campus i Kalmar. ",
-        "post": {
-            "heading": "Missa inte introduktionsf\u00c3\u00b6rel\u00c3\u00a4sningen",
-            "auhtor": "Johan Leitet",
-            "time": "2014-11-04 03:54"
-        }
-    },
-    {
-        "name": "Klientbaserad webbutveckling",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/klientbaserad-webbutveckling\/",
-        "courseCode": "1DV435",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV435&documenttype=pdf&lang=sv",
-        "text": "I denna kurs kommer fokus ligga p\u00c3\u00a5 teknik och praktik kring byggandet av webbplatser med fokus p\u00c3\u00a5 klientbaserad webbutveckling. Kursen fokuserar dels p\u00c3\u00a5 modern utveckling med HTML5 och CSS samt \u00c3\u00a4ven p\u00c3\u00a5 grundl\u00c3\u00a4ggande programmering med JavaScript som programmeringsspr\u00c3\u00a5k. Kursen avslutas med ett st\u00c3\u00b6rre projekt d\u00c3\u00a4r dessa tekniker anv\u00c3\u00a4nds. ",
-        "post": {
-            "heading": "Ytterligare f\u00c3\u00b6rtydling",
-            "auhtor": "John H\u00c3\u00a4ggerud",
-            "time": "2014-11-10 04:29"
-        }
-    },
-    {
-        "name": "Strukturerad programmering med C++",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/strukturerad-programmering-med-cplusplus\/",
-        "courseCode": "1DV433",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV433&documenttype=pdf&lang=sv",
-        "text": "I denna grundkurs l\u00c3\u00a4r du dig skapa console-baserade datorprogram p\u00c3\u00a5 ett procedurorienterat s\u00c3\u00a4tt med programspr\u00c3\u00a5ket C++. Kursen best\u00c3\u00a5r av teorimoment (3,5p) och praktiska till\u00c3\u00a4mpningar (4p). Allt kursmaterial utom kurslitteraturen h\u00c3\u00a4mtas p\u00c3\u00a5 denna webbplats \u2013 logga in med ditt studentkonto f\u00c3\u00b6r att f\u00c3\u00a5 tillg\u00c3\u00a5ng till detta. (Bara\u00c2\u00a0registrerade kursdeltagare\u00c2\u00a0har tillg\u00c3\u00a5ng till diskussionsgrupp eller gruppindelningar -\u00c2\u00a0anonyma bes\u00c3\u00b6kare har\u00c2\u00a0begr\u00c3\u00a4nsad \u00c3\u00a5tkomst till\u00c2\u00a0webbmaterialet.) ",
-        "post": {
-            "heading": "Schema\u00c3\u00a4ndring \u00e2\u0080\u00a6",
-            "auhtor": "Anne Norling",
-            "time": "2014-11-07 01:26"
-        }
-    },
-    {
-        "name": "Grundl\u00e4ggande spelprogrammering",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/grundlaggande-spelprogrammering\/",
-        "courseCode": "1DV437",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV437&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": {
-            "heading": "P\u00c3\u00a5 resa",
-            "auhtor": "Daniel Toll",
-            "time": "2014-11-10 01:27"
-        }
-    },
-    {
-        "name": "Mjukvarutestning (Software Testing)",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/mjukvarutestning\/",
-        "courseCode": "2DV110",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=2DV110&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": {
-            "heading": "Travelling",
-            "auhtor": "Daniel Toll",
-            "time": "2014-11-10 01:27"
-        }
-    },
-    {
-        "name": "Avancerade LAN-teknologier",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/avancerade-lan-teknologier\/",
-        "courseCode": "1DV447",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV447&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": null
-    },
-    {
-        "name": "Iterativ mjukvaruutveckling",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/iterativ-mjukvaruutveckling\/",
-        "courseCode": "1DV404",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV404&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": {
-            "heading": "Laboration 1 tillg\u00c3\u00a4nglig",
-            "auhtor": "Jesper Andersson",
-            "time": "2014-11-07 03:20"
         }
     }
 ]

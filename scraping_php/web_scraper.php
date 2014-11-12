@@ -1,23 +1,19 @@
 <?php 
 
-class WebScraper{
-	//Skulle kunna göra om denna till en basklass med vissa statiska metoder.
-	private $numberOfRequests = 0; 
-	private $scrapedPages = array(); 
+include_once('scraper_information.php'); 
 
-	private $requestTime = 0; 
-	
+class WebScraper implements JsonSerializable {
+	//Skulle kunna göra om denna till en basklass med vissa statiska metoder.
+	private $scraperInformationArr = array(); 
 	private $courses = array(); 
 
 	private function performCurlExec($url){
 		if(!$url){
 			throw new \Exception("WebScraper::performCurlExec() url is false!!");
 		}
+		$scraperInformation = new ScraperInformation(); 
 
 		$ch = curl_init();
-
-		echo "<pre>";
-		print_r("scraping: " . $url);
 
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -30,15 +26,17 @@ class WebScraper{
 	    ));
 
 		$scrapedPage = curl_exec($ch);
-		$this->numberOfRequests += 1; 
-		$this->scrapedPages[$url]= $scrapedPage; 
+		
+		$scraperInformation->scrapedURL = $url; 
+		$scraperInformation->scrapedPage = $scrapedPage; 
 
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$this->requestTime += curl_getinfo($ch, CURLINFO_TOTAL_TIME); 
+		$scraperInformation->httpCode = $httpCode; 
+		$scraperInformation->requestTime = curl_getinfo($ch, CURLINFO_TOTAL_TIME); 
+		
+		$this->scraperInformationArr[] = $scraperInformation;
+
 		curl_close($ch);
-
-		print_r("response: " . $httpCode);
-
 		if($httpCode == 404){
 			return false; 
 		}
@@ -50,9 +48,10 @@ class WebScraper{
 		return $this->courses; 
 	}
 	
-	public function scrapeCourses($numberOfCourses = 10, $url = "https://coursepress.lnu.se/kurser/"){
+	public function scrapeCourses($numberOfCourses = 4, $url = "http://coursepress.lnu.se/kurser/"){
 		$dom = new DOMDocument(); 
 		$scrapedPage = $this->performCurlExec($url); 
+
 		if(@$dom->loadHTML($scrapedPage)){
 			$xpath = new DOMXPath($dom); 
 
@@ -62,6 +61,7 @@ class WebScraper{
 			foreach ($titels as $title) {
 				//Jag vill bara skrapa kurser
 				if(strpos($title->getAttribute('href'), "//coursepress.lnu.se/kurs/") !== false){
+
 					$course = new CourseScraper($title->nodeValue, $title->getAttribute('href')); 
 					$course->scrapeCoursePage($this->performCurlExec($title->getAttribute('href')));
 					$this->courses[] = $course;
@@ -72,7 +72,9 @@ class WebScraper{
 							strpos($link->getAttribute('href'), str_replace("https", "http", $course->getURL())) !== false )
 							&& strpos($course->getURL(), "kurs") !== false){
 							//Alla länkar jag vill spara innehåller kurs så bekräftar detta
-							$course->setPostUrl(str_replace("http", "https", $link->getAttribute('href')));							
+							$course->setPostUrl($link->getAttribute('href'));							
+							
+							//$course->setPostUrl(str_replace("http", "https", $link->getAttribute('href')));							
 							//måste dela upp detta//$course->scrapePostPage($this->performCurlExec(str_replace("http", "https", $link->getAttribute('href'))));
 							break; 
 						}
@@ -85,8 +87,7 @@ class WebScraper{
 		}else{
 			throw new \Exception("WebScraper::scrapeCourses() Kunde inte läsa in sidan"); 
 		}
-
-
+		//Hämta nextpage länken
 		$pagination = $xpath->query('//*[@id="blog-dir-pag-bottom"]/a[@class="next page-numbers"]'); 
 		if($pagination->item(0)){
 			$nextPageURL = substr($pagination->item(0)->getAttribute('href'), strpos($pagination->item(0)->getAttribute('href'), '?')); 
@@ -99,8 +100,6 @@ class WebScraper{
 			//Rekursivt anrop
 			$this->scrapeCourses($numberOfCourses, $url . $nextPageURL); 
 		}
-
-
 	}
 
 	public function scrapeLatestpost(){
@@ -112,10 +111,21 @@ class WebScraper{
 	}
 
 	public function getNumberOfRequests(){
-		return $this->numberOfRequests; 
+		return count($this->scraperInformationArr); 
 	}
 
 	public function getRequestTime(){
-		return $this->requestTime; 
+		$time = 0; 
+		foreach ($this->scraperInformationArr as $info) {
+			$time += $info->requestTime; 
+		}
+		return $time; 
+	}
+
+	public function jsonSerialize() {
+		$array = array_merge($this->scraperInformationArr, $this->courses);
+		// Sort by key
+		ksort($array);
+		return $array; 
 	}
 }

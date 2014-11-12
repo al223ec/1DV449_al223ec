@@ -1,67 +1,93 @@
 <?php
 set_time_limit(0); // to infinity
 
-include_once('coursescraper.php'); 
-include_once('webscraper.php'); 
+include_once('course_scraper.php'); 
+include_once('web_scraper.php'); 
 
 $jsonFilePath = "data.json"; 
-
 $scraper = new WebScraper(); 
-
+/*
 $scraper->scrapeCourses();
 $courses = $scraper->getCourses(); 
-$scraper->scrapeLatestpost(); 
+$scraper->scrapeLatestpost();
 
-echo "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime() . " executiontime: " . $scraper->getExecutionTime(); 
-//file_put_contents($jsonFilePath, json_encode($courses, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
+$arrayJson = array_merge($scraper->getScraperInformation(), $courses); 
 
+//echo "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime(); 
+file_put_contents($jsonFilePath, json_encode($arrayJson, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
+*/
+
+//*[@id="sidebar-user-login"]
+//*[@id="sidebar-user-pass"]
+
+$action = "a"; 
+$actionScrapeCoursePage = "WebScraper::actionScrapeCoursePage"; 
+$actionScrapeLoginPage = "WebScraper::actionScrapeLoginPage"; 
+$numberOfCourses = "WebScraper::numberOfCourses"; 
+$message = ""; 
+
+
+if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
+
+	$scraper->scrapeCourses(intval($_POST[$numberOfCourses]));
+	$scraper->scrapeLatestpost();
+
+	$message = "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime(); 
+	file_put_contents($jsonFilePath, json_encode($scraper, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
+}
 
 /*
-<ul>
-<li>Kursens namn</li>
-<li>Den URL kurswebbplatsen har</li>
-<li>Kurskod</li>
-<li>URL till kursplanen</li>
-<li>Den inledande texten om varje kurs</li>
-<li>Senaste inläggets rubrik, författare samt datum/klockslag för detta inlägg (på formatet YYYY-MM-DD HH:MM)</li>
-<li>Finns inte den aktuella informationen på något av fälten ska de ersättat med texten "no information". T.ex. "coursecode" : "no information". </li>
-<li>Du ska också låta ditt skript ta reda på viss statistik kring skrapningen genom att att i ditt JSON-dokument inkludera även hur många kurser som skrapats ner samt en timestamp om när senaste skrapningen gjordes (bör användas vid din cachningsstrategi). </li>
-</ul></li>
-<li><p>All data ska sparas på disk i en fil i korrekt JSON-format som man ska kunna komma åt via en URL efter skrapningen är gjord. Fundera över hur du strukturerar upp din JSON på ett bra sätt! 
-Använd jsonlint.org eller lämpligt plugin till din editor för att validera json-strukturen du skapar.</p></li>
-<li>Du ska bara skrapa kurser! (dock ej för extrauppgiften) observera att visa sidor hör till ett projekt, ämne, blogg eller t.ex. är coursepress startsida. Hitta ett enkelt sätt att särskilja dem!</li>
-<li>Du ska implementera en enklare cachingsstategi som gör att om man anropar sidan som kör ditt script ska bara själva skrapningen göras ifall fem minuter har passerat sedan sista gången. Det ska dock vara enkelt att kicka igång skrapan vid redovisning genom en enkel ändring i koden eller borttagning av JSON-filen.</li>
-<li>Din webbskrapas alla HTTP-anrop mot coursepress webbserver ska identifiera dig på lämpligt sätt.</li>
-<li>Du ska skriva ner dina reflektioner (se nedan) i ett dokument i md-format som ska vara enkelt åtkommligt från ditt GitHub-repo.</li>
-<li>När du anser dig klar med uppgiften gör du en release/tag på GitHub. Döp den liknande L01-v.1.0. Vid eventuella kompletteringar gör du en ny release L01-v.1.1 o.s.v.</li>
-</ol>
-
-<h2>Reflektion</h2>
-
-<p>Du ska i ditt repositorie skapa en fil (reflektion_lab1.md) <strong>i <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown-format</a></strong> där du reflekterar över följande saker:</p>
-
-<ol>
-<li>Vad tror Du vi har för skäl till att spara det skrapade datat i JSON-format?</li>
-<li>Olika jämförelsesiter är flitiga användare av webbskrapor. Kan du komma på fler typer av tillämplingar där webbskrapor förekommer? </li>
-<li>Hur har du i din skrapning underlättat för serverägaren?</li>
-<li>Vilka etiska aspekter bör man fundera kring vid webbskrapning?</li>
-<li>Vad finns det för risker med applikationer som innefattar automatisk skrapning av webbsidor? Nämn minst ett par stycken!</li>
-<li>Tänk dig att du skulle skrapa en sida gjord i ASP.NET WebForms. Vad för extra problem skulle man kunna få då?</li>
-<li>Välj ut två punkter kring din kod du tycker är värd att diskutera vid redovisningen. Det kan röra val du gjort, tekniska lösningar eller lösningar du inte är riktigt nöjd med.</li>
-<li>Hitta ett rättsfall som handlar om webbskrapning. Redogör kort för detta.</li>
-<li>Känner du att du lärt dig något av denna uppgift? </li>
-</ol>
-
-<h2>Extrauppgifter</h2>
-
-<p>För er som satsar på högre betyg i kursen finns här ett par extra funktioner för din applikation. Du väljer själv hur många du implementerar.</p>
-
-<ol>
-<li>Implementera algoritmen för skrapningen via rekursiva anrop.</li>
-<li>Skrapa även de andra typer av sidorna (project, subject, blogg, program) och skapa en JSON-fil för varje.</li>
-<li>När man är inloggad på coursepress kan man även komma åt "mina kurser" Skrapa även ner dessa i en egen JSON-fil. Det kan kräva att scriptet du skriver måste logga in på coursepress för att komma åt sidan.
-<strong>STOR VARNING</strong> Tänk efter hur du gö rmed ditt lösenord. LDet får unde ringa omständigheter spridas genom att t.ex. läggas på GitHub. Om du råkar göra det byt genast lösenordet!</li>
-<li>Sortera så att kurserna sparas i bokstavsordning på kursnamn i din JSON-fil.</li>
-</ol>
-
+ <legend>Un och PW </legend>
+      <div class="form-group">
+        <label for="oauth_access_token" class="col-sm-2 control-label">Oauth access token:</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="oauth_access_token" name="oauthAccessToken" 
+          placeholder="Användarnamn" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="oauth_access_token_secret" class="col-sm-2 control-label">Oauth access secret:</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="oauth_access_token_secret" name="oauthAccessTokenSecret" 
+          placeholder="Lösenord" value="">
+        </div>
+      </div>
 */
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<title> Webbskrapning </title>
+</head>
+<body>
+<section>
+  <div class="container">    
+    <h3> Webbskrapning webbteknik 2 al223ec </h3>
+    <p><?php echo $message; ?></p>
+    <form class="form-horizontal" action="?<?php echo $action; ?>=<?php echo $actionScrapeCoursePage; ?>" method="post" enctype="multipart/form-data" role="form">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Antalet kurser som läses in:</label>
+        <div class="col-sm-2">
+        <select class="form-control" name="<?php echo $numberOfCourses; ?>">
+           <?php for ($i=5; $i < 90; $i+=5) { ?>
+              <option value="<?php  echo $i; ?>" >
+              <?php  echo $i; ?>
+              </option> 
+           	<?php } ?>
+		</select>
+        </div>
+      </div>
+       <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <p>Detta kan ta lite tid</p>
+          <button type="submit" class="btn btn-default">Skrapa</button> 
+        </div>
+      </div>
+    </form>
+  </div>
+</section> 
+
