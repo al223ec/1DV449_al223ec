@@ -18,7 +18,7 @@ abstract class WebScraper implements JsonSerializable {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 400); 
 
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -36,7 +36,7 @@ abstract class WebScraper implements JsonSerializable {
 		}
 		return $scrapedPage;
 	}
-	
+
 	protected function saveScrapeInformation($ch, $url, $scrapedPage, $httpCode){
 		$scraperInformation = new ScraperInformation(); 
 		

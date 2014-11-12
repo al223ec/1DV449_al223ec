@@ -1,5 +1,6 @@
 <?php
-set_time_limit(0); // to infinity
+ini_set('open_basedir', NULL);
+//set_time_limit(0); // to infinity
 
 include_once('course_scraper.php'); 
 include_once('web_scraper.php'); 
@@ -29,7 +30,7 @@ if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
 }else if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeLoginPage){
 	$myScraper = new MyPageScraper(); 
 	$myScraper->scrapeMyPage($_POST[$userName], $_POST[$password], intval($_POST[$numberOfCourses])); 
-	
+
 	file_put_contents($jsonFilePathMyPage, json_encode($myScraper, JSON_PRETTY_PRINT));
 }
 
@@ -126,3 +127,5 @@ function getScrapingInformation($jsonFilePath){
   </div>
 </section> 
 
+</body>
+</html>

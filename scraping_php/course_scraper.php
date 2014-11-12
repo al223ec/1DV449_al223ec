@@ -67,7 +67,7 @@ class CourseScraper implements JsonSerializable{
 			//Inget att skrapa
 			return;
 		}
-		
+
 		$heading = $xpath->query('//header[@class="entry-header"]/h1');
 		$heading = $heading->item(0)->nodeValue; 
 
@@ -82,7 +82,7 @@ class CourseScraper implements JsonSerializable{
 	}
 
 	public function jsonSerialize() {
-         return $array = ['name' => $this->name, 'URL' => $this->URL, 'courseCode' => $this->courseCode, 
-        'coursePlanURL' => $this->coursePlanURL, 'text' => $this->text, 'post' => $this->post];
+         return $array = array('name' => $this->name, 'URL' => $this->URL, 'courseCode' => $this->courseCode, 
+        'coursePlanURL' => $this->coursePlanURL, 'text' => $this->text, 'post' => $this->post);
     }
 }

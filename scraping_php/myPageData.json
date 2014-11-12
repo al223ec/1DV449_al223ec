@@ -1,102 +1,32 @@
 {
     "info": {
-        "time": 1415805055,
-        "numberOfReqests": 9,
-        "totalTime": 4.609,
-        "coursesScraped": 5
+        "time": 1415817196,
+        "numberOfReqests": 4,
+        "totalTime": 1.594,
+        "coursesScraped": 0
     },
     "0": {
         "scrapedURL": "https:\/\/coursepress.lnu.se\/kurser\/",
-        "requestTime": 0.406,
+        "requestTime": 0.328,
         "httpCode": 200,
-        "time": 1415805051
+        "time": 1415817194
     },
     "1": {
         "scrapedURL": "https:\/\/coursepress.lnu.se\/wp-login.php",
-        "requestTime": 0.438,
+        "requestTime": 0.328,
         "httpCode": 302,
-        "time": 1415805051
+        "time": 1415817194
     },
     "2": {
         "scrapedURL": "https:\/\/coursepress.lnu.se\/kurser\/",
-        "requestTime": 1.125,
+        "requestTime": 0.641,
         "httpCode": 200,
-        "time": 1415805052
+        "time": 1415817195
     },
     "3": {
         "scrapedURL": "https:\/\/coursepress.lnu.se\/medlemmar\/al223ec\/kurser",
-        "requestTime": 1.156,
-        "httpCode": 200,
-        "time": 1415805054
-    },
-    "4": {
-        "scrapedURL": "https:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
-        "requestTime": 0.313,
-        "httpCode": 200,
-        "time": 1415805054
-    },
-    "5": {
-        "scrapedURL": "https:\/\/coursepress.lnu.se\/kurs\/aspnet-mvc\/",
-        "requestTime": 0.265,
-        "httpCode": 200,
-        "time": 1415805054
-    },
-    "6": {
-        "scrapedURL": "https:\/\/coursepress.lnu.se\/kurs\/objektorienterad-analys-och-design-med-uml\/",
-        "requestTime": 0.312,
-        "httpCode": 200,
-        "time": 1415805054
-    },
-    "7": {
-        "scrapedURL": "https:\/\/coursepress.lnu.se\/kurs\/webbutveckling-med-php\/",
         "requestTime": 0.297,
-        "httpCode": 200,
-        "time": 1415805055
-    },
-    "8": {
-        "scrapedURL": "https:\/\/coursepress.lnu.se\/kurs\/databasteknik-vt14\/",
-        "requestTime": 0.297,
-        "httpCode": 200,
-        "time": 1415805055
-    },
-    "9": {
-        "name": "Webbteknik II",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/webbteknik-ii\/",
-        "courseCode": "1DV449",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV449&documenttype=pdf&lang=sv",
-        "text": "Denna kurs fokuserar helt p\u00c3\u00a5 webben. Kursen tar upp webbens historia, utveckling och betydelse f\u00c3\u00b6r samh\u00c3\u00a4llet, problem inom forskningen kring webben (Web Science). Kursen tar ocks\u00c3\u00a5 upp optimering och s\u00c3\u00a4kerhet i webbapplikationer. Stort fokus kommer att ligga i att kunna hantera \u00c3\u00b6ppna Webb-API:er f\u00c3\u00b6r att sammanfoga data i s\u00c3\u00a5 kallade mashup-applikationer. ",
-        "post": null
-    },
-    "10": {
-        "name": "ASP.NET MVC",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/aspnet-mvc\/",
-        "courseCode": "1DV409",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV409&documenttype=pdf&lang=sv",
-        "text": "Kursen ASP.NET MVC \u00c3\u00a4r en kurs som inom ramen f\u00c3\u00b6r programmet \u00e2\u0080\u009dWebbprogrammerare\u00e2\u0080\u009d vid Linn\u00c3\u00a9universitetet i Kalmar och genomf\u00c3\u00b6rs p\u00c3\u00a5 campus s\u00c3\u00a5v\u00c3\u00a4l som distans. Kursen behandlar planering och skapade av webbapplikationer med ASP.NET MVC 5. Webbapplikationernas persistenta data lagras i databaser och hanteras med fr\u00c3\u00a4mst Entity Framework. P\u00c3\u00a5 denna webbplats hittar du all information kring kursen. \u00c3\u0084r du kursdeltagare b\u00c3\u00b6r du logga in f\u00c3\u00b6r att f\u00c3\u00a5 tillg\u00c3\u00a5ng till gruppindelningar, forum, etc., n\u00c3\u00a4r dessa tj\u00c3\u00a4nster finns att tillg\u00c3\u00a5 i samband med kursstart. \u00c3\u0084r du h\u00c3\u00a4r som bes\u00c3\u00b6kare kan du f\u00c3\u00b6lja med i kursen genom att f\u00c3\u00b6lja materialet p\u00c3\u00a5 denna webbplats. F\u00c3\u00b6rel\u00c3\u00a4sningar publiceras i takt med att de genomf\u00c3\u00b6rs p\u00c3\u00a5 campus i Kalmar. ",
-        "post": null
-    },
-    "11": {
-        "name": "Objektorienterad analys och design med UML",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/objektorienterad-analys-och-design-med-uml\/",
-        "courseCode": "1DV407",
-        "coursePlanURL": "http:\/\/kursplan.lnu.se\/kursplaner\/syllabus-1DV407-2.pdf",
-        "text": null,
-        "post": null
-    },
-    "12": {
-        "name": "Webbutveckling med PHP",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/webbutveckling-med-php\/",
-        "courseCode": "1DV408",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV408&documenttype=pdf&lang=sv",
-        "text": null,
-        "post": null
-    },
-    "13": {
-        "name": "Databasteknik (VT14)",
-        "URL": "https:\/\/coursepress.lnu.se\/kurs\/databasteknik-vt14\/",
-        "courseCode": "1DV405",
-        "coursePlanURL": "http:\/\/prod.kursinfo.lnu.se\/utbildning\/GenerateDocument.ashx?templatetype=coursesyllabus&code=1DV405&documenttype=pdf&lang=sv",
-        "text": "Kursen Databasteknik \u00c3\u00a4r en kurs som inom ramen f\u00c3\u00b6r programmen \u00e2\u0080\u009dWebbprogrammerare\u00e2\u0080\u009d och \u201cUtveckling av digitala tj\u00c3\u00a4nster\u201d vid Linn\u00c3\u00a9universitetet i Kalmar och genomf\u00c3\u00b6rs p\u00c3\u00a5 campus s\u00c3\u00a5v\u00c3\u00a4l som distans. Kursen behandlar datamodellering, databas och SQL spr\u00c3\u00a5ket . P\u00c3\u00a5 denna webbplats hittar du all information kring kursen. De flesta sidorna med sin information \u00c3\u00a4r helt \u00c3\u00b6ppna \u2013 ett f\u00c3\u00a5tal sidor kr\u00c3\u00a4ver inloggning beroende p\u00c3\u00a5 att det \u00c3\u00a4r privat information. ",
-        "post": null
+        "httpCode": 301,
+        "time": 1415817195
     }
 }
