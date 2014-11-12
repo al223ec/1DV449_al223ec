@@ -1,122 +1,20 @@
 <?php
+set_time_limit(0); // to infinity
 
-$url = "https://coursepress.lnu.se/kurser/"; 
+include_once('coursescraper.php'); 
+include_once('webscraper.php'); 
 
-$dom = new DOMDocument(); 
-$scrapedPage = performCurlExec($url); 
+$jsonFilePath = "data.json"; 
 
-if(@$dom->loadHTML($scrapedPage)){
-	$courses = loadCourses($dom); 
-	echo "<pre>";
-	print_r($courses); 
+$scraper = new WebScraper(); 
 
+$scraper->scrapeCourses();
+$courses = $scraper->getCourses(); 
+$scraper->scrapeLatestpost(); 
 
-} else {
-	die("Kunde inte läsa in sidan"); 
-}
+echo "antalet anrop: " . $scraper->getNumberOfRequests() . " tid: " . $scraper->getRequestTime() . " executiontime: " . $scraper->getExecutionTime(); 
+//file_put_contents($jsonFilePath, json_encode($courses, JSON_PRETTY_PRINT)); //, JSON_PRETTY_PRINT)
 
-function loadInfo($courses){
-	//<li>Kurskod</li>
-	//<li>URL till kursplanen</li>
-
-	foreach ($courses as $course) {
-		# code...
-	}
-}
-
-function loadCourses($dom){
-	$xpath = new DOMXPath($dom); 
-	$latestBloggPostLinks = $xpath->query('//ul[@id="blogs-list"]/li/div[@class="action"]/div[@class="meta"]/a');
-
-	$titels =  $xpath->query('//div[@class="item-title"]/a');
-	$courses = array(); 
-
-	foreach ($titels as $title) {
-		$course = new Course($title->nodeValue, $title->getAttribute('href')); 
-		$courses[] = $course;
-
-		foreach ($latestBloggPostLinks as $key => $link){
-			//Osnygg lösning 
-			if((strpos($link->getAttribute('href'), $course->getURL()) !== false ||
-				strpos($link->getAttribute('href'), str_replace("https", "http", $course->getURL())) !== false )
-				&& strpos($course->getURL(), "kurs") !== false){
-				//Alla länkar jag vill spara innehåller kurs så bekräftar detta
-				$course->setPostUrl($link->getAttribute('href'));
-				break; 
-			}
-		}
-	}
-	return $courses; 
-}
-
-function performCurlExec($url){
-	$ch = curl_init();
-
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$scrapedPage = curl_exec($ch);
-	curl_close($ch);
-
-	return $scrapedPage;
-}
-
-class Course{
-
-	//Kursens namn
-	private $name;
-	//Den URL kurswebbplatsen har
-	private $URL; 
-	//Kurskod
-	private $courseCode; 
-	//URL till kursplanen
-	private $coursePlanURL; 
-	//Den inledande texten om varje kurs
-	private $text; 
-	//Senaste inläggets URL
-	private $postURL; 
-
-	public function __construct($name, $URL){
-		$this->name = $name; 
-		$this->URL = $URL;
-		$this->getInfo($URL); 
-	}
-
-	public function setPostUrl($postURL){
-		$this->postURL = $postURL; 
-	}
-
-	public function getURL(){
-		return $this->URL;
-	}
-
-	private function getInfo($URL){
-		if($URL == null || $URL == ""){
-			throw new \Exception("Error Processing Request URL is null");
-		}
-
-		$dom = new DOMDocument(); 
-		$scrapedPage = performCurlExec($URL); 
-
-		if(@$dom->loadHTML($scrapedPage)){
-			$xpath = new DOMXPath($dom); 
-
-			//Den inledande texten om varje kurs
-			$entryContent = $xpath->query('//div[@id="content"]/article/div[@class="entry-content"]/p');
-			foreach ($entryContent as $p) {
-				$this->text .= $p->nodeValue . " "; 
-			}
-
-			//Kurskoden
-			$courseCodeDOM = $xpath->query('//div[@id="header-wrapper"]/ul/li/a');
-			if($courseCodeDOM->length !== 0){
-				$this->courseCode = $courseCodeDOM->item($courseCodeDOM->length-1)->nodeValue; 
-			}
-
-			
-		}
-	}
-}
 
 /*
 <ul>
