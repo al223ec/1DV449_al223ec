@@ -64,5 +64,3 @@ Känner du att du lärt dig något av denna uppgift?
 ------------------
 Jag har lärt mig en hel del, hur man praktiskt går till väga för att skrapa en sida. Har också lärt mig en hel del kring http headers och hur man skickar postdata via kod. 
 Tidigare har jag inte reflekterat mycket över webbskrapning, men jag upplever det än så länge som ett ganska trubbigt och svårhanterligt verktyg. Öppna api:er är för alla parter betydligt vettigar och lättare att hantera. 
-
-Dessutom lärt mig att jag hatar DOMNodeList i php. Väldigt otymplig lista som är svår att hantera och svår att iterera igenom för att få ut data. Dessutom går det inte att ställa direkta querys till dessa listor. Xpath fungerar betydligt bättre, det gäller bara att html:en är ganska välsturkturerad för att göra det lätt att ställa frågor. 
