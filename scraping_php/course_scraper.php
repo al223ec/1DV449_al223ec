@@ -3,17 +3,17 @@ include_once('post.php');
 
 class CourseScraper implements JsonSerializable{
 	//Kursens namn
-	private $name;
+	private $name = "no information";
 	//Den URL kurswebbplatsen har
-	private $URL; 
+	private $URL = "no information"; 
 	//Kurskod
-	private $courseCode; 
+	private $courseCode = "no information"; 
 	//URL till kursplanen
-	private $coursePlanURL; 
+	private $coursePlanURL = "no information"; 
 	//Den inledande texten om varje kurs
-	private $text; 
+	private $text = "no information"; 
 	//Den senaste posten
-	private $post; 
+	private $post = "no information"; 
 
 	private $postURL; 
 

@@ -62,6 +62,10 @@ class MyPageScraper extends CoursePageScraper{
 
 		curl_setopt($ch,CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	    	'Webbteknik 2 Laboration 01 Skrapa: al223ec',
+	    ));
+
 
 		$scrapedPage = curl_exec ($ch);
 
@@ -79,6 +83,9 @@ class MyPageScraper extends CoursePageScraper{
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); //detta kan jag inte använda på mitt webbhotell och jag vet inte hur jag ska fixa det
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	    	'Webbteknik 2 Laboration 01 Skrapa: al223ec',
+	    ));
 
 		$result = curl_exec ($ch);
 		

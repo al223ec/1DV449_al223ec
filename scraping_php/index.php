@@ -1,6 +1,5 @@
 <?php
-ini_set('open_basedir', NULL);
-//set_time_limit(0); // to infinity
+//set_time_limit(0); // to infinity, denna får inte sättas på webbhotellet.
 
 include_once('course_scraper.php'); 
 include_once('web_scraper.php'); 
@@ -9,7 +8,6 @@ include_once('my_page_scraper.php');
 
 $jsonFilePath = "data.json"; 
 $jsonFilePathMyPage = "myPageData.json"; 
-
 
 $action = "a"; 
 $actionScrapeCoursePage = "WebScraper::actionScrapeCoursePage"; 
@@ -28,13 +26,12 @@ if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeCoursePage){
 	file_put_contents($jsonFilePath, json_encode($scraper, JSON_PRETTY_PRINT));
 
 }else if(isset($_GET[$action]) && $_GET[$action] == $actionScrapeLoginPage){
+	//Detta fungerar inte på mitt webbhotell
+	//Warning: curl_setopt(): CURLOPT_FOLLOWLOCATION cannot be activated when an open_basedir is set
 	$myScraper = new MyPageScraper(); 
 	$myScraper->scrapeMyPage($_POST[$userName], $_POST[$password], intval($_POST[$numberOfCourses])); 
-
 	file_put_contents($jsonFilePathMyPage, json_encode($myScraper, JSON_PRETTY_PRINT));
 }
-
-
 
 function getScrapingInformation($jsonFilePath){
 	@$string = file_get_contents($jsonFilePath);

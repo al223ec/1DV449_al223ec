@@ -1,9 +1,9 @@
 <?php
 
 class Post implements JsonSerializable {
-	private $heading; 
-	private $author;
-	private $time; 
+	private $heading = "no information"; 
+	private $author = "no information";
+	private $time = "no information"; 
 
 	public function __construct($heading, $author, $time){
 		$this->heading = $heading; 
