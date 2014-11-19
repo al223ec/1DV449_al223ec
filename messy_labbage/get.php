@@ -26,8 +26,10 @@ function getMessages() {
 		return false;
 	}
 	
-	if($result)
+	if($result){
 		return $result;
-	else
+	}
+	else{
 	 	return false;
+	}
 }

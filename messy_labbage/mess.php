@@ -164,7 +164,7 @@ background-color: #F3FCE4;
         <!-- This script is running to get the messages -->
 			<script>
 				$(document).ready(function() {
-					MessageBoard.getMessages();
+				   MessageBoard.getMessages();
 				});
 			</script>
 			<script src="js/bootstrap.js"></script>

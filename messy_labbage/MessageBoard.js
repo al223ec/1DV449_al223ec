@@ -4,7 +4,7 @@ var MessageBoard = {
     textField: null,
     messageArea: null,
 
-    init:function(e)
+    init: function(e)
     {
 	
 		    MessageBoard.textField = document.getElementById("inputText");
@@ -33,7 +33,9 @@ var MessageBoard = {
         $.ajax({
 			type: "GET",
 			url: "functions.php",
-			data: {function: "getMessages"}
+			data: {
+                function: "getMessages"
+            }
 		}).done(function(data) { // called when the AJAX call is ready
 						
 			data = JSON.parse(data);
@@ -56,14 +58,16 @@ var MessageBoard = {
     },
     sendMessage:function(){
         
-        if(MessageBoard.textField.value == "") return;
+        if(MessageBoard.textField.value === "") return;
         
         // Make call to ajax
         $.ajax({
 			type: "GET",
 		  	url: "functions.php",
-		  	data: {function: "add", name: MessageBoard.nameField.value, message:MessageBoard.textField.value}
-		}).done(function(data) {
+		  	data: {
+                function: "add", name: MessageBoard.nameField.value, message:MessageBoard.textField.value
+            }
+		}).done(function(response) {
 		  alert("Your message is saved! Reload the page for watching it");
 		});
     

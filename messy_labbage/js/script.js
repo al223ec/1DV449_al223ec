@@ -1,69 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*!
  * Bootstrap v3.3.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
@@ -156,10 +90,10 @@ if (typeof jQuery === 'undefined') {
   // ALERT CLASS DEFINITION
   // ======================
 
-  var dismiss = '[data-dismiss="alert"]'
+  var dismiss = '[data-dismiss="alert"]';
   var Alert   = function (el) {
-    $(el).on('click', dismiss, this.close)
-  }
+    $(el).on('click', dismiss, this.close);
+  };
 
   Alert.VERSION = '3.3.1'
 
@@ -176,28 +110,28 @@ if (typeof jQuery === 'undefined') {
 
     var $parent = $(selector)
 
-    if (e) e.preventDefault()
+    if (e) e.preventDefault();
 
     if (!$parent.length) {
-      $parent = $this.closest('.alert')
+      $parent = $this.closest('.alert');
     }
 
-    $parent.trigger(e = $.Event('close.bs.alert'))
+    $parent.trigger(e = $.Event('close.bs.alert'));
 
-    if (e.isDefaultPrevented()) return
+    if (e.isDefaultPrevented()) return;
 
-    $parent.removeClass('in')
+    $parent.removeClass('in');
 
     function removeElement() {
       // detach from parent, fire event then clean up data
-      $parent.detach().trigger('closed.bs.alert').remove()
+      $parent.detach().trigger('closed.bs.alert').remove();
     }
 
     $.support.transition && $parent.hasClass('fade') ?
       $parent
         .one('bsTransitionEnd', removeElement)
         .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
-      removeElement()
+      removeElement();
   }
 
 
