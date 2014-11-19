@@ -63,4 +63,4 @@ http://www.twobirds.com/en/news/articles/2009/french-supreme-court-decision-webs
 Känner du att du lärt dig något av denna uppgift?
 ------------------
 Jag har lärt mig en hel del, hur man praktiskt går till väga för att skrapa en sida. Har också lärt mig en hel del kring http headers och hur man skickar postdata via kod. 
-Tidigare har jag inte reflekterat mycket över webbskrapning, men jag upplever det än så länge som ett ganska trubbigt och svårhanterligt verktyg. Öppna api:er är för alla parter betydligt vettigar och lättare att hantera. 
+Tidigare har jag inte reflekterat mycket över webbskrapning, men jag upplever det än så länge som ett ganska trubbigt och svårhanterligt verktyg. Öppna api:er är för alla parter betydligt vettigar och lättare att hantera.
