@@ -15,11 +15,6 @@ class UserDb extends Db {
 		return false; 
 	}
 
-	public function isUserLoggedIn(){
-
-	}
-
-
 	private function validateByPassword($password, $passwordHash){
 		return crypt($password, $passwordHash) === $passwordHash;
 	}
@@ -30,9 +25,6 @@ class UserDb extends Db {
 		$salt = sprintf("$2a$%02d$", $cost) . $salt;
 		return crypt($password, $salt);
 	}
-
-
-
 
 
 	private function setInitialData(){

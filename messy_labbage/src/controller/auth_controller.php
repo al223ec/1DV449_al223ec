@@ -1,21 +1,25 @@
 <?php
 
 class AuthController extends Controller{
-	private $dbModel; 
+	private $authModel; 
 	private $userNameKey = "AuthController::userNameKey"; 
 	private $passwordKey = "AuthController::passwordKey"; 
 	private $loginAction = "AuthController::login";
 
 	public function __construct(){
-		$this->dbModel = new UserDb(); 
+		$this->authModel = new AuthModel(); 
 	}
 
 	public function controll(){
+
 		switch ($this->getAction()) {
 			case $this->loginAction :
 				$this->login();
 				break;
 			default :
+				if($this->userIsLoggedIn()){
+					return;
+				}
 				$this->index();
 				break;
 		}
@@ -23,7 +27,7 @@ class AuthController extends Controller{
 
 
 	public function userIsLoggedIn(){
-		return $this->dbModel->isUserLoggedIn(); 
+		return $this->authModel->isUserLoggedIn(); 
 	}
 
 	private function index(){
@@ -44,13 +48,17 @@ class AuthController extends Controller{
 		$p = $this->getCleanInput($this->passwordKey);
 
 		if(isset($u) && isset($p)){
-			var_dump($this->dbModel->login($u, $p));
-			die();  
+			$this->authModel->login($u, $p);
+
 		} 
 		$this->redirect(); 
 	}
 
 	private function logout(){
 		$this->redirect(); 
+	}
+
+	private function loggedIn(){
+		$this->render("logged_in"); 
 	}
 }
