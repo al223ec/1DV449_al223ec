@@ -5,21 +5,25 @@ class AuthController extends Controller{
 	private $userNameKey = "AuthController::userNameKey"; 
 	private $passwordKey = "AuthController::passwordKey"; 
 	private $loginAction = "AuthController::login";
+	private $logoutAction = "AuthController::logout"; 
 
 	public function __construct(){
 		$this->authModel = new AuthModel(); 
 	}
 
 	public function controll(){
-
 		switch ($this->getAction()) {
 			case $this->loginAction :
 				$this->login();
 				break;
+			case $this->logoutAction : 
+				$this->logout(); 
+				break; 
 			default :
 				if($this->userIsLoggedIn()){
 					return;
 				}
+
 				$this->index();
 				break;
 		}
@@ -55,6 +59,7 @@ class AuthController extends Controller{
 	}
 
 	private function logout(){
+		$this->authModel->logout(); 
 		$this->redirect(); 
 	}
 

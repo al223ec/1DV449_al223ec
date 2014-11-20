@@ -2,7 +2,9 @@
 
 class AuthModel {
 	private $dbModel; 
-	private $sessionKey = "AuthModel::sessionKey"; 
+	private $sessionLoggedInKey = "AuthModel::sessionKey"; 
+	private $userAgentKey = "AuthModel::userAgentKey"; 
+
 
 	public function __construct(){
 		$this->dbModel = new UserDb(); 
@@ -14,10 +16,15 @@ class AuthModel {
 	}
 
 	public function isUserLoggedIn(){
-		return isset($_SESSION[$this->sessionKey]) ? $_SESSION[$this->sessionKey] : false; 
+		return isset($_SESSION[$this->sessionLoggedInKey]) ? $_SESSION[$this->sessionLoggedInKey] : false; 
+	}
+	private function confirmSession(){
+		isset($_SESSION[$this->sessionLoggedInKey]) && $_SESSION[$this->userAgentKey] == $_SERVER['HTTP_USER_AGENT']; 
 	}
 
 	public function saveSession(){
-			$_SESSION[$this->sessionKey] = true; 
+		$_SESSION[$this->sessionLoggedInKey] = true; 
+		$_SESSION[$this->userAgentKey] = $_SERVER['HTTP_USER_AGENT']; //Motverka sessionsstölder
+
 	}
 }

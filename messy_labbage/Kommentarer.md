@@ -1,5 +1,4 @@
-Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. 
-
+Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. Det är mycket buggar, koden är ganska dåligt skriven vilket ur både ett säkerhetsperspektiv "bugg"perspektiv är väldigt dåligt.
 
 Säkerhetsproblem
 -----------------------
@@ -11,6 +10,14 @@ Ingen server side authentisering, möjligt att ta bort required attributen på f
 SQL injections 
 Inga prepare statements, eller då dessa finns används de fel
 
+XSS 
+Är fullt möjligt, ingen indata saniteras. 
+
+CSRF
+Är också möjlig
+
+
+
 Implementera
 Synchronizer Token Pattern
 
@@ -21,10 +28,11 @@ Optimering
 Frågan om man ska fokusera på kod optimering eller snabbhet. 
 javascripten verkar laddas in flera ggr och i head taggen
 
-Valdigt rörigt strukturerad applikation, css överallt dock är ju inline css snabbast.
+Valdigt rörigt strukturerad applikation, css överallt dock är ju inline css snabbast. NJa 
+Inline css kan inte cachas vilket sker med css filer. 
 Background image och css som inte används
 
-Sprites
+Sprites??  
 
 Long-polling
 -------------------------
