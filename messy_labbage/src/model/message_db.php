@@ -1,15 +1,8 @@
 <?php
 
-class MessageDb {
-	private $dbName; 
-	private $db = null; 
+class MessageDb extends Db{
 
 	public function __construct(){
-		$dbName = "messages"; 
+		parent::__construct("messages.db"); 
 	}
-
-	public function connection(){
-		
-	}
-
 }

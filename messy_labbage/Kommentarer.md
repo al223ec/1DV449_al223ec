@@ -1,4 +1,5 @@
-Nästan ingen funktionalitet är på plats
+Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. 
+
 
 Säkerhetsproblem
 -----------------------
@@ -8,7 +9,7 @@ Behöver inte ange UN eller PW
 Ingen server side authentisering, möjligt att ta bort required attributen på fälten och logga in. 
 
 SQL injections 
-
+Inga prepare statements, eller då dessa finns används de fel
 
 Implementera
 Synchronizer Token Pattern
@@ -27,3 +28,8 @@ Sprites
 
 Long-polling
 -------------------------
+
+
+
+sqllite
+http://www.if-not-true-then-false.com/2012/php-pdo-sqlite3-example/
