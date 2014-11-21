@@ -15,14 +15,13 @@
 			echo $pageContent;
 		?>
 	</div>
-	
-    <script type="text/javascript" src="js/jquery-1.10.2.min.js" ></script>
-    <script type="text/javascript" src="my_js/message.js" ></script>
-    <script type="text/javascript" src="my_js/message_board.js" ></script>
 	<?php 
-		if(isset($jsContent)) { 
-			echo $jsContent; 
-		}
+	if(isset($userIsLoggedIn) && $userIsLoggedIn) { ?>
+	    <script type="text/javascript" src="js/jquery-1.10.2.min.js" ></script>
+	    <script type="text/javascript" src="my_js/message.js" ></script>
+	    <script type="text/javascript" src="my_js/message_board.js" ></script>
+	<?php
+	}
 	?>
 </body>
 </html>

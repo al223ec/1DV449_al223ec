@@ -34,41 +34,5 @@ class MessageDb extends Db{
 		} catch(PDOException $e) {
 	   		die($e->getMessage());
 	  	}
-	}
-
-	private function setInitialData(){
-		try{
-			$file_db = $this->connection(); 
-		    $messages = array(
-		                  array('message' => 'ett till test meddelande',
-		                        'name' => "ett till namn",
-		                        'time' => time()
- 		                        )
-		                );
-		 
-		 
-		    // Prepare INSERT statement to SQLite3 file db
-		    $insert = "INSERT INTO ". $this->table ." (message, name, time) 
-		                VALUES (:message, :name, :time)";
-		    $stmt = $file_db->prepare($insert);
-		 
-		    // Bind parameters to statement variables
-		    $stmt->bindParam(':message', $message);
-		    $stmt->bindParam(':name', $name);
-		 	$stmt->bindParam(':time', $time);
-		    // Loop thru all users and execute prepared insert statement
-		    foreach ($messages as $mess) {
-		      // Set values to bound variables
-		      $message = $mess['message'];
-		      $name = $mess['name'];
-		      $time = $mess['time'];
-		      // Execute statement'
-		      $stmt->execute();
-	  		}	
-		    $file_db = null; 	     
-		} catch(PDOException $e) {
-	   		die($e->getMessage());
-	  	}
-	  }
-*/
+	}*/
 }

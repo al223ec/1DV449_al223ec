@@ -1,6 +1,7 @@
 <div id="container">
     <div id="messageboard">
         <input class="btn btn-danger" type="button" id="buttonLogout" value="Logout" />
+        <input type="hidden" id="CSRFPreventionString" value="<?php echo $CSRFPreventionString; ?>" />
         
         <div id="messagearea"></div>
         

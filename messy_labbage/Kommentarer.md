@@ -23,6 +23,9 @@ Synchronizer Token Pattern
 
 Printar ut felmeddelande direkt
 
+För att förhindra att obehöriga ska kunna getta sidan kan man endast hämta data om man är inloggad. Tidigare skulle man bara kunna göra en get förfrågan och kringå inloggningskravet.
+
+
 Optimering
 ------------------------
 Frågan om man ska fokusera på kod optimering eller snabbhet. 

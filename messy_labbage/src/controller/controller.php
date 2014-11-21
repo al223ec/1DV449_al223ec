@@ -10,8 +10,7 @@ abstract class Controller{
 	protected function getCleanInput($inputName) {
 		return isset($_POST[$inputName]) ? $this->sanitize($_POST[$inputName]) : '';
 	}
-
-	private function sanitize($input) {
+	protected function sanitize($input) {
         $temp = trim($input);
         return filter_var($temp, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
     }	
