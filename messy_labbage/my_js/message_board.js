@@ -28,7 +28,6 @@ var MessageBoard = {
         };    
     },
     getMessages:function() {
-
         $.ajax({
 			type: "GET",
 			url: "index.php",
@@ -48,13 +47,11 @@ var MessageBoard = {
 			document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
 			
 		});
-	
-
     },
     sendMessage:function(){
-        
-        if(MessageBoard.textField.value === "") return;
-        
+        if(MessageBoard.textField.value === "") {
+            return;
+        }
         // Make call to ajax
         $.ajax({
 			type: "POST",
@@ -129,11 +126,8 @@ var MessageBoard = {
         }
     },*/
     showTime: function(message){
-         
          var time = message.getDate();
-         
          var showTime = "Created " + time.toLocaleDateString() + " at " + time.toLocaleTimeString();
-
          alert(showTime);
     },
     logout: function() {
