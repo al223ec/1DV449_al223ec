@@ -4,7 +4,7 @@ class MessageBoardController extends Controller{
 	private $auth; 
 
 	public function __construct(AuthController $authController){
-		$this->auth = $authController; 
+		$this->auth = $authController;
 	}
 
 	public function controll(){
@@ -12,5 +12,6 @@ class MessageBoardController extends Controller{
 		if($this->auth->userIsLoggedIn()){
 			$this->render("message_board"); 
 		}
+		//övriga senarios renderas i authcontroller
 	}
 }

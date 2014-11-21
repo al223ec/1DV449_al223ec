@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
+
 <title> Messy Labbage </title>
 </head>
 <body>
@@ -14,5 +15,14 @@
 			echo $pageContent;
 		?>
 	</div>
+	
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js" ></script>
+    <script type="text/javascript" src="my_js/message.js" ></script>
+    <script type="text/javascript" src="my_js/message_board.js" ></script>
+	<?php 
+		if(isset($jsContent)) { 
+			echo $jsContent; 
+		}
+	?>
 </body>
 </html>

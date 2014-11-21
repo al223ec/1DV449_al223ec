@@ -143,3 +143,6 @@ var MessageBoard = {
 }
 
 window.onload = MessageBoard.init;
+$(document).ready(function() {
+        MessageBoard.getMessages();
+    });

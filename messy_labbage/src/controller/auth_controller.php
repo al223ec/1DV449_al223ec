@@ -23,8 +23,7 @@ class AuthController extends Controller{
 				if($this->userIsLoggedIn()){
 					return;
 				}
-
-				$this->index();
+				$this->loginForm();
 				break;
 		}
 	}
@@ -34,9 +33,8 @@ class AuthController extends Controller{
 		return $this->authModel->isUserLoggedIn(); 
 	}
 
-	private function index(){
+	private function loginForm(){
 		if($this->userIsLoggedIn()){
-			$this->render("logged_in");
 			return;  
 		}
 
@@ -53,7 +51,6 @@ class AuthController extends Controller{
 
 		if(isset($u) && isset($p)){
 			$this->authModel->login($u, $p);
-
 		} 
 		$this->redirect(); 
 	}
@@ -61,9 +58,5 @@ class AuthController extends Controller{
 	private function logout(){
 		$this->authModel->logout(); 
 		$this->redirect(); 
-	}
-
-	private function loggedIn(){
-		$this->render("logged_in"); 
 	}
 }

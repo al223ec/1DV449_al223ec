@@ -16,7 +16,7 @@ XSS
 CSRF
 Är också möjlig
 
-
+Använder get för att posta data
 
 Implementera
 Synchronizer Token Pattern
@@ -33,6 +33,8 @@ Inline css kan inte cachas vilket sker med css filer.
 Background image och css som inte används
 
 Sprites??  
+Scriptfiler laddas in i slutet på sidan
+
 
 Long-polling
 -------------------------

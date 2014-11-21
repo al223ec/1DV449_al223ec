@@ -26,7 +26,7 @@ class UserDb extends Db {
 		return crypt($password, $salt);
 	}
 
-
+/*
 	private function setInitialData(){
 		try{
 			$file_db = $this->connection(); 
@@ -67,5 +67,5 @@ class UserDb extends Db {
 		} catch(PDOException $e) {
 	   		die($e->getMessage());
 	  	}
-	}
+	}*/
 }
