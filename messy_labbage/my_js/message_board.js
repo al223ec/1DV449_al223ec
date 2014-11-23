@@ -3,23 +3,29 @@ var MessageBoard = {
     messages: [],
     textField: null,
     messageArea: null,
+    latestRequest: null,
 
     init: function(e) {
-	    MessageBoard.textField = document.getElementById("inputText");
-	    MessageBoard.nameField = document.getElementById("inputName");
-        MessageBoard.messageArea = document.getElementById("messagearea");
+	    MessageBoard.textField     =   document.getElementById("inputText");
+	    MessageBoard.nameField     =   document.getElementById("inputName");
+        MessageBoard.messageArea   =   document.getElementById("messagearea");
 
         // Add eventhandlers    
-        document.getElementById("inputText").onfocus = function(e){ this.className = "focus"; };
-        document.getElementById("inputText").onblur = function(e){ this.className = "blur"; };
-        document.getElementById("buttonSend").onclick = function(e) {MessageBoard.sendMessage(); return false;};
-        document.getElementById("buttonLogout").onclick = function(e) {MessageBoard.logout(); return false;};
+        document.getElementById("inputText").onfocus = function(e){ 
+            this.className = "focus"; 
+        };
+        document.getElementById("inputText").onblur = function(e){ 
+            this.className = "blur"; 
+        };
+        document.getElementById("buttonSend").onclick = function(e) {
+            MessageBoard.sendMessage(); return false;
+        };
+        document.getElementById("buttonLogout").onclick = function(e) {
+            MessageBoard.logout(); return false;
+        };
 
-        MessageBoard.textField.onkeypress = 
-        function(e){ 
-            if(!e){
-                var e = window.event; 
-            }
+        MessageBoard.textField.onkeypress = function(e){ 
+            if(!e){ var e = window.event; }
             
             if(e.keyCode === 13 && !e.shiftKey){
                 MessageBoard.sendMessage();
@@ -28,44 +34,65 @@ var MessageBoard = {
         };    
     },
     getMessages:function() {
-        $.ajax({
-			type: "GET",
-			url: "index.php",
-			data: {
-                action: "getMessages"
-            }
-		}).done(function(response) { // called when the AJAX call is ready
-			messages = JSON.parse(response);
+        $.ajax(
+            {
+    			type: "GET",
+    			url: "index.php",
+                async: true,
 
-			for(var i in messages) { 
-			    var text = messages[i].name +" said:\n" +messages[i].message;
-				var mess = new Message(text, new Date(messages[i].time * 1000));
-                MessageBoard.messages.push(mess);
-                MessageBoard.renderMessage(mess);
-				
-			}
-			document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-			
-		});
+    			data: {
+                    action: "getMessages",
+                    latestRequest: MessageBoard.latestRequest
+                },
+                success : function(response) {
+                    MessageBoard.latestRequest =  new Date().getTime() / 1000;
+                    console.log(response);
+                    messages = JSON.parse(response);
+
+                    if(messages.length > MessageBoard.messages.length){
+                        for(var i in messages) { 
+                            var text = messages[i].name +" said:\n" + messages[i].message;
+                            var mess = new Message(text, new Date(messages[i].time * 1000));
+                            MessageBoard.messages.push(mess);
+                            MessageBoard.renderMessage(mess);
+                        }
+                        document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
+                    }
+                    MessageBoard.getMessages();
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown){
+
+                }
+            }
+        );
     },
     sendMessage:function(){
+        console.log("sendMessage pressed"); 
         if(MessageBoard.textField.value === "") {
             return;
         }
-        // Make call to ajax
-        $.ajax({
-			type: "POST",
-		  	url: "index.php",
-		  	data: {
-                action: "addMessage", 
-                name: MessageBoard.nameField.value, 
-                message: MessageBoard.textField.value,
-                CSRFPreventionString: document.getElementById("CSRFPreventionString").value
-            }
-		}).done(function(response) {
-            console.log(response); 
-            //window.location = "index.php";
-		});
+        
+        $.ajax(
+            {
+    			type: "POST",
+    		  	url: "index.php",
+                async: true,
+
+    		  	data: {
+                    action: "addMessage", 
+                    name: MessageBoard.nameField.value, 
+                    message: MessageBoard.textField.value,
+                    CSRFPreventionString: document.getElementById("CSRFPreventionString").value
+                }, 
+                success : function(response) {
+                    console.log(response); 
+                    window.location = "index.php";
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown){
+
+                }
+    		}
+        );
     
     },
     renderMessages: function(){
@@ -135,7 +162,7 @@ var MessageBoard = {
     }
 };
 
-$(document).ready(function() {
-    MessageBoard.init();  
+$(function() {
+    MessageBoard.init();
     MessageBoard.getMessages();
 });

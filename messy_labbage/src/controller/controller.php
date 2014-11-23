@@ -19,7 +19,6 @@ abstract class Controller{
 		if($this->viewVars !== null){ 
 			extract($this->viewVars);
 		}
-
 		ob_start();
 
 		$pageContent = SRC_DIR . "view" . DS . "$file.php";
