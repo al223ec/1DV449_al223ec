@@ -5,7 +5,7 @@ var MessageBoard = {
     messageArea: null,
     latestRequest: null,
 
-    init: function(e) {
+    init : function(e) {
 	    MessageBoard.textField     =   document.getElementById("inputText");
 	    MessageBoard.nameField     =   document.getElementById("inputName");
         MessageBoard.messageArea   =   document.getElementById("messagearea");
@@ -33,7 +33,7 @@ var MessageBoard = {
             }
         };    
     },
-    getMessages:function() {
+    getMessages : function() {
         $.ajax(
             {
     			type: "GET",
@@ -47,26 +47,27 @@ var MessageBoard = {
                 success : function(response) {
                     MessageBoard.latestRequest =  new Date().getTime() / 1000;
                     console.log(response);
+                    MessageBoard.messages = []; 
                     messages = JSON.parse(response);
 
-                    if(messages.length > MessageBoard.messages.length){
-                        for(var i in messages) { 
-                            var text = messages[i].name +" said:\n" + messages[i].message;
-                            var mess = new Message(text, new Date(messages[i].time * 1000));
-                            MessageBoard.messages.push(mess);
-                            MessageBoard.renderMessage(mess);
-                        }
-                        document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
+                    for(var i in messages) { 
+                        var text = messages[i].name +" said:\n" + messages[i].message;
+                        var mess = new Message(text, new Date(messages[i].time * 1000));
+                        MessageBoard.messages.push(mess);
                     }
+                    MessageBoard.renderMessages(); 
                     MessageBoard.getMessages();
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){
+
+                },
+                complete : function (){
 
                 }
             }
         );
     },
-    sendMessage:function(){
+    sendMessage : function(){
         console.log("sendMessage pressed"); 
         if(MessageBoard.textField.value === "") {
             return;
@@ -77,7 +78,6 @@ var MessageBoard = {
     			type: "POST",
     		  	url: "index.php",
                 async: true,
-
     		  	data: {
                     action: "addMessage", 
                     name: MessageBoard.nameField.value, 
@@ -90,12 +90,14 @@ var MessageBoard = {
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){
 
+                },
+                complete : function (){
                 }
     		}
         );
     
     },
-    renderMessages: function(){
+    renderMessages : function(){
         // Remove all messages
         MessageBoard.messageArea.innerHTML = "";
      
@@ -106,7 +108,7 @@ var MessageBoard = {
         
         document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
     },
-    renderMessage: function(message){
+    renderMessage : function(message){
         // Message div
         var div = document.createElement("div");
         div.className = "message";
@@ -152,13 +154,13 @@ var MessageBoard = {
 			MessageBoard.renderMessages();
         }
     },*/
-    showTime: function(message){
+    showTime : function(message){
          var time = message.getDate();
          var showTime = "Created " + time.toLocaleDateString() + " at " + time.toLocaleTimeString();
          alert(showTime);
     },
-    logout: function() {
-        window.location = "index.php";
+    logout : function() {
+        window.location = "index.php?action=logout";
     }
 };
 

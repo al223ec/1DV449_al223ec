@@ -43,8 +43,10 @@ abstract class Db {
 		} else {
 			$query->execute(); 
 		}
-		
-		if($response = $query->fetchAll()){
+		$response = $query->fetchAll(); 
+		$query = null;
+
+		if($response){
 			return $response; 
 		}
 		return null;

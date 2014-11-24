@@ -28,14 +28,14 @@ class MessageBoardController extends Controller{
 
 			$CSRFPreventionString = $this->getCleanInput('CSRFPreventionString'); 
 			
-			if($CSRFPreventionString === $_SESSION["CSRFPreventionString"]){
+			//if($CSRFPreventionString === $_SESSION["CSRFPreventionString"]){
 				if($n !== "" && $m !== ""){
 					$this->messageDb->addMessage($n, $m); 
 					file_put_contents($this->filePath, time());
 					echo "message added $m $CSRFPreventionString";
 					return;
 				}
-			}
+			//}
 		}
 	}
 

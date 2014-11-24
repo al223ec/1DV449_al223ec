@@ -37,7 +37,7 @@ class AuthController extends Controller{
 		if($this->userIsLoggedIn()){
 			return;  
 		}
-
+		
 		$this->viewVars["loginAction"] = $this->loginAction; 
 		$this->viewVars["userNameKey"] = $this->userNameKey;
 		$this->viewVars["passwordKey"] = $this->passwordKey;  

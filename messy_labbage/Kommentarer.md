@@ -41,6 +41,7 @@ Scriptfiler laddas in i slutet på sidan
 
 Long-polling
 -------------------------
+Verkar vara nästan omöjligt att få till ordentlig long polling med php när man använder sig av session start. Lyckades dock till slut lösa detta i samarbete, genom att kalla på session_write_close(); innan jag börjar while loopen
 
 
 
