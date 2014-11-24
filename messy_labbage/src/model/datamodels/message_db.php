@@ -7,9 +7,14 @@ class MessageDb extends Db{
 		parent::__construct($this->table);
 	}
 
-	public function getMessages(){
-		$sql = "SELECT * FROM ". $this->table; 
-		return $this->query($sql); 
+	public function getMessages($latestRequest){  
+		$sql = "
+			SELECT " . $this->table . ".*
+			FROM " . $this->table . "
+			WHERE ". $this->table .".time > :time
+		";
+		$params = array(":time" => $latestRequest);
+		return $this->query($sql, $params);
 	}
 
 	public function addMessage($name, $message){

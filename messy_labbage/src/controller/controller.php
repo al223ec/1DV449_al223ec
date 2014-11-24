@@ -39,7 +39,7 @@ abstract class Controller{
 	}
 
 	protected function redirect(){
-		header('Location:' . "/messyLabbage/index.php");
+		header('Location:' ."/messyLabbage/index.php");
 		die(); 
 	}
 

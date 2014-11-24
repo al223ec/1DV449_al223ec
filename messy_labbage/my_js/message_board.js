@@ -47,22 +47,23 @@ var MessageBoard = {
                 success : function(response) {
                     MessageBoard.latestRequest =  new Date().getTime() / 1000;
                     console.log(response);
-                    MessageBoard.messages = []; 
                     messages = JSON.parse(response);
 
                     for(var i in messages) { 
                         var text = messages[i].name +" said:\n" + messages[i].message;
                         var mess = new Message(text, new Date(messages[i].time * 1000));
                         MessageBoard.messages.push(mess);
+                        MessageBoard.renderMessage(mess); 
                     }
-                    MessageBoard.renderMessages(); 
-                    MessageBoard.getMessages();
+                    document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){
-
+                    //Vad händer om det blir ett error? 
                 },
                 complete : function (){
-
+                    //Sker efter success och error 
+                    //MessageBoard.renderMessages(); 
+                    MessageBoard.getMessages();
                 }
             }
         );
@@ -85,8 +86,8 @@ var MessageBoard = {
                     CSRFPreventionString: document.getElementById("CSRFPreventionString").value
                 }, 
                 success : function(response) {
-                    console.log(response); 
                     window.location = "index.php";
+                    console.log(response); 
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){
 
@@ -97,7 +98,7 @@ var MessageBoard = {
         );
     
     },
-    renderMessages : function(){
+   /* renderMessages : function(){
         // Remove all messages
         MessageBoard.messageArea.innerHTML = "";
      
@@ -107,7 +108,7 @@ var MessageBoard = {
         }        
         
         document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-    },
+    },*/
     renderMessage : function(message){
         // Message div
         var div = document.createElement("div");
@@ -158,9 +159,6 @@ var MessageBoard = {
          var time = message.getDate();
          var showTime = "Created " + time.toLocaleDateString() + " at " + time.toLocaleTimeString();
          alert(showTime);
-    },
-    logout : function() {
-        window.location = "index.php?action=logout";
     }
 };
 

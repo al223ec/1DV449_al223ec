@@ -3,7 +3,7 @@
 class MessageBoardController extends Controller{
 	protected $auth; 
 	protected $messageDb;
-	protected $filePath = "timestamp"; 
+	protected $sessionTimestampKey = "MessageBoardController::sessionTimestampKey"; 
 
 	public function __construct(AuthController $authController){
 		$this->auth = $authController;
@@ -16,6 +16,7 @@ class MessageBoardController extends Controller{
 		if($this->auth->userIsLoggedIn()){
 			$_SESSION["CSRFPreventionString"] = $this->getCSRFPreventionString();  
 			$this->viewVars['CSRFPreventionString'] = $_SESSION["CSRFPreventionString"]; 
+			$this->auth->bindVars($this->viewVars); 
 			$this->render("message_board"); 
 		}
 		//övriga senarios renderas i authcontroller
@@ -28,14 +29,14 @@ class MessageBoardController extends Controller{
 
 			$CSRFPreventionString = $this->getCleanInput('CSRFPreventionString'); 
 			
-			//if($CSRFPreventionString === $_SESSION["CSRFPreventionString"]){
+			if($CSRFPreventionString === $_SESSION["CSRFPreventionString"]){
 				if($n !== "" && $m !== ""){
 					$this->messageDb->addMessage($n, $m); 
-					file_put_contents($this->filePath, time());
-					echo "message added $m $CSRFPreventionString";
+					$_SESSION[$this->sessionTimestampKey] = time(); 
+					echo "message added"; //$this->messageDb->getLatestMessage();
 					return;
 				}
-			//}
+			}
 		}
 	}
 

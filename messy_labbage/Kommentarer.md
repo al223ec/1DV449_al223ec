@@ -37,12 +37,21 @@ Background image och css som inte används
 
 Sprites??  
 Scriptfiler laddas in i slutet på sidan
-
+Rule 5: Put Stylesheets at the To s37
+Rule 6: Put Scripts at the Bottom  s45
+Rule 8: Make JavaScript and CSS External s55
+Rule 10: Minify JavaScript s69
+Rule 12: Remove Duplicate Scripts s85
 
 Long-polling
 -------------------------
 Verkar vara nästan omöjligt att få till ordentlig long polling med php när man använder sig av session start. Lyckades dock till slut lösa detta i samarbete, genom att kalla på session_write_close(); innan jag börjar while loopen
 
+
+
+ht access fil, saknas 404 sida och liknande
+Kod
+Skulle vilja implementera lite routing men applikationen är så liten så känns lite overkill. 
 
 
 sqllite

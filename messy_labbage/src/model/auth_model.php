@@ -27,4 +27,8 @@ class AuthModel {
 		$_SESSION[$this->userAgentKey] = $_SERVER['HTTP_USER_AGENT']; //Motverka sessionsstölder
 
 	}
+	public function logout(){
+		$_SESSION[$this->sessionLoggedInKey] = null; 
+		$_SESSION[$this->userAgentKey] = null;
+	}
 }

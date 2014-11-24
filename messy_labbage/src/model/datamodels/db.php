@@ -6,11 +6,10 @@ abstract class Db {
 	public function __construct($table){
 		$this->table = $table;
 	}
-
 	protected function connection(){
 		try{
 			// Create (connect to) SQLite database in file
-			$db = new \PDO('sqlite:messaging.sqlite');
+			$db = new \PDO('sqlite:'. SRC_DIR . 'model/datamodels/messaging.sqlite');
 			// Set errormode to exceptions
 			$db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		}catch(PDOException $e) {

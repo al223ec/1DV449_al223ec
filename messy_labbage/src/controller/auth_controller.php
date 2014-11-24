@@ -2,6 +2,7 @@
 
 class AuthController extends Controller{
 	private $authModel; 
+
 	private $userNameKey = "AuthController::userNameKey"; 
 	private $passwordKey = "AuthController::passwordKey"; 
 	private $loginAction = "AuthController::login";
@@ -58,5 +59,9 @@ class AuthController extends Controller{
 	private function logout(){
 		$this->authModel->logout(); 
 		$this->redirect(); 
+	}
+
+	public function bindVars(&$viewVars){
+		$viewVars["logoutAction"] = $this->logoutAction;
 	}
 }
