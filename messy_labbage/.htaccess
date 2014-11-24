@@ -8,3 +8,8 @@
  
 	RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
  </IfModule>
+
+ <Directory .git>
+    order allow,deny
+    deny from all
+</Directory>

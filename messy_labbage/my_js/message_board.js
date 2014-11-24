@@ -46,7 +46,7 @@ var MessageBoard = {
                 },
                 success : function(response) {
                     MessageBoard.latestRequest =  new Date().getTime() / 1000;
-                    console.log(response);
+                    //console.log(response);
                     messages = JSON.parse(response);
 
                     for(var i in messages) { 
@@ -61,8 +61,7 @@ var MessageBoard = {
                     //Vad händer om det blir ett error? 
                 },
                 complete : function (){
-                    //Sker efter success och error 
-                    //MessageBoard.renderMessages(); 
+                    //Sker efter success och error  
                     MessageBoard.getMessages();
                 }
             }
