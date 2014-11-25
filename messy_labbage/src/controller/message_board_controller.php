@@ -3,7 +3,7 @@
 class MessageBoardController extends Controller{
 	protected $auth; 
 	protected $messageDb;
-	protected $sessionTimestampKey = "MessageBoardController::sessionTimestampKey"; 
+	private $timeStampPath = "timestamp"; 
 
 	public function __construct(AuthController $authController){
 		$this->auth = $authController;
@@ -32,7 +32,8 @@ class MessageBoardController extends Controller{
 			if($CSRFPreventionString === $_SESSION["CSRFPreventionString"]){
 				if($n !== "" && $m !== ""){
 					$this->messageDb->addMessage($n, $m); 
-					$_SESSION[$this->sessionTimestampKey] = time(); 
+					$this->setTimeStamp(time());
+					
 					echo "message added"; //$this->messageDb->getLatestMessage();
 					return;
 				}
@@ -49,5 +50,12 @@ class MessageBoardController extends Controller{
 	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
 	    }
 	    return $randomString;
+	}
+
+	protected function setTimeStamp($time){
+		file_put_contents($this->timeStampPath, intval($time)); 
+	}
+	protected function readTimeStamp(){
+		return intval(file_get_contents($this->timeStampPath));
 	}
 }

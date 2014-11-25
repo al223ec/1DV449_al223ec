@@ -46,7 +46,7 @@ var MessageBoard = {
                 },
                 success : function(response) {
                     MessageBoard.latestRequest =  new Date().getTime() / 1000;
-                    //console.log(response);
+                    console.log(response);
                     messages = JSON.parse(response);
 
                     for(var i in messages) { 
@@ -85,7 +85,7 @@ var MessageBoard = {
                     CSRFPreventionString: document.getElementById("CSRFPreventionString").value
                 }, 
                 success : function(response) {
-                    window.location = "index.php";
+                    //window.location = "index.php";
                     console.log(response); 
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){

@@ -11,16 +11,13 @@ class MessageBoardGetController extends MessageBoardController{
 		$startTime = time(); 
 		
 		if($this->auth->userIsLoggedIn()){	
-			$latestUpdate = intval(isset($_SESSION[$this->sessionTimestampKey]) ? 
-				$_SESSION[$this->sessionTimestampKey] : 0);
-
-			$_SESSION[$this->sessionTimestampKey] = time(); 
-			
 			session_write_close();
-    		while(time() <= $startTime + 4){
-				if($latestRequest === 0 || $startTime > $latestUpdate){
+
+    		while(time() <= $startTime + 15){
+				$latestUpdate = $this->readTimeStamp(); 
+				if($latestRequest === 0 || $latestRequest < $latestUpdate){
 					$this->performRequest($latestRequest); 
-					return;
+					break;
 				} else {
 					sleep(1); //Sov 1 sekund
 			        continue;
@@ -43,5 +40,6 @@ class MessageBoardGetController extends MessageBoardController{
 			}
 		}
 		echo json_encode($messages); 
+		die();
 	}
 }
