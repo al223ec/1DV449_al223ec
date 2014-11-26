@@ -6,7 +6,7 @@ abstract class Db {
 	public function __construct($table){
 		$this->table = $table;
 	}
-	protected function connection(){
+	private function connection(){
 		try{
 			// Create (connect to) SQLite database in file
 			$db = new \PDO('sqlite:'. SRC_DIR . 'model/datamodels/messaging.sqlite');

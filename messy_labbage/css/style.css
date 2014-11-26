@@ -1,3 +1,5 @@
+
+
 <!-- Custom styles for login_form template -->
 body {
   background-color: #eee;
@@ -42,27 +44,26 @@ body {
 html{
 
 }
-#messageboard-container{
-    margin:0;
-    padding:0;
-    display:inline-block;
-    background-color:#C3D9FF;
-    overflow:auto;
-    width: auto;
-    height: auto;
+.container{
+  width: 100%;
+  padding: 0;
 }
-#messageboard{
-    padding: 5px;
+.messageboard-container{
     padding-top:200px; 
     background-image:url("../pic/logo.png"); 
 
     background-repeat:no-repeat;
     background-position:center top;
+    background-color:#C3D9FF;
+}
+#messageboard{
+    padding: 5px;
+
     width:600px;
     margin:auto;
     border:1px solid silver;
     padding-bottom:20px;
-    background-color:#C3D9FF;
+    background-color:#fff;
 }
 
 #numberOfMess {

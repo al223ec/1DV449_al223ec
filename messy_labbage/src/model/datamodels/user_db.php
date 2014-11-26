@@ -16,6 +16,7 @@ class UserDb extends Db {
 	}
 
 	private function validateByPassword($password, $passwordHash){
+		//hash_equals bör användas men kan inte pga php version
 		return crypt($password, $passwordHash) === $passwordHash;
 	}
 

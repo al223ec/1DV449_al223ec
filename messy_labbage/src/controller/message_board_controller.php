@@ -37,6 +37,8 @@ class MessageBoardController extends Controller{
 					echo "message added"; //$this->messageDb->getLatestMessage();
 					return;
 				}
+			}else{
+				$this->auth->logout(); 
 			}
 		}
 	}

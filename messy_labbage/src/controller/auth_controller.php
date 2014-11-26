@@ -56,7 +56,7 @@ class AuthController extends Controller{
 		$this->redirect(); 
 	}
 
-	private function logout(){
+	public function logout(){
 		$this->authModel->logout(); 
 		$this->redirect(); 
 	}
