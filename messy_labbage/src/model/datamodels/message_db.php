@@ -8,9 +8,9 @@ class MessageDb extends Db{
 	}
 
 	public function getMessages($latestRequest){  
-		$sql = "
-			SELECT " . $this->table . ".*
-			FROM " . $this->table . "
+		$sql = 
+			"SELECT " . $this->table . 
+			".*FROM " . $this->table . "
 			WHERE ". $this->table .".time > :time
 		";
 		$params = array(":time" => $latestRequest);

@@ -34,7 +34,7 @@ class AuthModel {
 		return isset($_SESSION[$this->sessionLoggedInKey]) ? $_SESSION[$this->sessionLoggedInKey] : false; 
 	}
 	private function confirmSession(){
-		isset($_SESSION[$this->sessionLoggedInKey]) && $_SESSION[$this->userAgentKey] == $_SERVER['HTTP_USER_AGENT']; 
+		isset($_SESSION[$this->sessionLoggedInKey]) && $_SESSION[$this->userAgentKey] === $_SERVER['HTTP_USER_AGENT']; 
 	}
 
 	public function saveSession(){

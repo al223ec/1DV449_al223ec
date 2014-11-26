@@ -84,7 +84,8 @@ var MessageBoard = {
                     message: MessageBoard.textField.value,
                     CSRFPreventionString: document.getElementById("CSRFPreventionString").value
                 }, 
-                success : function(response) {
+                success : function(response) { 
+                    MessageBoard.textField.value = "",
                     //window.location = "index.php";
                     console.log(response); 
                 },

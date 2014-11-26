@@ -17,7 +17,6 @@ class MessageBoardGetController extends MessageBoardController{
 				$latestUpdate = $this->readTimeStamp(); 
 				if($latestRequest === 0 || $latestRequest < $latestUpdate){
 					$this->performRequest($latestRequest); 
-					break;
 				} else {
 					sleep(1); //Sov 1 sekund
 			        continue;
