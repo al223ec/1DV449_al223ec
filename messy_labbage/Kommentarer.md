@@ -83,8 +83,7 @@ Optimering resultat
 -------------------
 Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas. Dessutom har jag kunnat ta bort 4 request. 
 
-<h3>Lokalt</h3>
------
+<h4>Lokalt</h4>
 Innan förändring
 login 3 request 192 kb | 77ms (load: 88ms DOMContentloaded: 88ms)
 start 14 request 785 kb | 320ms (load: 288ms DOMContentloaded: 281ms)
