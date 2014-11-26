@@ -70,12 +70,13 @@ Jag har främst fokuserat på att få till bättre struktur så att man mycket l
 
 <h4>Utförd optimering</h4>
 -------------
+<ul>
 <li>Rule 5: Put Stylesheets at the To s37</li>
 <li>Rule 6: Put Scripts at the Bottom  s45</li>
 <li>Rule 8: Make JavaScript and CSS External s55</li>
 <li>Rule 10: Minify JavaScript s69</li>
 <li>Rule 12: Remove Duplicate Scripts s85</li>
-
+</ul>
 <h4>Optimering resultat</h4>
 -------------------
 Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas. Dessutom har jag kunnat ta bort 4 request. 
