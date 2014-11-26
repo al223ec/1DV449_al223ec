@@ -17,12 +17,13 @@ class MessageBoardGetController extends MessageBoardController{
 				$latestUpdate = $this->readTimeStamp(); 
 				if($latestRequest === 0 || $latestRequest < $latestUpdate){
 					$this->performRequest($latestRequest); 
+					return;
 				} else {
 					sleep(1); //Sov 1 sekund
 			        continue;
 				}
 			}
-			$this->performRequest($latestRequest); 
+			echo json_encode(null); 
 		}
 	}
 
@@ -39,6 +40,6 @@ class MessageBoardGetController extends MessageBoardController{
 			}
 		}
 		echo json_encode($messages); 
-		die();
+		//die();
 	}
 }

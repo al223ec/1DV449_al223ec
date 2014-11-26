@@ -4,6 +4,7 @@ var MessageBoard = {
     textField: null,
     messageArea: null,
     latestRequest: null,
+    timeout: null,
 
     init : function(e) {
 	    MessageBoard.textField     =   document.getElementById("inputText");
@@ -44,28 +45,31 @@ var MessageBoard = {
                     action: "getMessages",
                     latestRequest: MessageBoard.latestRequest
                 },
-                success : function(response) {
-                    MessageBoard.latestRequest =  new Date().getTime() / 1000;
-                    console.log(response);
-                    messages = JSON.parse(response);
-
-                    for(var i in messages) { 
-                        var text = messages[i].name +" said:\n" + messages[i].message;
-                        var mess = new Message(text, new Date(messages[i].time * 1000));
-                        MessageBoard.messages.push(mess);
-                        MessageBoard.renderMessage(mess); 
-                    }
-                    document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown){
-                    //Vad händer om det blir ett error? 
-                },
-                complete : function (){
-                    //Sker efter success och error  
-                    MessageBoard.getMessages();
-                }
             }
-        );
+        ).done(function(response){
+            MessageBoard.latestRequest =  new Date().getTime() / 1000;
+            console.log(response);
+            messages = JSON.parse(response);
+
+            for(var i in messages) { 
+                var text = messages[i].name +" said:\n" + messages[i].message;
+                var mess = new Message(text, new Date(messages[i].time * 1000));
+                for(var j = 0; j < MessageBoard.messages.length; j++) { 
+                    var add = MessageBoard.messages[j].getDate().getTime() === mess.getDate().getTime() && 
+                                MessageBoard.messages[j].getText() === mess.getText(); 
+                }
+                if(!add){ 
+                    MessageBoard.messages.push(mess); 
+                    MessageBoard.renderMessage(mess);
+                }          
+            }
+            document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
+           
+            clearInterval(MessageBoard.timeout);
+            MessageBoard.timeout = setTimeout( function(){
+                MessageBoard.getMessages();
+            }, 1000 );
+        });
     },
     sendMessage : function(){
         console.log("sendMessage pressed"); 
@@ -85,30 +89,13 @@ var MessageBoard = {
                     CSRFPreventionString: document.getElementById("CSRFPreventionString").value
                 }, 
                 success : function(response) { 
-                    MessageBoard.textField.value = "",
-                    //window.location = "index.php";
-                    console.log(response); 
+                    MessageBoard.textField.value = "";
+                    //console.log(response); 
                 },
-                error : function(XMLHttpRequest, textStatus, errorThrown){
-
-                },
-                complete : function (){
-                }
     		}
         );
     
     },
-   /* renderMessages : function(){
-        // Remove all messages
-        MessageBoard.messageArea.innerHTML = "";
-     
-        // Renders all messages.
-        for(var i=0; i < MessageBoard.messages.length; ++i){
-            MessageBoard.renderMessage(MessageBoard.messages[i]);
-        }        
-        
-        document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-    },*/
     renderMessage : function(message){
         // Message div
         var div = document.createElement("div");
@@ -146,15 +133,7 @@ var MessageBoard = {
         div.appendChild(spanClear);        
         
         MessageBoard.messageArea.appendChild(div);       
-    },/* 
-    removeMessage: function(messageID){
-		if(window.confirm("Vill du verkligen radera meddelandet?")){
-        
-			MessageBoard.messages.splice(messageID,1); // Removes the message from the array.
-        
-			MessageBoard.renderMessages();
-        }
-    },*/
+    },
     showTime : function(message){
          var time = message.getDate();
          var showTime = "Created " + time.toLocaleDateString() + " at " + time.toLocaleTimeString();

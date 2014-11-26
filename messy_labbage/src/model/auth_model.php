@@ -19,7 +19,7 @@ class AuthModel {
 		if (!isset($_SESSION['CREATED'])) {
 		    $_SESSION['CREATED'] = time();
 		} else if (time() - $_SESSION['CREATED'] > 180) {
-		    session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
+		    session_regenerate_id();    // change session ID for the current session 
 		    $_SESSION['CREATED'] = time();  // update creation time
 		}
 	}
