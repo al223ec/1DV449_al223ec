@@ -1,6 +1,14 @@
 Laborationsrapport
 --------------------- 
-Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. Det är mycket buggar, koden är ganska dåligt skriven vilket ur både ett säkerhetsperspektiv och ett "bugg"perspektiv är väldigt dåligt.
+Anton Ledström al223ec
+---------------------
+<ul>
+	<li>https://www.antonledstrom.se/messy/</li>
+	<li>Un: admin</li>
+	<li>pw: password</li>
+</ul>
+
+Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. Det är mycket buggar, koden är ganska dåligt skriven och väldigt dåligt strukturerad vilket ur både ett säkerhetsperspektiv och ett "bugg"perspektiv är väldigt dåligt.
 
 Säkerhetsproblem
 -----------------------
@@ -66,10 +74,11 @@ Optimering
 Koden är väldigt dåligt strukturerad och filer laddas in flera gånger. CSS skrivs på flera platser. Script filer laddas också in hur som helst. 
 Det finns dessutom flera bilder i css som inte används, eller de syns iallafall inte. 
 
-Jag har främst fokuserat på att få till bättre struktur så att man mycket lättare ser vad det är som laddas in och vad det är som måste laddas in. Jag har följt flera rekomendationer från boken: High Performance Web Sites, Steve Sounders, O’Reilly. 
+Jag har främst fokuserat på att få till bättre struktur så att man mycket lättare ser vad det är som laddas in och vad det är som måste laddas in. 
 
 <h4>Utförd optimering</h4>
 -------------
+Jag har följt flera rekomendationer från boken: High Performance Web Sites, Steve Sounders, O’Reilly. 
 <ul>
 <li>Rule 5: Put Stylesheets at the To s37</li>
 <li>Rule 6: Put Scripts at the Bottom  s45</li>
@@ -79,7 +88,7 @@ Jag har främst fokuserat på att få till bättre struktur så att man mycket l
 </ul>
 <h4>Optimering resultat</h4>
 -------------------
-Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas. Dessutom har jag kunnat ta bort 4 request. 
+Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas, detta genom att jag inte länkar in filer i onödan. Dessutom har jag kunnat ta bort 4 request. 
 
 <h4>Lokalt</h4>
 --------------------
@@ -101,31 +110,33 @@ Efter förändring
 login 3 request 20,6 kb | 231ms (load: 240ms DOMContentloaded: 106ms)
 start 10 request 97 kb | 447ms (load: 158ms DOMContentloaded: 131ms)
 
-
 Long-polling
 -------------------------
-Verkar vara nästan omöjligt att få till ordentlig long polling med php när man använder sig av session start. Lyckades dock till slut lösa detta i samarbete, genom att kalla på session_write_close(); innan jag börjar while loopen
+Hade stora problem att få till long polling ordentligt. Det som var problemet var att när användaren hade skickat ett anrop till servern var det inte möligt att posta ett nytt meddelande direkt utan detta meddelande köades upp för att skickas så fort servern hade svarat på long pollings anropet. 
 
-Läser från fil, detta pga sessionshanteringen inte fungerar i samband med long polling 
+Detta visade sig att ha att göra med sessionshanteringen i php. Om en webbläsare har en session får denna använadare endast tillgång till den specifika sessionen och eftersom den session var upptagen i while loopen för long pollingen väntade php på att den tråden skulle slutföras innan den på började att svara på det andra anropet. 
 
+Lyckades dock till slut lösa detta, genom att kalla på session_write_close(); innan jag börjar while loopen detta gjorde att alla anrop svarades som förväntat.
 
-ht access fil, saknas 404 sida och liknande
-har inte fullt implementerat htaaccess filen på webbservern. Just nu går det iaf inte att komma åt sqlite filen och därigenom databasen på ett lätt sätt. 
-Skulle man implementera detta live ska man naturligtvis inte ha en sqlite databas.
+Long pollingen väntar genom en while loop upp till 15 sekunder på att svara på anropet, om inga nya meddelande har postats under denna tiden returneras null.
+Om det däremot postas ett meddelande under dessa 15 sekunder returneras detta medelande och loopen avbryts. För att ta reda på om det postas något meddelande läser jag från filen timestamp, anledningen är att sessionshanteringen inte fungerar i samband med long polling 
+Om jag haft en "riktig" databas och inte sqlite skulle jag nog kunna lösa detta lite snyggare. 
+
 
 Felhantering
 ------------
-Det saknas mycket felhantering speciellt på klientsidan, inga felmeddelanden eller successmeddelanden skrivs ut. 
+Det saknas mycket felhantering speciellt på klientsidan, inga felmeddelanden eller successmeddelanden skrivs ut. Det saknas 404 sidor och liknande. 
+
 Cache
 ------------
 Ligger på servern har inte styrt så mycket i detta. Dessutom har jag valt att köra med https på servern, detta innebär också begränsningar i cachningsmöjligheter. 
 
 Kod
 Skulle vilja implementera lite routing men applikationen är så liten så känns lite overkill. 
-Bör också bryta ut min sessionshantering och hantera allt med sessioner från samma klass, den implmeneterade lösningnen är ganska rörig. 
+Bör också bryta ut min sessionshantering och hantera allt med sessioner från samma klass, den implmeneterade sessionshanteringen är ganska rörig. 
 
-övrigt
+Örigt
+-----
 Jag valde att bortse från att visa nya meddelanden överst, dessa vissas istället där man skriver sitt meddelande i botten av sidan. Detta skulle kunna fixas enkelt med en array reverse.
 
-sqllite
-http://www.if-not-true-then-false.com/2012/php-pdo-sqlite3-example/
+Skulle man implementera detta live bör man nog implementera en bättre databas.
