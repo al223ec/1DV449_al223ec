@@ -8,54 +8,54 @@ Inloggning saknas man kan komma in på sidan genom att endast ange URL:en till d
 
 Ingen server side autentisering finns. 
 
-SQL injections 
+<h4>SQL injections</h4> 
 ---------------
 Applikationen är helt öppen för sql injections. Inga prepare statements, eller då dessa finns används de fel. 
 
-Databas
+<h4>Databas</h4> 
 ---------
 Användarens lösenord hashas inte. Databasfilen ligger dessutom helt öppet och kan nås genom att man endast anger en url till filen.
 Detta speler iofs ingen roll när inte inloggningen fungerar. 
 
-XSS 
+<h4>XSS </h4> 
 -------
 Är fullt möjligt, ingen indata eller utdata saniteras. 
 
-CSRF
+<h4>CSRF</h4> 
 ----------
 Det finns heller inget skydd mot Cross-site request forgery. 
 
-Övrigt
+<h4>Övrigt</h4> 
 ----------
 Använder get för att posta data, vilket innebär att webskrapor och spindlar skulle kunna posta data. 
 
 
-Åtgärder
+<h4>Åtgärder</h4> 
 -----------
 Jag har helt förändrat server side strukturen på applikationen och implementerat ett MVC mönster. Jag har implementerat en fungerande inlogg och hashat lösenorden i databasen. 
 
 Man kan nu endast get:ta data om man är inloggad. 
 Tvingar också användaren att besöka sidan med https
 
-SQL injections 
+<h4>SQL injections</h4>  
 ---------------
 Jag förhindrar sql injections genom att prepara alla mina sql satser. Har dessutom gjort så att jag kör alla databas frågor i samma funktion, har dolt databasförbinndelsen i klassen Db och exponerar aldrig denna utan tvingar programmeraren att använda funktionerna findBy eller query för att ställa frågor till databasen. 
 
-Databas
+<h4>Databas</h4> 
 ---------
 För att hasha lösenord använder jag php:s funktion crypt och ett genererat salt. Hash_equals bör användas när man sedan gämför användarens givna lösen med hashen som finns i databasen, men detta kan jag inte göra pga den php versionen som jag har på mitt webbhotell är 5.5 och denna funktion kommer i 5.6. 
 
 Databasfilen ligger numera mer dolt, och har försökt att skriva en .htaccess fil som förhindrar att man laddar ner den. 
 
-XSS 
+<h4>XSS </h4> 
 -------
 All data till och från databasen saniteras numera.
 
-CSRF
+<h4>CSRF</h4> 
 ----------
 Har implementerat Synchronizer Token Pattern via ett dolt fällt som skickas till användaren. Om man försöker posta med ett ogiltigt värde i detta fält loggas man ut. 
 
-Sessionen
+<h4>Sessionen</h4> 
 -------------------
 Det som spontant saknas är lite mer sessionshantering jag bör namnge sessionen för att försvåra sessionsstölder, nu kontrollerar jag endast att användaren använder samma webbläsare vid alla inloggade request, detta skulle kunna utökas så att fler variablar måste stämma överens. 
 Jag har också satt att sessionen blir ogiltig efter 30 minuters inaktivitet, jag genererar om session var tredje minut. 
@@ -63,36 +63,34 @@ Jag har också satt att sessionen blir ogiltig efter 30 minuters inaktivitet, ja
 
 Optimering
 ------------------------
-Frågan om man ska fokusera på kod optimering eller snabbhet. 
-javascripten verkar laddas in flera ggr och i head taggen
+Koden är väldigt dåligt strukturerad och filer laddas in flera gånger. CSS skrivs på flera platser. Script filer laddas också in hur som helst. 
+Det finns dessutom flera bilder i css som inte används, eller de syns iallafall inte. 
 
-Valdigt rörigt strukturerad applikation, css överallt dock är ju inline css snabbast. NJa 
-Inline css kan inte cachas vilket sker med css filer. 
-Background image och css som inte används
+Jag har främst fokuserat på att få till bättre struktur så att man mycket lättare ser vad det är som laddas in och vad det är som måste laddas in. Jag har följt flera rekomendationer från boken: High Performance Web Sites, Steve Sounders, O’Reilly. 
 
+<h4>Utförd optimering</h4>
+-------------
+<li>Rule 5: Put Stylesheets at the To s37</li>
+<li>Rule 6: Put Scripts at the Bottom  s45</li>
+<li>Rule 8: Make JavaScript and CSS External s55</li>
+<li>Rule 10: Minify JavaScript s69</li>
+<li>Rule 12: Remove Duplicate Scripts s85</li>
 
-Sprites??  
-Scriptfiler laddas in i slutet på sidan
-Rule 5: Put Stylesheets at the To s37
-Rule 6: Put Scripts at the Bottom  s45
-Rule 8: Make JavaScript and CSS External s55
-Rule 10: Minify JavaScript s69
-Rule 12: Remove Duplicate Scripts s85
-
-Optimering resultat
+<h4>Optimering resultat</h4>
 -------------------
 Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas. Dessutom har jag kunnat ta bort 4 request. 
 
 <h4>Lokalt</h4>
-Innan förändring
+--------------------
+Innan förändring<br>
 login 3 request 192 kb | 77ms (load: 88ms DOMContentloaded: 88ms)
 start 14 request 785 kb | 320ms (load: 288ms DOMContentloaded: 281ms)
 
-Efter förändring
+Efter förändring<br>
 login 3 request 115 kb | 64ms (load: 103ms DOMContentloaded: 57ms)
 start 10 request 257 kb | 180ms (load: 158ms DOMContentloaded: 131ms)
 
-Server
+<h4>Server</h4>
 -------
 Innan förändring
 login 3 request 32,9 kb | 379ms (load: 409ms DOMContentloaded: 408ms)
