@@ -8,7 +8,7 @@ Anton Ledström al223ec
 	<li>pw: password</li>
 </ul>
 
-Nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. Det är mycket buggar, koden är ganska dåligt skriven och väldigt dåligt strukturerad vilket ur både ett säkerhetsperspektiv och ett "bugg"perspektiv är väldigt dåligt.
+I den koden vi fick börja jobba med fanns nästan ingen funktionalitet är på plats, fel i koden på väldigt många ställen. Det är mycket buggar, koden är ganska väldigt dåligt strukturerad vilket ur både ett säkerhetsperspektiv och ett "bugg"perspektiv gör koden väldigt svårarbetad.
 
 Säkerhetsproblem
 -----------------------
@@ -76,7 +76,7 @@ Optimering
 Koden är väldigt dåligt strukturerad och filer laddas in flera gånger. CSS skrivs på flera platser. Script filer laddas också in hur som helst. 
 Det finns dessutom flera bilder i css som inte används, eller de syns iallafall inte. 
 
-Jag har främst fokuserat på att få till bättre struktur så att man mycket lättare ser vad det är som laddas in och vad det är som måste laddas in. 
+Jag har främst fokuserat på att få till bättre struktur så att man mycket lättare ser vad det är som laddas in på de olika sidorna och vad det är som måste laddas in. 
 
 <h4>Utförd optimering</h4>
 -------------
@@ -90,7 +90,7 @@ Jag har följt flera rekomendationer från boken: High Performance Web Sites, St
 </ul>
 <h4>Optimering resultat</h4>
 -------------------
-Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Stört förändring har skett i hur mycket data som skickas, detta genom att jag inte länkar in filer i onödan. Dessutom har jag kunnat ta bort 4 request. 
+Man har ganska mycket att tjäna på hur servern är konfigurerad och att servern komprimerar filerna. Störst förändring har skett i hur mycket data som skickas, detta genom att jag inte länkar in filer i onödan. Dessutom har jag kunnat ta bort 4 request. 
 
 <h4>Lokalt</h4>
 --------------------
@@ -129,21 +129,20 @@ Long pollingen väntar genom en while loop upp till 15 sekunder på att svara p�
 Om det däremot postas ett meddelande under dessa 15 sekunder returneras detta medelande och loopen avbryts. För att ta reda på om det postas något meddelande läser jag från filen timestamp, anledningen är att sessionshanteringen inte fungerar i samband med long polling 
 Om jag haft en "riktig" databas och inte sqlite skulle jag nog kunna lösa detta lite snyggare, med någon last_write funktion. 
 
-
-Felhantering
-------------
-Det saknas mycket felhantering speciellt på klientsidan, inga felmeddelanden eller successmeddelanden skrivs ut. Det saknas 404 sidor och liknande. 
-
 Cache
 ------------
-Ligger på servern har inte styrt så mycket i detta. Dessutom har jag valt att köra med https på servern, detta innebär också begränsningar i cachningsmöjligheter. 
+Jag har inte styrt så mycket i caching:en eftersom jag valt att köra med https på servern, detta innebär begränsningar i cachningsmöjligheter. 
 
-Kod
+Kodkvalitet
+-----------
 Skulle vilja implementera lite routing men applikationen är så liten så känns lite overkill. 
-Bör också bryta ut min sessionshantering och hantera allt med sessioner från samma klass, den implmeneterade sessionshanteringen är ganska rörig. 
+Bör också bryta ut min sessionshantering och hantera allt med sessioner från samma klass, den implmeneterade sessionshanteringen är ganska rörig.
+<h4>Felhantering</h4>
+------------
+Det saknas mycket felhantering speciellt på klientsidan, inga felmeddelanden eller successmeddelanden skrivs ut. Det saknas också 404 sidor och liknande. 
 
 Örigt
 -----
 Jag valde att bortse från att visa nya meddelanden överst, dessa vissas istället där man skriver sitt meddelande i botten av sidan. Detta skulle kunna fixas enkelt med en array reverse.
 
-Skulle man implementera detta live bör man nog implementera en bättre databas.
+Skulle man implementera detta live bör man nog implementera en bättre databas, sqlite filen skulle kunna nås med en url request.
