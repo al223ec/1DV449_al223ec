@@ -2,9 +2,7 @@
 
 class WebController {
 	public function getTrafficInfo(){
-		
 		echo $this->performCurl("http://api.sr.se/api/v2/traffic/messages?format=json&indent=true");
-		//echo json_encode(file_get_contents("http://api.sr.se/api/v2/traffic/messages?format=json")); 
 	}
 
 	private function performCurl($url){

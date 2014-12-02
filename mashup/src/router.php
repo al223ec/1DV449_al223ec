@@ -29,9 +29,7 @@ class Router{
 
 	}
 	public function route(){
-		if($_SERVER['REQUEST_METHOD'] === 'GET'){
-			$this->controller->getTrafficInfo();
-		}
+
 	}
 	private function getAction(){
 		return $this->action;
