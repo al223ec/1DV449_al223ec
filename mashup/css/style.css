@@ -1,0 +1,253 @@
+html, body, section, #map-canvas { height: 600px; margin: 0; padding: 0;}
+
+html { 
+	font-size: 100%; /* 1 */
+	-webkit-text-size-adjust: 100%; /* 2 */
+	-ms-text-size-adjust: 100%; /* 2 */ 
+}
+	html, html a { 
+	-webkit-font-smoothing: antialiased; 
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); 
+}
+/* * Addresses `font-family` inconsistency between `textarea` and other form
+* elements. */
+html, button, input, select, textarea { 
+	font-family: 'Varela Round', 
+	sans-serif; 
+}
+/* * Addresses margins handled incorrectly in IE 6/7. */
+body { 
+	margin: 0; 
+	font-family: 'Varela Round', 
+	sans-serif; 
+}
+a:focus { 
+	outline: thin dotted; 
+}
+/* * Improves readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { 
+	outline: 0; 
+}
+/* ==========================================================================
+Typography
+========================================================================== */
+/* * Addresses font sizes and margins set differently in IE 6/7.
+* Addresses font sizes within `section` and `article` in Firefox 4+, Safari 5, * and Chrome. */
+ 
+h1 { 
+	font-size: 2em; 
+	margin: 0.67em 0; 
+	color: #353535; 
+}
+h2 { 
+	font-size: 1.5em; 
+	margin: 0.83em 0; 
+}
+h3 { 
+	font-size: 1.17em; 
+	margin: 1em 0; 
+}
+h4 { 
+	font-size: 1em; 
+	margin: 1.33em 0; 
+}
+h5 { 
+	color:#8c9398;
+	font-size: 0.83em; 
+	margin: 1.67em 0; 
+}
+h6 { 
+	font-size: 0.75em; 
+	margin: 2.33em 0; 
+}
+a { 
+	color: #353535;
+	 -webkit-transition: all 0.5s; 
+	 -moz-transition: all 0.5s; 
+	 -o-transition: all 0.5s; 
+	 transition: all 0.5s; 
+}
+a:hover, a:focus { 
+	color: #3dc9b3; 
+	text-decoration: none; 
+}
+p { 
+	color: #8c9398; 
+	word-spacing: 1px; 
+	line-height: 25px; 
+	font-size: 14px; 
+}
+
+.nav-mybrand {
+ 	letter-spacing: 6px; 
+}
+.nav-mybrand span {
+		font-size: 12px; 
+ 	letter-spacing: 0px; 
+	color: #a1a9b0; 
+}
+.map {
+}
+
+.hero { 
+	padding: 0 0 50px 0; 
+	height: auto; 
+}
+.hero h1 {
+	 font-size: 40px; 
+	 letter-spacing: 12px; 
+	 margin: 10px; 
+	}
+.hero h1 span { 
+	color: #a1a9b0; 
+	display: inline-block; 
+}
+.hero p { 
+	letter-spacing: 1px; 
+}
+
+/* ==========================================================================
+Footer
+========================================================================== */
+footer {
+	margin-top: 20px; 
+}
+footer a { 
+	color: #a1a9b0; 
+}
+footer { 
+	background-color: #242830; 
+	padding: 40px 0 30px; 
+}
+footer p { 
+	color: #fff; 
+	font-size: 12px;
+}
+ul.links { 
+	list-style: none; 
+	color: #fff; 
+	line-height: 25px; }
+ul.links li { 
+	display: inline-block; 
+}
+ul.links li::after { 
+	content: " |"; 
+}
+ul.links li:last-child::after { 
+	content: ""; 
+}
+.links { 
+	text-align: left; 
+}
+.credit { 
+	text-align: right; 
+	font-size: 8px;
+}
+
+
+.errormessage{
+	font-size: 10px; 
+	color: red; 
+}
+label{
+	width: 180px; 
+}
+
+textarea{
+	width:70%;
+	height: 400px;
+}
+
+img{
+	max-width: 100%;
+}
+
+.login{
+	padding: 10px;
+}
+
+.inner { 
+	padding-top: 170px; 
+}
+
+div> .bloggpost:nth-child(odd) div{
+	float:right;
+}
+/*
+.bloggpost:nth-child(odd) div {
+    background-color: red;
+}*/ 
+
+.min{
+	max-height: 100px;
+	overflow: hidden;
+}
+.bloggtext{
+	margin-bottom: 20px;
+}
+.instagrampopup{
+	width: 600px;
+	margin: 30px auto;
+}
+
+.padding_bottom {
+	padding-bottom: 20px;
+}
+
+h1.arrow { 
+	font-size: 15px; 
+	text-transform: uppercase; 
+	color: #353535; 
+	letter-spacing: 1px; 
+	background: url('../img/h1-bg.png') no-repeat center bottom; 
+	padding-bottom: 30px; 
+	font-weight: bold; 
+}
+
+h1.bloggTitle {
+	font-size: 15px; 
+	color: #353535; 
+	letter-spacing: 1px; 
+	padding-bottom: 30px; 
+	font-weight: bold; 
+}
+.swag { 
+	background: url('../img/plants-bg.jpg') no-repeat center center; 
+	-webkit-background-size: cover; 
+	-moz-background-size: cover; 
+	-o-background-size: cover; 
+	background-size: cover; 
+	background-attachment: 
+	fixed; 
+	padding: 50px 0; 
+}
+.swag h1 { 
+	color: #fff; 
+	font-size: 40px; 
+	text-transform: 
+	uppercase; 
+	letter-spacing: 5px; 
+}
+.swag h1 span { 
+	display: block; 
+	font-size: 25px; 
+	margin-top: 20px; 
+}
+
+section {
+	margin-top: 40px; 
+}
+.wp1, .wp2, .wp3, .wp4, .wp5, .wp6 { visibility: hidden; }
+.bounceInLeft, .bounceInRight, .fadeInUp, .fadeInUpDelay, .fadeInDown, .fadeInUpD, .fadeInLeft, .fadeInRight { visibility: visible; }
+.delay-05s { 
+	animation-delay: 0.5s; 
+	-webkit-animation-delay: 0.5s; 
+}
+.delay-1s { 
+	animation-delay: 1s; 
+	-webkit-animation-delay: 1s; 
+}
+
+.navbar-myNavBar {
+	background-color: #fff;
+}

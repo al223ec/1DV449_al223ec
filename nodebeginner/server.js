@@ -5,13 +5,21 @@ var url = require("url");
 
 function start(route, handle){
 	function onRequest(request, response){
+		var postData = "";
 		//Note that our server will probably write "Request received." to STDOUT two times upon opening the page in a browser. That's because most browsers will try to load the favicon by requesting http://localhost:8888/favicon.ico whenever you open http://localhost:8888/.
 		var pathName = url.parse(request.url).pathname;
 		console.log("Request: " + pathName + " received.");
 
-		route(handle, pathName, response);
-	}
+		request.addListener("data", function(postDataChunk) {
+			postData += postDataChunk;
+			console.log("Received POST data chunk '"+
+			postDataChunk + "'.");
+		});
 
+		request.addListener("end", function() {
+			route(handle, pathName, response, postData);
+		});
+	}
  
 	http.createServer(onRequest).listen(8888);
 	console.log("Server started");
