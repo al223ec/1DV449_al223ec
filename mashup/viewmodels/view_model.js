@@ -1,4 +1,4 @@
-var srUrl = ;  
+var srUrl = "";  
 
   var model = {
       trafficInfo: ko.observableArray(),
@@ -9,7 +9,7 @@ var srUrl = ;
   }
 
   function sendAjaxRequest(httpMethod, callback, url, reqData) {
-      $.ajax("web/" + (url ? "/" + url : ""), {
+      $.ajax("index.php/" + (url ? "/" + url : ""), {
           type: httpMethod,
           success: callback,
           data: reqData
@@ -26,6 +26,8 @@ var srUrl = ;
   function getAllItems() {
       sendAjaxRequest("GET", function (data) {
           model.trafficInfo.removeAll();
+          var json = $.parseJSON(data); 
+          console.log(json);
 
           for (var i = 0; i < data.length; i++) {
               model.trafficInfo.push(data[i]);
