@@ -17,11 +17,11 @@
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <p>Denna laboration  är gjor med hjälp av två olika api:er</p>
-
+          <p>Denna laboration  är gjord med hjälp av två olika api:er</p>
           <ul>
           <li><a href="http://sverigesradio.se/api/documentation/v2/index.html">Sveriges radios öppna API</a> </li>
           <li>och <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps</a> </li>
@@ -34,9 +34,10 @@
   </section>
   <section class="map">
     <div class="row">
-      <div class="col-md-8" id="map-canvas" data-bind="map:map"></div>
-      <div class="col-md-4">
-          <p>Välj kategori : 
+      <div class="col-md-9" id="map-canvas" data-bind="map:trafficMap">
+      </div>
+      <div class="col-md-3">
+          <p>Välj kategori : </p>
               <div>
                 <input type="radio" name="categoryGroup" value="0" data-bind="checked: category" /> 
                 Vägtrafik
@@ -49,13 +50,20 @@
                 <input type="radio" name="categoryGroup" value="4" data-bind="checked: category" /> 
                 Alla kategorier
               </div>
-  
-          <select data-bind=  "options: trafficInfo, 
+            <h3>Filtrerad lista</h3>
+            <select data-bind=  "options: filteredTrafficInfo, 
                                optionsText: 'title',
-                               value: selectedTrafficInfo" size="20" multiple="false"></select>
+                               value: selectedTrafficInfo" size="27" multiple="false"></select>
+                               <hr />
+            <!--
+            <h3>Ofiltrerad lista</h3>
+            <select data-bind=  "options: trafficInfo, 
+                               optionsText: 'title',
+                               value: selectedTrafficInfo" size="20" multiple="false"></select>-->
        </div>
     </div>
   </section>
+
     <script type="text/javascript" 
       src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/knockout-3.2.0.js"></script>
@@ -63,26 +71,5 @@
 
     <script type="text/javascript" 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2BwG_H_rJ5JlGyLZ4hct2jZUMt72pQs0"></script>   
-
-    <script type="text/javascript">
-    /*
-      function initialize() {
-        var mapOptions = {
-          center: { lat: 63.637242114815805, lng: 16.77774716461938},
-          zoom: 4
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        return map; 
-      }*/
-      //google.maps.event.a*/ddDomListener(window, 'load', initialize);
-      $(document).ready(function () {
-          getAllItems();
-
-          createMap();
-          ko.applyBindings(model);
- 
-          //ko.applyBindings(model);
-      })
-    </script>
   </body>
 </html>
