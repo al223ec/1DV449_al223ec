@@ -95,7 +95,8 @@ ko.bindingHandlers.map = {
         mapObj.googleMap = new google.maps.Map(element, mapOptions);*/
   },
   update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-      console.log(valueAccessor()); 
+      console.log(update += 1);
+       
       if(viewModel.selectedTrafficInfo()){
 
           var latlng = new google.maps.LatLng(viewModel.selectedTrafficInfo().latitude, 
