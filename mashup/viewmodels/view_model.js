@@ -4,7 +4,6 @@ $(document).ready(function () {
   ko.applyBindings(vm);
 });
 //Meddelandets kategori (0 = Vägtrafik, 1 = Kollektivtrafik, 2 = Planerad störning, 3 = Övrigt)
-
 function vm (){
     var that = this; 
     that.trafficInfo = ko.observableArray();
@@ -12,27 +11,38 @@ function vm (){
     that.category = ko.observable(4);
 
     that.trafficMap = ko.observable({}); 
-
     that.filteredTrafficInfo = ko.computed(function(){
       var info = that.trafficInfo();
+      var ret = []; 
+
       switch(that.category()){
         case '0' :
         case '1' : 
         case '2' : 
         case '3' :
-          var ret = []; 
           for(var i = 0; i < info.length; i++){
               if(info[i].category == that.category()){
                   ret.push(info[i]); 
               }
           }
-          return ret;
+          ret;
+          break; 
         default : 
-          return info; 
+          for(var i = 0; i < info.length; i++){
+            info[i].marker.setMap(map);
+          }
+          return info;  
       }
+      for(var i = 0; i < info.length; i++){
+        info[i].marker.setMap(null);
+      }
+      for(var i = 0; i < ret.length; i++){
+        ret[i].marker.setMap(map);
+      }
+      return ret; 
     }, that);
 }
-var map;
+
 var vm = new vm(); 
 
 function sendAjaxRequest(httpMethod, callback, url, reqData) {
@@ -43,31 +53,65 @@ function sendAjaxRequest(httpMethod, callback, url, reqData) {
     });
 }
 
-/*function handleEditorClick() {
-    sendAjaxRequest("POST", function (newItem) {
-        model.reservations.push(newItem);
-    }, null, {
-        ClientName: model.editor.name,
-        Location: model.editor.location
-    });
-}*/
 function getAllItems(model) {
     sendAjaxRequest("GET", function (data) {
         model.trafficInfo.removeAll();
         var messages = $.parseJSON(data)["messages"]; 
 
         for (var i = 0; i < messages.length; i++) {
-
-            messages[i]['marker']  = new google.maps.Marker({
-                position: new google.maps.LatLng(messages[i].latitude, messages[i].longitude),
-                map: null,
-                title: messages[i].title,
-            });
-            model.trafficInfo.push(messages[i]);
+            model.trafficInfo.push(createTrafficInfo(messages[i], model));
         }
     });
 }
+function createTrafficInfo(trafficInfo, model){
+    var icon = getIcon(trafficInfo.priority); 
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(trafficInfo.latitude, trafficInfo.longitude),
+        map: null,
+        title: trafficInfo.title,
+        icon: icon
+    });
+    var content = getContent(trafficInfo); 
+    var infowindow = new google.maps.InfoWindow({
+        content: content
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+        if(model.selectedTrafficInfo()){
+          model.selectedTrafficInfo().infowindow.close(); 
+        }
+        model.selectedTrafficInfo(trafficInfo); 
+        infowindow.open(map, marker);
+    });
 
+    trafficInfo['marker']  = marker; 
+    trafficInfo['infowindow'] = infowindow; 
+    return trafficInfo; 
+}
+function getContent(trafficInfo){
+  return '<div id="content">'+
+      '<h1>' + trafficInfo.title + '</h1>' +
+      '<h3>' + trafficInfo.exactlocation + '</h3>' +
+      '<p>' + trafficInfo.description + '</p>' +
+    '</div>';
+}
+function getIcon(priority){
+  //priority - Meddelandets prioritet (1 = Mycket allvarlig händelse, 2 = Stor händelse, 3 = Störning, 4 = Information, 5 = Mindre störning)
+  switch(priority){
+    case 1 : 
+      return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'; 
+    case 2 : 
+      return 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+    case 3 : 
+      return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'; 
+    case 4 : 
+      return 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'; 
+    case 5 : 
+      return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    default : 
+      return 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'; 
+  } 
+}
+var map;
 function createMap(){    
   var mapOptions = {
       zoom: 6,
@@ -77,45 +121,20 @@ function createMap(){
   map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 }
 var update = 0; 
-
 ko.bindingHandlers.map = {
-   init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-   /*     
-    http://stackoverflow.com/questions/12722925/google-maps-and-knockoutjs
-    console.log(viewModel);
-        var mapObj = ko.utils.unwrapObservable(valueAccessor());
-        
-        var latLng = new google.maps.LatLng(
-            ko.utils.unwrapObservable(mapObj.lat),
-            ko.utils.unwrapObservable(mapObj.lng));
-        var mapOptions = { center: latLng,
-                          zoom: 5, 
-                          mapTypeId: google.maps.MapTypeId.ROxADMAP};
-
-        mapObj.googleMap = new google.maps.Map(element, mapOptions);*/
-  },
   update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
       console.log(update += 1);
-       
-      if(viewModel.selectedTrafficInfo()){
+  
+      var trafficInfo = viewModel ? viewModel.selectedTrafficInfo() : null; 
 
-          var latlng = new google.maps.LatLng(viewModel.selectedTrafficInfo().latitude, 
-            viewModel.selectedTrafficInfo().longitude);
+      if(trafficInfo){
+          /*var latlng = new google.maps.LatLng(trafficInfo.latitude, trafficInfo.longitude);
           map.setCenter(latlng);
+          */
+          for(var i = 0; i < viewModel.filteredTrafficInfo().length; i++){
+              viewModel.filteredTrafficInfo()[i].infowindow.close(); 
+          }
+          trafficInfo.infowindow.open(map, trafficInfo.marker);
       }
-      var info = viewModel.filteredTrafficInfo(); 
-
-      if(info){
-        for(var i = 0; i < viewModel.trafficInfo().length; i++){
-        viewModel.trafficInfo()[i].marker.setMap(null);
-        }
-        for(var i = 0; i < info.length; i++){
-          info[i].marker.setMap(map);
-        }
-      }
-      //var latlng = new google.maps.LatLng(allBindingsAccessor().latitude(), allBindingsAccessor().longitude());
-      //viewModel._mapMarker.setPosition(latlng);
-      //map.setCenter(latlng);
   }
 };
-
