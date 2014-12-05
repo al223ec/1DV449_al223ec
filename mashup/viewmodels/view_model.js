@@ -11,6 +11,8 @@ function vm (){
     that.category = ko.observable(4);
 
     that.trafficMap = ko.observable({}); 
+    that.infowindow = new google.maps.InfoWindow(); //Enda info fönstret som finns i applikationen
+
     that.filteredTrafficInfo = ko.computed(function(){
       var info = that.trafficInfo();
       var ret = []; 
@@ -42,7 +44,6 @@ function vm (){
       return ret; 
     }, that);
 }
-
 var vm = new vm(); 
 
 function sendAjaxRequest(httpMethod, callback, url, reqData) {
@@ -53,17 +54,17 @@ function sendAjaxRequest(httpMethod, callback, url, reqData) {
     });
 }
 
-function getAllItems(model) {
+function getAllItems(viewModel) {
     sendAjaxRequest("GET", function (data) {
-        model.trafficInfo.removeAll();
+        viewModel.trafficInfo.removeAll();
         var messages = $.parseJSON(data)["messages"]; 
 
         for (var i = 0; i < messages.length; i++) {
-            model.trafficInfo.push(createTrafficInfo(messages[i], model));
+            viewModel.trafficInfo.push(createTrafficInfo(messages[i], viewModel));
         }
-    });
+    }, "?action=trafficInfo");
 }
-function createTrafficInfo(trafficInfo, model){
+function createTrafficInfo(trafficInfo, viewModel){
     var icon = getIcon(trafficInfo.priority); 
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(trafficInfo.latitude, trafficInfo.longitude),
@@ -71,22 +72,17 @@ function createTrafficInfo(trafficInfo, model){
         title: trafficInfo.title,
         icon: icon
     });
-    var content = getContent(trafficInfo); 
-    var infowindow = new google.maps.InfoWindow({
-        content: content
-    });
+
     google.maps.event.addListener(marker, 'click', function() {
-        if(model.selectedTrafficInfo()){
-          model.selectedTrafficInfo().infowindow.close(); 
-        }
-        model.selectedTrafficInfo(trafficInfo); 
-        infowindow.open(map, marker);
+        viewModel.selectedTrafficInfo(trafficInfo); 
+        viewModel.infowindow.setContent(getContent(trafficInfo))
+        viewModel.infowindow.open(map, marker);
     });
 
     trafficInfo['marker']  = marker; 
-    trafficInfo['infowindow'] = infowindow; 
     return trafficInfo; 
 }
+
 function getContent(trafficInfo){
   return '<div id="content">'+
       '<h1>' + trafficInfo.title + '</h1>' +
@@ -94,6 +90,7 @@ function getContent(trafficInfo){
       '<p>' + trafficInfo.description + '</p>' +
     '</div>';
 }
+
 function getIcon(priority){
   //priority - Meddelandets prioritet (1 = Mycket allvarlig händelse, 2 = Stor händelse, 3 = Störning, 4 = Information, 5 = Mindre störning)
   switch(priority){
@@ -128,13 +125,8 @@ ko.bindingHandlers.map = {
       var trafficInfo = viewModel ? viewModel.selectedTrafficInfo() : null; 
 
       if(trafficInfo){
-          /*var latlng = new google.maps.LatLng(trafficInfo.latitude, trafficInfo.longitude);
-          map.setCenter(latlng);
-          */
-          for(var i = 0; i < viewModel.filteredTrafficInfo().length; i++){
-              viewModel.filteredTrafficInfo()[i].infowindow.close(); 
-          }
-          trafficInfo.infowindow.open(map, trafficInfo.marker);
+          viewModel.infowindow.setContent(getContent(trafficInfo)); 
+          viewModel.infowindow.open(map, trafficInfo.marker);
       }
   }
 };

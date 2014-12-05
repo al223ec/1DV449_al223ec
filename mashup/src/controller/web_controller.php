@@ -2,34 +2,54 @@
 
 class WebController {
 
-	private $srUrl = "http://api.sr.se/api/v2/traffic/messages?format=json&indent=true";
-	private $numberOfPages = 10;
+	private $srTrafficMessagesUrl = "http://api.sr.se/api/v2/traffic/messages?format=json&indent=true";
+	private $srTrafficAreasUrl = "http://api.sr.se/api/v2/traffic/areas?format=json"; 
 
-	private $jsonFilePath = "srTraffic.json"; 
+	private $numberOfMessages = 100;
+	private $updateIntervalSeconds = 180; 
+
+	private $jsonFilePathTraffic = "srTraffic.json"; 
+	private $jsonFilePathAreas = "srAreas.json";
 	private $timeStampPath = "timestamp";  
 
 	public function getTrafficInfo(){
-		@$response = file_get_contents($this->jsonFilePath); 
+		@$response = file_get_contents($this->jsonFilePathTraffic); 
 
 		if($this->shouldUpdate() || !$response){
-			$response = ''; 
-			$nextpage = $this->srUrl; 
-			$messages = array(); 
-			for ($i=0; $i < $this->numberOfPages; $i++) { 
-				//$response .= $this->performCurl($nextpage);
-				$json = json_decode($this->performCurl($nextpage));
-				if($json){
-					foreach ($json->messages as $mess) {
-						$messages[] = $mess; 
-					}
-					$nextpage = $json->pagination->nextpage;
-				}
-			}
+			$messages = $this->performApiPagination($this->srTrafficMessagesUrl, 'messages', $this->numberOfMessages); 
 			$response = json_encode(array("messages" => $messages)); 
 			file_put_contents($this->timeStampPath, time());
-			file_put_contents($this->jsonFilePath, $response);
+			file_put_contents($this->jsonFilePathTraffic, $response);
 		}
 		echo $response;
+	}
+
+	public function getTrafficAreas(){
+		@$response = file_get_contents($this->jsonFilePathAreas); 
+
+		if($this->shouldUpdate() || !$response){
+			$areas = $this->performApiPagination($this->srTrafficAreasUrl, 'areas'); 
+			$response = json_encode(array("area" => $areas));
+			file_put_contents($this->jsonFilePathAreas, $response);
+		}
+		echo $response;
+	}
+
+	private function performApiPagination($url, $dataName, $dataLimit = 1000){
+		$nextpage = $url; 
+		$returnData = array(); 
+		do{
+			$json = json_decode($this->performCurl($nextpage));
+			if($json){
+				foreach ($json->$dataName as $area) {
+					$returnData[] = $area; 
+				}
+				$nextpage = isset($json->pagination->nextpage) ? $json->pagination->nextpage : false;
+			} else {
+				break; 
+			}
+		} while ($nextpage && count($returnData) < $dataLimit);
+		return $returnData; 
 	}
 
 	private function performCurl($url){
@@ -47,6 +67,6 @@ class WebController {
 	}
 
 	private function shouldUpdate(){
-		return intval(file_get_contents($this->timeStampPath)) + 100000 < time();
+		return intval(file_get_contents($this->timeStampPath)) + $this->updateIntervalSeconds < time();
 	}
 }
