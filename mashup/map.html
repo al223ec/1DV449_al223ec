@@ -17,20 +17,6 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <p>Denna laboration  är gjord med hjälp av två olika api:er</p>
-          <ul>
-          <li><a href="http://sverigesradio.se/api/documentation/v2/index.html">Sveriges radios öppna API</a> </li>
-          <li>och <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps</a> </li>
-          </ul>
-
-          <p>Detta är en javascript-applikation som ska visa trafikinformation som Sveriges Radio ger, via en karta från Google.</p>
-        </div>
-      </div>
-    </div>
   </section>
   <section class="map">
     <div class="row">
@@ -41,26 +27,51 @@
               <div>
                 <input type="radio" name="categoryGroup" value="0" data-bind="checked: category" /> 
                 Vägtrafik
+              </div>
+              <div>
                 <input type="radio" name="categoryGroup" value="1" data-bind="checked: category" /> 
                 Kollektivtrafik
+              </div>
+              <div>  
                 <input type="radio" name="categoryGroup" value="2" data-bind="checked: category" /> 
                 Planerad störning 
+              </div>
+              <div>
                 <input type="radio" name="categoryGroup" value="3" data-bind="checked: category" /> 
                 Övrigt
+              </div>
+              <div>
                 <input type="radio" name="categoryGroup" value="4" data-bind="checked: category" /> 
                 Alla kategorier
               </div>
-            <h3>Filtrerad lista</h3>
+            <h3>Lista med trafikinformation</h3>
             <select data-bind=  "options: filteredTrafficInfo, 
                                optionsText: 'title',
-                               value: selectedTrafficInfo" size="27" multiple="false"></select>
-                               <hr />
+                               value: selectedTrafficInfo" size="23" multiple="false"></select>
             <!--
             <h3>Ofiltrerad lista</h3>
             <select data-bind=  "options: trafficInfo, 
                                optionsText: 'title',
                                value: selectedTrafficInfo" size="20" multiple="false"></select>-->
        </div>
+    </div>
+
+  </section>
+  <section>
+
+      <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <hr />
+          <p>Denna laboration  är gjord med hjälp av två olika api:er</p>
+          <ul>
+          <li><a href="http://sverigesradio.se/api/documentation/v2/index.html">Sveriges radios öppna API</a> </li>
+          <li>och <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps</a> </li>
+          </ul>
+
+          <p>Detta är en javascript-applikation som ska visa trafikinformation som Sveriges Radio ger, via en karta från Google.</p>
+        </div>
+      </div>
     </div>
   </section>
 

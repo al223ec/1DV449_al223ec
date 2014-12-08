@@ -10,12 +10,11 @@
 		
 	</p>
 </li>
-
-
 <li>
 	<h4>Vad finns det för risker med din applikation?</h4>
 	<p>
-		stort beroende till apierna. 
+		stort beroende till apierna. Dessutom har man ingen kontroll över datan man får från apierna. Det skulla kunna komma in farlig data i form av skript. 
+		Har försökt att motverka detta genom flaggor och json encode och decod i php. 
 	</p>
 </li>
 <li>
@@ -24,6 +23,9 @@
 </li>
 <li>
 	<h4>Hur har du tänkt kring optimeringen i din applikation?</h4>
-	<p></p>
+	<p>
+		Skulle kunna implementera någon sorts longpolling eller websocket lösning. Jag litar på att google har ordnat med att kartan levereras och cachas på ett snabbt sätt. med cdn etc. 
+
+	</p>
 </li>
 </ul>

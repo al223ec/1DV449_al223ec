@@ -1,6 +1,7 @@
 $(document).ready(function () {
   createMap();
-  getAllItems(vm);
+  getAllItems(vm); 
+  setInterval(function(){ getAllItems(vm); }, 180000);
   ko.applyBindings(vm);
 });
 //Meddelandets kategori (0 = Vägtrafik, 1 = Kollektivtrafik, 2 = Planerad störning, 3 = Övrigt)
@@ -88,6 +89,12 @@ function getContent(trafficInfo){
       '<h1>' + trafficInfo.title + '</h1>' +
       '<h3>' + trafficInfo.exactlocation + '</h3>' +
       '<p>' + trafficInfo.description + '</p>' +
+      '<h4>' + 
+      new Date(
+        parseInt(trafficInfo.createddate.substring(
+          trafficInfo.createddate.indexOf('(') +1, 
+            trafficInfo.createddate.indexOf('+')))) 
+      + '</h4>' +
     '</div>';
 }
 
@@ -117,13 +124,10 @@ function createMap(){
   };
   map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 }
-var update = 0; 
+
 ko.bindingHandlers.map = {
   update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-      console.log(update += 1);
-  
       var trafficInfo = viewModel ? viewModel.selectedTrafficInfo() : null; 
-
       if(trafficInfo){
           viewModel.infowindow.setContent(getContent(trafficInfo)); 
           viewModel.infowindow.open(map, trafficInfo.marker);
