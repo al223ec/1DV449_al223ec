@@ -52,15 +52,15 @@
 	<li>
 		<h4>Hur har du tänkt kring optimeringen i din applikation?</h4>
 		<p>
-			Man borde implementera någon sorts longpolling eller websocket lösning. Detta dels för att undvika onödiga request och också för att se till att applikationen alltid är uppdaterad med korrekt information. 
+			Man borde implementera någon sorts longpolling eller websocket lösning. Detta dels för att undvika onödiga request och också för att se till att applikationen alltid är uppdaterad med korrekt information. I min applikation kör jag endast en sett intervall funktion på klienten. 
 
 			Jag litar på att google har ordnat med att kartan levereras och cachas och levereras på ett snabbt sätt, med hjälp av cdn etc. Jag laddar också in jquery med hjälp av google.  
 		</p>
 		<p>
-			Jag använder mig av knockout i min applikation, detta är mest för att testa på inför mitt projekt. Detta känns lite overkill i en så här liten applikation. 
+			Jag använder mig av knockout i min applikation, detta är mest för att testa på inför mitt projekt. Detta känns lite overkill i en så här liten applikation, dessutom är jag inte helt säker på hur man hanterar knockout på ett effektivt sätt.  
 		</p>
 		<p>
-			Vidare borde jag ha minifierat mina egna javascript filer, men det är endast 140 rader kod. Vilket är ganska överkommligt.
+			Vidare borde jag ha minifierat mina egna javascript filer, men det är endast 140 rader kod. Vilket är ganska överkommligt. Css file style.css skulle också behövas minifieras och ses över så att jag tar bort "död" kod.
 		</p>
 	</li>
 </ul>
