@@ -2,5 +2,9 @@
 ==============
 Labbar i webbteknik 2
 -------------------
-Labb 1 scraping_php - Skrapning
-Labb 2 messy_labbage - Optimering och säkerhet
+<ul>
+  <li> Labb 1 scraping_php - Skrapning</li>
+  <li> Labb 2 messy_labbage - Optimering och säkerhet</li>
+  <li> Labb 3 mashup - Mashup</li>
+  <li> Projekt - Webbteknik II - Twitter tredning map</li>
+</ul>
