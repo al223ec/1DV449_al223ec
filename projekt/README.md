@@ -1,25 +1,25 @@
-1DV449_al223ec
+1DV449_al223ec - Projekt
 ==============
-Projekt webbteknik 2
+Projektbeskrivning webbteknik 2
 -------------------------
-projekt ideér
+Trendig på Twitter
+
+Mitt projekt kommer använda sig av google maps och twitter, man kommer att kunna se vad det är som trendar just nu och vart det gör det. 
+Man ska också kunna historiskt se vad som trendat tidigare. 
+Kommer också att använda mig av Yahoos GeoPlanets api för att kunna hantera "trendig locations" på ett bra sätt.
+
+Användaren ska också kunna se 
+<h4>Krav</h4>
 <ul>
-	<li>Github, instagram</li>
-	<li>Karta, instagram</li>
 	<li>
+		Användaren kan via en karta se vad som trendar för tillfället och vart det gör det.
 	</li>
+	<li>
+		Användaren kan via en timeline se hur det som trendar förändras
+	</li>
+	<li>
+		Användren kan genom att klicka på något av det som trendar läsa de senaste tweetsen
+	</li>
+
 </ul>
 
-	http://www.mashup.se/svenskamashups/brottsplats-stockholm-vad-hander-pa-din-gata, 
-	http://brottsplatskartan.se/sida/api
-	Jag undrar vem som blir först med att blanda information från polisen med bostadspriser från Boolis API http://www.booli.se/api/
-
-	Listar lediga jobb för utvecklare och designers som vill jobba med utveckling av appar för iOS, Android och Windows Phone. Platsannonserna kommer från en mängd olika källor och granskas alltid manuellt.
-
-
-	http://systembevakningsagenten.se/api/
-	Systembevakningsagenten
-
-
-	spotify 
-	https://developer.spotify.com/technologies/metadata-api/
