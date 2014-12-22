@@ -1,0 +1,74 @@
+[
+    {
+        "trends": [
+            {
+                "name": "#LoteriadeNavidad",
+                "query": "%23LoteriadeNavidad",
+                "url": "http://twitter.com/search?q=%23LoteriadeNavidad",
+                "promoted_content": null
+            },
+            {
+                "name": "#FOURThingsIWantForChristmas",
+                "query": "%23FOURThingsIWantForChristmas",
+                "url": "http://twitter.com/search?q=%23FOURThingsIWantForChristmas",
+                "promoted_content": null
+            },
+            {
+                "name": "#ShortGirlAppreciationDay",
+                "query": "%23ShortGirlAppreciationDay",
+                "url": "http://twitter.com/search?q=%23ShortGirlAppreciationDay",
+                "promoted_content": null
+            },
+            {
+                "name": "#replacesongtitleswithItlog",
+                "query": "%23replacesongtitleswithItlog",
+                "url": "http://twitter.com/search?q=%23replacesongtitleswithItlog",
+                "promoted_content": null
+            },
+            {
+                "name": "#GetWellSoonTaeHyung",
+                "query": "%23GetWellSoonTaeHyung",
+                "url": "http://twitter.com/search?q=%23GetWellSoonTaeHyung",
+                "promoted_content": null
+            },
+            {
+                "name": "WAY5 Princesses",
+                "query": "%22WAY5+Princesses%22",
+                "url": "http://twitter.com/search?q=%22WAY5+Princesses%22",
+                "promoted_content": null
+            },
+            {
+                "name": "تدريب المنتخب",
+                "query": "%22%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8+%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AE%D8%A8%22",
+                "url": "http://twitter.com/search?q=%22%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8+%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AE%D8%A8%22",
+                "promoted_content": null
+            },
+            {
+                "name": "Selamat Hari Ibu",
+                "query": "%22Selamat+Hari+Ibu%22",
+                "url": "http://twitter.com/search?q=%22Selamat+Hari+Ibu%22",
+                "promoted_content": null
+            },
+            {
+                "name": "RK Christmas QandA",
+                "query": "%22RK+Christmas+QandA%22",
+                "url": "http://twitter.com/search?q=%22RK+Christmas+QandA%22",
+                "promoted_content": null
+            },
+            {
+                "name": "Lyca The Future OPM Royalty",
+                "query": "%22Lyca+The+Future+OPM+Royalty%22",
+                "url": "http://twitter.com/search?q=%22Lyca+The+Future+OPM+Royalty%22",
+                "promoted_content": null
+            }
+        ],
+        "as_of": "2014-12-22T12:41:11Z",
+        "created_at": "2014-12-22T12:36:18Z",
+        "locations": [
+            {
+                "name": "Worldwide",
+                "woeid": 1
+            }
+        ]
+    }
+]

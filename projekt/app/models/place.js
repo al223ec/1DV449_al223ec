@@ -1,7 +1,13 @@
 var mongoose = require('mongoose');
 
-// define our nerd model
-// module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('Place', {
-    name : {type : String, default: ''}
+	name : { type : String, default: '' },
+	placeType : {
+		code : { type : int, default: 0 },
+		name : { type : String, default: '' }
+	},
+	url : { type : String, default: '' },
+	parentid : { type : int, default: 0 },
+	country : { type : String, default: '' },
+    woeid : { type : int, default: 0 }
 });

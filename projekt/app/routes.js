@@ -1,6 +1,7 @@
 var Nerd = require('./models/nerd');
 var Bear = require('./models/bear');
-var Twitter = require('../lib/twitter');
+var Trend = require('./models/trend');
+var TwitterService = require('./services/twitter_service');
 
     module.exports = function(app) {
 
@@ -24,7 +25,7 @@ var Twitter = require('../lib/twitter');
         });
 
         app.get('/api/', function(req, res) {
-            res.json({ message: 'Välkommen till mitt api!' });   
+            res.json({ message: 'Api:et är vid liv!' });   
         });
 
         // route to handle creating goes here (app.post)
@@ -42,6 +43,14 @@ var Twitter = require('../lib/twitter');
 
         });
 
+        app.get('api/twitter/trends', function(req, res){
+            Trend.find(function(err, trends) {
+                if (err){
+                    res.send(err);
+                }
+                res.json(trends);
+            });
+        }); 
         app.get('/api/bears', function(req, res) {
             Bear.find(function(err, bears) {
                 if (err){
@@ -52,24 +61,41 @@ var Twitter = require('../lib/twitter');
         });
 
         app.get('/api/twitter', function(req, res){
-            var twitter = new Twitter({
-                "consumerKey": "FK9XoCuRrCUVeLQeiLvIhZnU9",
-                "consumerSecret": "cbXiVbtElhpoOsLCwHNosGmP1OXgzEMHuosYydvYVRXo6fDvzQ",
-                "accessToken": "2817132410-kDwQxyG1GlGf7Go3ghnJCMMJbqykFXZMNUN9t7d",
-                "accessTokenSecret": "Ylvg2sPJwKsn8M6WS4Gmc6vmK85cmVNvzbH50BUQhxef4",
-                "callBackUrl": "antonledstrom.se"
-            }); 
-
+            var service = new TwitterService(); 
             var error = function (err, response, body) {
                 res.send(err);
             };
             var success = function (data) {
+                          /*  data = JSON.parse(data); 
+                var trend = data[0];
+                var trends = JSON.parse(data)[0]['trends'];
+    
+                for (var i = 0; i < trends.length; i++) {
+                    var trend = new Trend();
+                    trend.name = trends[i]['name'];
+                    trend.query = trends[i]['query']; 
+                    trend.url = trends[i]['url'];  
+                    
+                    trend.save(function(err){
+                        if (err){
+                            res.send(err);
+                        }
+                    }); 
+                 };*/
+
                 res.send(data);
             };
-            twitter.getTrendsFromPlace({'id' : 890869}, error, success); 
+            //service.getWorldwideTrends(error, success); 
+            service.getTrend(23424954, error, success); 
+
             //twitter.getAvailableTrends({}, error, success); 
             //twitter.getTweets({'screen_name' : 'al223ec'}, error, success); 
         }); 
+
+        app.get('api/twitter/:id', function(){
+
+        }); 
+
 
         // route to handle delete goes here (app.delete)
 

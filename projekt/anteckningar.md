@@ -9,3 +9,15 @@ https://github.com/ciaranj/node-oauth
 Twitter
 ----------
 https://github.com/BoyCook/TwitterJSClient
+
+
+npm install
+----------
+Backend dependancies
+
+bower install
+------
+installerar frontend beroenden
+
+mongodb.exe
+mongo.exe
