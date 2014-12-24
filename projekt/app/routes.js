@@ -1,6 +1,6 @@
 var Nerd = require('./models/nerd');
 var Bear = require('./models/bear');
-var Trend = require('./models/trend');
+var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
 
     module.exports = function(app) {
@@ -43,20 +43,12 @@ var TwitterService = require('./services/twitter_service');
 
         });
 
-        app.get('api/twitter/trends', function(req, res){
-            Trend.find(function(err, trends) {
+        app.get('/api/trends', function(req, res) {
+            TrendQuery.find(function(err, trendQuery) {
                 if (err){
                     res.send(err);
                 }
-                res.json(trends);
-            });
-        }); 
-        app.get('/api/bears', function(req, res) {
-            Bear.find(function(err, bears) {
-                if (err){
-                    res.send(err);
-                }
-                res.json(bears);
+                res.json(trendQuery);
             });
         });
 
@@ -66,27 +58,34 @@ var TwitterService = require('./services/twitter_service');
                 res.send(err);
             };
             var success = function (data) {
-                          /*  data = JSON.parse(data); 
-                var trend = data[0];
-                var trends = JSON.parse(data)[0]['trends'];
-    
-                for (var i = 0; i < trends.length; i++) {
-                    var trend = new Trend();
-                    trend.name = trends[i]['name'];
-                    trend.query = trends[i]['query']; 
-                    trend.url = trends[i]['url'];  
-                    
-                    trend.save(function(err){
+                data = JSON.parse(data)[0]; 
+                var trendQuery = new TrendQuery(); 
+
+                trendQuery.as_of = new Date(data['as_of']);
+                trendQuery.created_at = new Date(data['created_at']); 
+                trendQuery.locations.name = data['locations']['name']; 
+                trendQuery.locations.woeid = data['locations']['woeid']; 
+
+                 for (var i = 0; i < data['trends'].length; i++) {
+                    trendQuery.trends.push({
+                        name : data['trends'][i]['name'],
+                        query : data['trends'][i]['query'],
+                        url : data['trends'][i]['url'],
+                    });
+                }
+
+                trendQuery.save(function(err){
+                    console.log(err); 
+
                         if (err){
                             res.send(err);
                         }
                     }); 
-                 };*/
-
                 res.send(data);
             };
-            //service.getWorldwideTrends(error, success); 
-            service.getTrend(23424954, error, success); 
+            //service.getWorldwideTrends(error, success);
+            //service.searchTweets(error, success);  
+            service.getTrend(service.cities.london, error, success); 
 
             //twitter.getAvailableTrends({}, error, success); 
             //twitter.getTweets({'screen_name' : 'al223ec'}, error, success); 

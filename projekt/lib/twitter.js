@@ -120,7 +120,6 @@ Twitter.prototype.doRequest = function (url, error, success) {
 };
 
 Twitter.prototype.doPost = function (url, post_body, error, success) {
-
     //(url, oauth_token, oauth_token_secret, post_body, post_content_type, callback 
     this.oauth.post(url, this.accessToken, this.accessTokenSecret, post_body, "application/x-www-form-urlencoded", function (err, body, response) {
         console.log('URL [%s]', url);
@@ -157,6 +156,12 @@ Twitter.prototype.getTrendsFromPlace = function(params, error, success) {
 
 Twitter.prototype.getTweets = function(params, error, success){
     var path = '/statuses/user_timeline.json' + this.buildQS(params);
+    var url = this.baseUrl + path;
+    this.doRequest(url, error, success);
+}; 
+
+Twitter.prototype.searchTweets = function(params, error, success){
+    var path = '/search/tweets.json' + this.buildQS(params);
     var url = this.baseUrl + path;
     this.doRequest(url, error, success);
 }; 

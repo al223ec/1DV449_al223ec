@@ -1,0 +1,74 @@
+[
+    {
+        "trends": [
+            {
+                "name": "Christmas Eve Eve",
+                "query": "%22Christmas+Eve+Eve%22",
+                "url": "http://twitter.com/search?q=%22Christmas+Eve+Eve%22",
+                "promoted_content": null
+            },
+            {
+                "name": "Westfield",
+                "query": "Westfield",
+                "url": "http://twitter.com/search?q=Westfield",
+                "promoted_content": null
+            },
+            {
+                "name": "Xbox",
+                "query": "Xbox",
+                "url": "http://twitter.com/search?q=Xbox",
+                "promoted_content": null
+            },
+            {
+                "name": "Turkey",
+                "query": "Turkey",
+                "url": "http://twitter.com/search?q=Turkey",
+                "promoted_content": null
+            },
+            {
+                "name": "London",
+                "query": "London",
+                "url": "http://twitter.com/search?q=London",
+                "promoted_content": null
+            },
+            {
+                "name": "UKIP",
+                "query": "UKIP",
+                "url": "http://twitter.com/search?q=UKIP",
+                "promoted_content": null
+            },
+            {
+                "name": "Sheffield",
+                "query": "Sheffield",
+                "url": "http://twitter.com/search?q=Sheffield",
+                "promoted_content": null
+            },
+            {
+                "name": "Santa",
+                "query": "Santa",
+                "url": "http://twitter.com/search?q=Santa",
+                "promoted_content": null
+            },
+            {
+                "name": "#georgesquare",
+                "query": "%23georgesquare",
+                "url": "http://twitter.com/search?q=%23georgesquare",
+                "promoted_content": null
+            },
+            {
+                "name": "Clarke Carlisle",
+                "query": "%22Clarke+Carlisle%22",
+                "url": "http://twitter.com/search?q=%22Clarke+Carlisle%22",
+                "promoted_content": null
+            }
+        ],
+        "as_of": "2014-12-23T11:15:36Z",
+        "created_at": "2014-12-23T11:00:53Z",
+        "locations": [
+            {
+                "name": "London",
+                "woeid": 44418
+            }
+        ]
+    }
+]
