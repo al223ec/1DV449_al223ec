@@ -44,11 +44,11 @@ var TwitterService = require('./services/twitter_service');
         });
 
         app.get('/api/trends', function(req, res) {
-            TrendQuery.find(function(err, trendQuery) {
+            TrendQuery.find(function(err, trendQueries) {
                 if (err){
                     res.send(err);
                 }
-                res.json(trendQuery);
+                res.json(trendQueries);
             });
         });
 
@@ -73,15 +73,23 @@ var TwitterService = require('./services/twitter_service');
                         url : data['trends'][i]['url'],
                     });
                 }
+                TrendQuery.findOne({}).sort({ created_at : 'desc' }).exec(function(err, _trendQuery){
+                    if (err){
+                        res.send(err);
+                    }
+                    if(_trendQuery.created_at < trendQuery.created_at){
+                        trendQuery.save(function(err){
+                            console.log(err + " sparar"); 
+                            if (err){
+                                res.send(err);
+                            }
+                        }); 
+                        res.send(data);
+                    }else{
+                        res.json({ message: 'no updates!' }); 
+                    }
+                });
 
-                trendQuery.save(function(err){
-                    console.log(err); 
-
-                        if (err){
-                            res.send(err);
-                        }
-                    }); 
-                res.send(data);
             };
             //service.getWorldwideTrends(error, success);
             //service.searchTweets(error, success);  

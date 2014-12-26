@@ -47,4 +47,8 @@ module.exports = function TwitterService(){
 	this.searchTweets = function(error, success){
 		twitter.searchTweets({ 'q' : 'ShortGirlAppreciationDay'}, error, success)
 	}; 
+
+	this.getAndSaveTrends = function(){
+		
+	}
 }

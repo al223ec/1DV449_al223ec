@@ -23,6 +23,9 @@ Användaren ska också kunna se annan relevant metaData från twitter.
 	<li>
 		Användaren kan filtrera ut och söka på trender
 	</li>
+	<li>
+		Användaren kan söka på ort/stad och se vad som trendar där
+	</li>
 </ul>
 
 <h4>Teknik</h4>
@@ -30,7 +33,7 @@ Användaren ska också kunna se annan relevant metaData från twitter.
 <ul>
 	<li>Twitters API</li>
 	<li>Google Maps</li>
-	<li>Yahoo GeoPlante API</li>
+	<li>Yahoo GeoPlanet API</li>
 </ul>
 
 
