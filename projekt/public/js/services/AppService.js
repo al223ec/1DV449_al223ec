@@ -15,7 +15,11 @@ angular.module('AppService', []).factory('App', ['$http', function($http) {
         // call to DELETE a nerd
         delete : function(id) {
             return $http.delete('/api/nerds/' + id);
-        }
+        }, 
+
+        getTrendsWithCoordinates : function(lat, lng) {
+            return $httop.get('api/trendsWithCoordinates'); 
+        },
     }       
 
 }]);

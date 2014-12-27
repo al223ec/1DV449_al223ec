@@ -1,6 +1,7 @@
 /*
  * Twitter client app
  * Från : https://github.com/BoyCook/TwitterJSClient/blob/master/lib/Twitter.js
+ * av : Craig Cook, http://craigcook.com/
  * Modifierad av mig
  */
 

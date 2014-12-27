@@ -1,5 +1,5 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
+angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Map', function($scope, map) {
+    $scope.tagline = 'To the moon and back!';
+    map.create(); 
 
-    $scope.tagline = 'To the moon and back!';   
-
-});
+}]);

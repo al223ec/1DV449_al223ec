@@ -1,7 +1,8 @@
-angular.module('sampleApp', [
+angular.module('twitterApp', [
 	'ngRoute', 
 	'appRoutes', 
 	'MainCtrl', 
 	'TwitterCtrl', 
-	'AppService'
+	'AppService',	
+	'MapService',
 	]);

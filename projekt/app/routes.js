@@ -1,5 +1,5 @@
 var Nerd = require('./models/nerd');
-var Bear = require('./models/bear');
+var Bear = require('./models/bear');    
 var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
 
