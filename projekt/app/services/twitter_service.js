@@ -36,7 +36,7 @@ module.exports = function TwitterService(){
 		twitter.getTrendsFromPlace({'id' : worldwide}, error, success); 
 	}; 
 
-	this.getTrend = function(id, error,success){
+	this.getTrendsWithWoeid = function(id, error,success){
 		twitter.getTrendsFromPlace({'id' : id}, error, success); 
 	};
 
@@ -46,6 +46,10 @@ module.exports = function TwitterService(){
 
 	this.searchTweets = function(error, success){
 		twitter.searchTweets({ 'q' : 'ShortGirlAppreciationDay'}, error, success)
+	}; 
+	this.getTrendsClosest = function(lat, lng, error, success){
+		var params = {'lat' : lat, 'long' : lng}; 
+		twitter.getTrendsClosest(params, error, success); 
 	}; 
 
 	this.getAndSaveTrends = function(){

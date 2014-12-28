@@ -1,17 +1,73 @@
-var Nerd = require('./models/nerd');
-var Bear = require('./models/bear');    
 var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
 
-    module.exports = function(app) {
+    module.exports = function(app, router) {
+        var service = new TwitterService();
+        //Middleware, Detta sker vid varje request
+        router.use(function(req, res, next) {
+            console.log('Request till api:et.');
+            next();
+        });
 
+        router.get('/', function(req, res) {
+            res.json({ message: 'Api:et är vid liv!' }); 
+        });
+        router.route('/trends')
+             .post(function(req, res) {
+
+             })
+             .get(function(req, res){
+                TrendQuery.find(function(err, trendQueries) {
+                    if (err){
+                        res.send(err);
+                    }
+                    res.json(trendQueries);
+                });
+             });
+
+        router.route('/trends/:lat/:lng')
+            .get(function(req, res){
+                var woeidSuccess = function(data){
+                    data = JSON.parse(data)[0];
+                    var woeid = data['woeid'];
+                    service.getTrendsWithWoeid(woeid, error(res), success(res));   
+                }
+                service.getTrendsClosest(req.params.lat, req.params.lng, error(res), woeidSuccess);
+                //service.getTrendsClosest(req.params.lat, req.params.lng, error(res), success(res)); 
+                //res.json({ message: 'med ett argumnet ' + req.params.lat + ' ' + req.params.lng }); 
+            });
+
+
+
+        function error(res){
+            return function(err, response, body){
+                res.send(err);
+            }
+        }
+        function success(res){
+            return function(data){
+                res.send(data);
+            }
+        }
+        // frontend routes =========================================================
+        // route to handle all angular requests
+        /*
+        app.get('*', function(req, res) {
+            res.sendfile('./public/index.html'); // load our public/index.html file
+        });
+        */
+        app.use('/api', router);
         // server routes ===========================================================
         // handle things like api calls
         // authentication routes
         //app.route('/api/');
+        /*
+        app.get('/api/trendsWithCoordinates/', function(req, res){
+            res.json({ message: 'trendsWithCoordinates är vid liv!' });   
+        }); 
 
         // sample api route
-        app.get('/api/nerds', function(req, res) {
+        app.get('/api/bears', function(req, res) {
             // use mongoose to get all nerds in the database
             Nerd.find(function(err, nerds) {
 
@@ -24,7 +80,7 @@ var TwitterService = require('./services/twitter_service');
             });
         });
 
-        app.get('/api/', function(req, res) {
+        app.get('/Api/', function(req, res) {
             res.json({ message: 'Api:et är vid liv!' });   
         });
 
@@ -39,9 +95,11 @@ var TwitterService = require('./services/twitter_service');
                 }
 
                  res.json({ message: 'Bear created!' }); 
+                 
             })
 
         });
+
 
         app.get('/api/trends', function(req, res) {
             TrendQuery.find(function(err, trendQueries) {
@@ -111,6 +169,7 @@ var TwitterService = require('./services/twitter_service');
         app.get('*', function(req, res) {
             res.sendfile('./public/index.html'); // load our public/index.html file
         });
+*/
 
     };
 

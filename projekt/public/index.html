@@ -19,36 +19,26 @@
 </head>
 <body ng-app="twitterApp" ng-controller="TwitterController">
         <div class="container"> 
-            <div class="container" ng-view>
+            <div class="container slide" ng-view>
             </div>
             <nav id="bt-menu" class="bt-menu">
                 <a href="#" class="bt-menu-trigger">Menu</a>
                 <ul>
                     <li><a href="/twitter" class="bt-icon icon-home">Search</a></li>
-                    <li><a href="#" class="bt-icon icon-calendar">Compose</a></li>
+                    <li><a href="/map" class="bt-icon icon-calendar">Compose</a></li>
                     <li><a href="#" class="bt-icon icon-folder-add">Profile</a></li>
                     <li><a href="#" class="bt-icon icon-download">Calendar</a></li>
-                    <li><a href="#" class="bt-icon icon-window-delete">Download</a></li>
+                    <li><a href="/" class="bt-icon icon-window-delete">Download</a></li>
                 </ul>
             </nav>
         </div><!-- /container -->
-<!-- HEADER 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Trending on twitter: <span>Byggd med <a
-             href=""> MEAN</a> ett "fullstack javascript framework" </span></a>
-        </div>
-
-        <ul class="nav navbar-nav">
-        </ul>
-    </nav>
-END HEADER -->
-    
+   
 </div>
 
     <!-- JS -->
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="libs/angular-animate/angular-animate.min.js"></script>
     <script src="libs/jquery/dist/jquery.min.js" ></script>
 
     <!-- MY LIBS -->
@@ -64,37 +54,8 @@ END HEADER -->
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- MAP -->
+    <!-- GOOGLE MAPS -->
     <script type="text/javascript" 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2BwG_H_rJ5JlGyLZ4hct2jZUMt72pQs0"></script>  
-    
-    <!--<script type='text/javascript'>
-    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
-    <script type='text/javascript'>
-        google.load("visualization", "1", {packages:["geochart"]});
-        google.setOnLoadCallback(drawRegionsMap);
-
-        function drawRegionsMap() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity'],
-          ['Germany', 200],
-          ['Sweden', 300],
-          ['Brazil', 400],
-          ['Canada', 500],
-          ['France', 600],
-          ['RU', 700]
-        ]);
-
-        var options = {
-            region: 150,
-            displayMode : 'regions'
-
-        };
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-        chart.draw(data, options);
-        };
-    </script>-->
 </body>
 </html>

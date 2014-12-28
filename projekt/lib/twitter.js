@@ -166,3 +166,9 @@ Twitter.prototype.searchTweets = function(params, error, success){
     var url = this.baseUrl + path;
     this.doRequest(url, error, success);
 }; 
+
+Twitter.prototype.getTrendsClosest = function(params, error, success){
+    var path = '/trends/closest.json' + this.buildQS(params);
+    var url = this.baseUrl + path;
+    this.doRequest(url, error, success);
+}; 

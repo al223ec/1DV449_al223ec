@@ -1,4 +1,4 @@
-angular.module('MapService', []).factory('Map', ['AppService', function(appService) {
+angular.module('MapService', []).factory('Map', ['App', function(appService) {
 	var map; 
     var mapOptions = {
 		zoom: 6,
@@ -146,14 +146,32 @@ angular.module('MapService', []).factory('Map', ['AppService', function(appServi
             return map; 
         },
         
-	    create : function() {
+	    create : function(callback) {
 	    	map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
 		    google.maps.event.addListener(map, "rightclick", function(e) {	
+			    console.log("Clicked"); 
+
 			    var lat = e.latLng.lat();
 			    var lng = e.latLng.lng();
-			    // populate yor box/field with lat, lng
-			    alert("Lat=" + lat + "; Lng=" + lng);
+
+			    console.log(lat + ' ' + lng); 
+
+			    appService.getTrendsWithCoordinates(lat, lng)
+			    .success(function(data, status, headers, config) {
+					var latLng = new google.maps.LatLng(lat, lng);
+				   
+ 				    var marker = new google.maps.Marker({
+						position: latLng,
+						map: map,
+						title: data[0]['locations'][0]['name']
+					});
+					console.log(data); 
+    				console.log(data[0]['locations'][0]['name']); 
+
+  				}).error(function(data, status, headers, config) {
+    				console.log(data);
+  				});
 			}); 
         },
     }
