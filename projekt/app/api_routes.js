@@ -3,7 +3,7 @@ var TwitterService = require('./services/twitter_service');
 
     module.exports = function(app, router) {
         var service = new TwitterService();
-        //Middleware, Detta sker vid varje request
+        //Middleware, Detta sker vid varje request mot /api
         router.use(function(req, res, next) {
             console.log('Request till api:et.');
             next();
@@ -51,11 +51,10 @@ var TwitterService = require('./services/twitter_service');
         }
         // frontend routes =========================================================
         // route to handle all angular requests
-        /*
         app.get('*', function(req, res) {
             res.sendfile('./public/index.html'); // load our public/index.html file
         });
-        */
+        
         app.use('/api', router);
         // server routes ===========================================================
         // handle things like api calls

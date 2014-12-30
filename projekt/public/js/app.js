@@ -4,6 +4,7 @@ angular.module('twitterApp', [
 	'appRoutes', 
 	'MainCtrl', 
 	'TwitterCtrl', 
+	'AuthCtrl',
 	'AppService',	
 	'MapService',
 	]);

@@ -56,4 +56,8 @@ Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka 
 
 Risker med din applikation: Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
 
+NPM 
+
 Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
+
+

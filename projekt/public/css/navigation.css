@@ -33,7 +33,7 @@
 
 .bt-menu.bt-menu-open {
 	height: 100%;
-	border-width: 30px 30px 30px 90px;
+	border-width: 30px 30px 30px 190px;
 	background-color: rgba(9,16,20,0.3);
 	-webkit-transition: border-width 0.3s, background-color 0.3s;
 	transition: border-width 0.3s, background-color 0.3s;
@@ -146,7 +146,7 @@
 	left: 0;
 	margin: 0;
 	padding: 0;
-	width: 90px;
+	width: 190px;
 	list-style: none;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
@@ -204,10 +204,12 @@
 
 .bt-menu ul li a {
 	margin-top: 30px;
+	text-align: left;
+
+	margin-left: 20px;
 	outline: none;
-	color: transparent;
+	color: #fff;
 	text-decoration: none;
-	font-size: 0px;
 }
 
 .bt-menu ul li a:before {
@@ -216,7 +218,9 @@
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
 }
-
+.bt-menu ul li a:hover{
+	color: #a53930;	
+}
 .bt-menu ul li a:hover:before,
 .bt-menu ul li a:focus:before {
 	color: #e67e22;

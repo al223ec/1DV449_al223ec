@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/style.css"> 
     <!-- Navigation Animatied Borders -->
     <link rel="stylesheet" type="text/css" href="css/navigation.css" />
-    <link rel="stylesheet" type="text/css" href="css/icons.css" />
     <!-- custom styles -->
 
 
@@ -24,11 +23,11 @@
             <nav id="bt-menu" class="bt-menu">
                 <a href="#" class="bt-menu-trigger">Menu</a>
                 <ul>
-                    <li><a href="/twitter" class="bt-icon icon-home">Search</a></li>
-                    <li><a href="/map" class="bt-icon icon-calendar">Compose</a></li>
-                    <li><a href="#" class="bt-icon icon-folder-add">Profile</a></li>
-                    <li><a href="#" class="bt-icon icon-download">Calendar</a></li>
-                    <li><a href="/" class="bt-icon icon-window-delete">Download</a></li>
+                    <li><a href="/twitter" > Twitter</a></li>
+                    <li><a href="/map" > Map</a></li>
+                    <li><a href="/authenticate" > login </a></li>
+                    <li><a href="#" > Calendar</a></li>
+                    <li><a href="/" > Download</a></li>
                 </ul>
             </nav>
         </div><!-- /container -->
@@ -46,10 +45,16 @@
     <script src="my_libs/borderMenu.js"></script>
 
     <!-- ANGULAR CUSTOM -->
+    <!-- Component main -->
     <script src="js/controllers/MainCtrl.js"></script>
-    <script src="js/controllers/TwitterCtrl.js"></script>
     <script src="js/services/AppService.js"></script>
     <script src="js/services/MapService.js"></script>
+
+    <!-- Component twitter -->
+    <script src="js/controllers/TwitterCtrl.js"></script>
+
+    <!-- Component auth -->
+    <script src="js/controllers/AuthCtrl.js"></script>
 
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
