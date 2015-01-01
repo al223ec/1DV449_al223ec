@@ -33,11 +33,7 @@ var TwitterService = require('./services/twitter_service');
                     service.getTrendsWithWoeid(woeid, error(res), success(res));   
                 }
                 service.getTrendsClosest(req.params.lat, req.params.lng, error(res), woeidSuccess);
-                //service.getTrendsClosest(req.params.lat, req.params.lng, error(res), success(res)); 
-                //res.json({ message: 'med ett argumnet ' + req.params.lat + ' ' + req.params.lng }); 
             });
-
-
 
         function error(res){
             return function(err, response, body){
@@ -49,21 +45,15 @@ var TwitterService = require('./services/twitter_service');
                 res.send(data);
             }
         }
+        app.use('/api', router);
         // frontend routes =========================================================
         // route to handle all angular requests
-        app.get('*', function(req, res) {
+          /*app.get('*', function(req, res) {
+            console.log('Request till *');
             res.sendfile('./public/index.html'); // load our public/index.html file
         });
-        
-        app.use('/api', router);
-        // server routes ===========================================================
-        // handle things like api calls
-        // authentication routes
-        //app.route('/api/');
-        /*
-        app.get('/api/trendsWithCoordinates/', function(req, res){
-            res.json({ message: 'trendsWithCoordinates är vid liv!' });   
-        }); 
+   
+      
 
         // sample api route
         app.get('/api/bears', function(req, res) {

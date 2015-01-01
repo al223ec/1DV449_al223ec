@@ -12,9 +12,6 @@
     <!-- Navigation Animatied Borders -->
     <link rel="stylesheet" type="text/css" href="css/navigation.css" />
     <!-- custom styles -->
-
-
-
 </head>
 <body ng-app="twitterApp" ng-controller="TwitterController">
         <div class="container"> 
@@ -25,8 +22,8 @@
                 <ul>
                     <li><a href="/twitter" > Twitter</a></li>
                     <li><a href="/map" > Map</a></li>
-                    <li><a href="/authenticate" > login </a></li>
-                    <li><a href="#" > Calendar</a></li>
+                    <li><a href="/authenticate" > Login </a></li>
+                    <li><a href="/profile" > Profile</a></li>
                     <li><a href="/" > Download</a></li>
                 </ul>
             </nav>
@@ -55,6 +52,10 @@
 
     <!-- Component auth -->
     <script src="js/controllers/AuthCtrl.js"></script>
+    <script src="js/services/AuthService.js"></script>
+
+    <!-- Component profile -->
+    <script src="js/controllers/ProfileCtrl.js"></script>
 
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>

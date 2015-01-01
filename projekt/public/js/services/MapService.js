@@ -160,7 +160,7 @@ angular.module('MapService', []).factory('Map', ['App', function(appService) {
 			    appService.getTrendsWithCoordinates(lat, lng)
 			    .success(function(data, status, headers, config) {
 					var latLng = new google.maps.LatLng(lat, lng);
-				   
+				   	console.log(data); 
  				    var marker = new google.maps.Marker({
 						position: latLng,
 						map: map,

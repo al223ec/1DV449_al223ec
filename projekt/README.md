@@ -26,6 +26,17 @@ Användaren ska också kunna se annan relevant metaData från twitter.
 	<li>
 		Användaren kan söka på ort/stad och se vad som trendar där
 	</li>
+	<li>
+		Användaren ska kunna logga in med hjälp av
+		<ul>
+			<li>
+				Google+
+			</li>
+			<li>
+				Twitter
+			</li>
+		</ul>
+	</li>
 </ul>
 
 <h4>Teknik</h4>
