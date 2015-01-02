@@ -1,2 +1,19 @@
-<h1>Profile</h1>
-<h4>{{user.email}}</h4>
+<div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a ng-click="logout()" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+                    <p>
+                        <strong>id</strong>: {{user.data._id}}<br>
+                        <strong>email</strong>: {{user.data.local.email}}<br>
+                        <strong>password</strong>:  {{user.data.local.password}}
+                    </p>
+
+            </div>
+        </div>

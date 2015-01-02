@@ -48,13 +48,13 @@ var TwitterService = require('./services/twitter_service');
         app.use('/api', router);
         // frontend routes =========================================================
         // route to handle all angular requests
-          /*app.get('*', function(req, res) {
+        /* app.get('*', function(req, res) {
             console.log('Request till *');
-            res.sendfile('./public/index.html'); // load our public/index.html file
+            res.redirect('/');
         });
    
       
-
+        /*
         // sample api route
         app.get('/api/bears', function(req, res) {
             // use mongoose to get all nerds in the database

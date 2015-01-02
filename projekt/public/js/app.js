@@ -11,6 +11,8 @@ angular.module('twitterApp', [
 	'MapService',
 	]).run(['$location', '$rootScope', '$log', 'AuthService', '$route',
         function ($location, $rootScope, $log, AuthService, $route) {
+        	AuthService.getUserProfile();
+
   			$rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
             	if (rejection && rejection.needsAuthentication === true) {
                 	var returnUrl = $location.url();
@@ -22,4 +24,12 @@ angular.module('twitterApp', [
     }])
 	.config(function() {
 	    console.log("app config");
+		//Calling order 
+		/*
+		*	app.config()
+		*	app.run()
+		*	directive's compile functions (if they are found in the dom)
+		*	app.controller()
+		*	directive's link functions (again if found)
+		*/
 	})

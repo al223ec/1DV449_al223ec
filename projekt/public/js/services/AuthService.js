@@ -1,49 +1,53 @@
-angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http', '$window', 
-	function($rootScope, $http, $window) {
+angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http', '$location', 
+	function($rootScope, $http, $location) {
 	//Every application has a single root scope. All other scopes are descendant scopes of the root scope. Scopes 
 	var user = {
 	    isAuthenticated: false,
-		email: '' //El email
+		data: {}
 	};
  
     $rootScope.user = user;
 
-    var authService = {};
+    return {
+        isAuthenticated : function () {
+            return user.isAuthenticated; 
+        },
+        login : function (loginModel) {
+            var loginResponse = $http.post('/loginUser', loginModel); 
+            loginResponse.then(function (response) {
+                var data = response.data; 
 
-    authService.init = function (isAuthenticated, email) {
-        user.isAuthenticated = isAuthenticated;
-        user.email = email;
+                if (data.loginOk === true){
+                    user.isAuthenticated = true;
+                    user.data = data.user; 
+                    $location.path('/profile'); 
+                }
+            });
+        },
+        logout : function () {
+            user = {
+                    isAuthenticated: false,
+                    data: {}
+                };
+            $http.get('/logout').then(function(){
+                $location.path('/'); 
+            }); 
+        },
+        register : function (registerModel) {
+
+
+        },
+        getUserProfile : function(){
+            $http.get('/userprofile')
+            .then(function (response) {
+                var data = response.data; 
+                if (data.loginOk === true){
+                    user.isAuthenticated = true;
+                    user.data = data.user;
+                }
+            });
+        }
     };
 
-    authService.isAuthenticated = function () {
-        $http.get('/profile').then(function(response){
-            return user.isAuthenticated || (typeof response.data.user !== "undefined"); 
-        })
-    };
-
-    authService.login = function (loginModel) {
-        var loginResponse = $http.post('/loginUser', loginModel); 
-        loginResponse.then(function (response) {
-            var data = response.data; 
-            user.isAuthenticated = data.loginOk;
-
-            if (data.loginOk === true){
-                user.email = loginModel.email;
-              //  $window.location.href = '/';
-            }
-        });
-        //return loginResponse;
-    };
-
-    authService.logout = function () {
-
-    };
-
-    authService.register = function (registerModel) {
-
-
-    };
-
-    return authService;
 }]
 );

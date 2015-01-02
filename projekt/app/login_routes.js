@@ -2,7 +2,10 @@ module.exports = function(app, router, passport) {
 
     router.post('/loginUser', 
         passport.authenticate('local-login', { failureRedirect: '/login' }), function(req, res) {
-            res.json({ loginOk: true }); 
+            res.json({ 
+                loginOk: true,
+                user : req.user 
+            }); 
         }
     );
 
@@ -15,8 +18,11 @@ module.exports = function(app, router, passport) {
     }));
 
     // PROFIL  ===================== kan endast nås om isLoggedin är true
-    router.get('/profile', isLoggedIn, function(req, res) {
-		res.json({ user : req.user }); 
+    router.get('/userprofile', isLoggedIn, function(req, res) {
+        res.json({ 
+            loginOk: true,
+            user : req.user 
+        }); 
     });
 
     router.get('/logout', function(req, res) {
@@ -33,5 +39,6 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()){
         return next();
     }
-    res.json({ loginOk: false }); 
+    
+    res.redirect('/');
 }
