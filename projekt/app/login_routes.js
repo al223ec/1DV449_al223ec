@@ -1,5 +1,4 @@
 module.exports = function(app, router, passport) {
-
     router.post('/loginUser', 
         passport.authenticate('local-login', { failureRedirect: '/login' }), function(req, res) {
             res.json({ 

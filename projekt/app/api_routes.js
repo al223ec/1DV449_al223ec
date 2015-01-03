@@ -1,57 +1,59 @@
 var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
 
-    module.exports = function(app, router) {
-        var service = new TwitterService();
+module.exports = function(app, router) {
+    var service = new TwitterService();
         //Middleware, Detta sker vid varje request mot /api
-        router.use(function(req, res, next) {
-            console.log('Request till api:et.');
-            next();
-        });
+    router.use(function(req, res, next) {
+        console.log('Request till api:et.');
+        next();
+    });
 
-        router.get('/', function(req, res) {
-            res.json({ message: 'Api:et är vid liv!' }); 
-        });
-        router.route('/trends')
-             .post(function(req, res) {
+    router.get('/', function(req, res) {
+        res.json({ message: 'Api:et är vid liv!' }); 
+    });
+    router.route('/trends')
+         .post(function(req, res) {
 
-             })
-             .get(function(req, res){
-                TrendQuery.find(function(err, trendQueries) {
-                    if (err){
-                        res.send(err);
-                    }
-                    res.json(trendQueries);
-                });
-             });
-
-        router.route('/trends/:lat/:lng')
-            .get(function(req, res){
-                var woeidSuccess = function(data){
-                    data = JSON.parse(data)[0];
-                    var woeid = data['woeid'];
-                    service.getTrendsWithWoeid(woeid, error(res), success(res));   
+         })
+         .get(function(req, res){
+            TrendQuery.find(function(err, trendQueries) {
+                if (err){
+                    res.send(err);
                 }
-                service.getTrendsClosest(req.params.lat, req.params.lng, error(res), woeidSuccess);
+                res.json(trendQueries);
             });
+         });
 
-        function error(res){
-            return function(err, response, body){
-                res.send(err);
+     router.get('/trends/:lat/:lng', 
+        function(req, res){
+            console.log(req.user); 
+            
+            var woeidSuccess = function(data){
+                data = JSON.parse(data)[0];
+                var woeid = data['woeid'];
+                service.getTrendsWithWoeid(woeid, error(res), success(res));   
             }
-        }
-        function success(res){
-            return function(data){
-                res.send(data);
-            }
-        }
-        app.use('/api', router);
-        // frontend routes =========================================================
-        // route to handle all angular requests
-        /* app.get('*', function(req, res) {
-            console.log('Request till *');
-            res.redirect('/');
+            service.getTrendsClosest(req.params.lat, req.params.lng, error(res), woeidSuccess);
         });
+
+    function error(res){
+        return function(err, response, body){
+            res.send(err);
+        }
+    }
+    function success(res){
+        return function(data){
+            res.send(data);
+        }
+    }
+    app.use('/api', router);
+    // frontend routes =========================================================
+    // route to handle all angular requests
+    /* app.get('*', function(req, res) {
+        console.log('Request till *');
+        res.redirect('/');
+    });
    
       
         /*

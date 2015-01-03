@@ -42,7 +42,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public')); 
 
 // passport ==================================================
-app.use(session({ secret: 'S3CRE7SUCHhaxxor' })); // session secret
+//app.use(session({ secret: 'S3CRE7SUCHhaxxor' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());

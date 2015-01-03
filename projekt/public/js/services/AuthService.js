@@ -40,6 +40,7 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
         getUserProfile : function(){
             $http.get('/userprofile')
             .then(function (response) {
+                console.log(response); 
                 var data = response.data; 
                 if (data.loginOk === true){
                     user.isAuthenticated = true;

@@ -149,9 +149,7 @@ angular.module('MapService', []).factory('Map', ['App', function(appService) {
 	    create : function(callback) {
 	    	map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-		    google.maps.event.addListener(map, "rightclick", function(e) {	
-			    console.log("Clicked"); 
-
+		    google.maps.event.addListener(map, "rightclick", function(e) {
 			    var lat = e.latLng.lat();
 			    var lng = e.latLng.lng();
 

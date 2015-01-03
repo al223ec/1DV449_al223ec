@@ -18,6 +18,7 @@ angular.module('AppService', []).factory('App', ['$http', function($http) {
         }, 
 
         getTrendsWithCoordinates : function(lat, lng) {
+            
             return $http.get('/api/trends/' + lat + '/' + lng); 
         },
     }       
