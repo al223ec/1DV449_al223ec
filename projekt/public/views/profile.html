@@ -2,9 +2,7 @@
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
         <a ng-click="logout()" class="btn btn-default btn-sm">Logout</a>
     </div>
-
     <div class="row">
-
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
@@ -17,3 +15,15 @@
 
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+                    <p>
+                        <strong>id</strong>: {{user.data.facebook.id}}<br>
+                        <strong>token</strong>: {{user.data.facebook.token}}<br>
+                        <strong>email</strong>: {{user.data.facebook.email}}<br>
+                        <strong>name</strong>: {{user.data.facebook.name}}
+                    </p>
+            </div>
+        </div>
+    </div>

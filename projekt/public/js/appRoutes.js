@@ -1,15 +1,19 @@
 angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$locationProvider', 
     function($routeProvider, $httpProvider, $locationProvider) {
         function checkLoggedIn($q, $log, AuthService) {
-                var deferred = $q.defer();
-                //$q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+            var deferred = $q.defer();
+
+            AuthService.getUserProfile().then(function(){
                 if (!AuthService.isAuthenticated()) {
                     $log.log('authentication required. redirect to login');
                     deferred.reject({ needsAuthentication: true });
                 } else {
                     deferred.resolve();
-                }     
-                return deferred.promise;
+                }
+            });
+
+ 
+            return deferred.promise;
         }
      
         $routeProvider.whenAuthenticated = function (path, route) {
@@ -20,17 +24,13 @@ angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$loca
             return $routeProvider.when(path, route);
         }
         $routeProvider
-                .when('/', {
+                .whenAuthenticated('/', {
                     templateUrl: 'views/home.html',
                     controller: 'MainController'
                 })
                 .when('/twitter', {
                     templateUrl: 'views/twitter.html',
                     controller: 'TwitterController'
-                })
-                .when('/map', {
-                    templateUrl: 'views/map.html',
-                    controller: 'MainController'
                 })
                 .when('/authenticate', {
                     templateUrl: 'views/auth.html',
@@ -48,6 +48,7 @@ angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$loca
                     templateUrl: 'views/profile.html',
                     controller: 'ProfileController'
                 })
+                //TODO: implementera felhantering
                 .when('/404', { 
                     templateUrl: 'views/404.html', 
                     controller: 'NotFoundErrorCtrl' 

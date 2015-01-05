@@ -2,4 +2,5 @@ angular.module('MainCtrl', []).controller('MainController', ['$scope', 'Map', fu
     $scope.tagline = 'To the moon and back!';
 
     map.create(); 
+
 }]);

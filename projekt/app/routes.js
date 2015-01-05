@@ -1,15 +1,15 @@
 var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
 
-module.exports = function(app, router, passport) {
+module.exports = function(app, passport) {
     //Middleware, Detta sker vid varje request mot /servern
-    router.use(function(req, res, next) {
+    app.use(function(req, res, next) {
         console.log('Request till servern!');
         next();
     });
 
-    router.post('/loginUser', 
-        passport.authenticate('local-login', { failureRedirect: '/login' }), function(req, res) {
+    app.post('/loginUser', 
+        passport.authenticate('local-login', { failureRedirect: '/login', }), function(req, res) {
             res.json({ 
                 loginOk: true,
                 user : req.user 
@@ -18,21 +18,29 @@ module.exports = function(app, router, passport) {
     );
 
     // Registrera ==============================
-    router.post('/signup', passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/profile',
         failureRedirect : '/signup', 
         failureFlash : true // allow flash messages
     }));
 
     // PROFIL  ===================== kan endast nås om isLoggedin är true
-    router.get('/userprofile', isLoggedIn, function(req, res) {
+    app.get('/userprofile', isLoggedIn, function(req, res) {
         res.json({ 
             loginOk: true,
             user : req.user 
         }); 
     });
 
-    router.get('/logout', function(req, res) {
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }));
+
+    app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
@@ -47,10 +55,10 @@ module.exports = function(app, router, passport) {
     // Api routes ==============================
     var service = new TwitterService();
 
-    router.get('/api/', function(req, res) {
+    app.get('/api/', function(req, res) {
         res.json({ message: 'Api:et är vid liv!' }); 
     });
-    router.get('/api/trends', function(req, res){
+    app.get('/api/trends', function(req, res){
             TrendQuery.find(function(err, trendQueries) {
                 if (err){
                     res.send(err);
@@ -59,9 +67,8 @@ module.exports = function(app, router, passport) {
             });
          });
 
-    router.get('/api/trends/:lat/:lng', function(req, res){
+    app.get('/api/trends/:lat/:lng', isLoggedIn, function(req, res){
             console.log(req.user); 
-
             var woeidSuccess = function(data){
                 data = JSON.parse(data)[0];
                 var woeid = data['woeid'];
@@ -83,12 +90,8 @@ module.exports = function(app, router, passport) {
 
     // frontend routes =========================================================
     // route to handle all angular requests
-    /*
     app.get('*', function(req, res) {
         console.log('Request till *');
-        res.redirect('/');
+        res.sendfile('./public/index.html');
     });
-    */
-    app.use(router);
 };
-

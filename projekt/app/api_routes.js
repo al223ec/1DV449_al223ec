@@ -46,6 +46,7 @@ module.exports = function(app, router) {
         return function(data){
             res.send(data);
         }
+<<<<<<< HEAD
     }
     app.use('/api', router);
     // frontend routes =========================================================
@@ -54,9 +55,18 @@ module.exports = function(app, router) {
         console.log('Request till *');
         res.redirect('/');
     });
+=======
+        app.use('/api', router);
+        // frontend routes =========================================================
+        // route to handle all angular requests
+          /*app.get('*', function(req, res) {
+            console.log('Request till *');
+            res.sendfile('./public/index.html'); // load our public/index.html file
+        });
+>>>>>>> parent of 657480d... Fungerande inlogg
    
       
-        /*
+
         // sample api route
         app.get('/api/bears', function(req, res) {
             // use mongoose to get all nerds in the database

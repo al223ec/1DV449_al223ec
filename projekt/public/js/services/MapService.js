@@ -1,4 +1,4 @@
-angular.module('MapService', []).factory('Map', ['App', function(appService) {
+angular.module('MapService', []).factory('Map', ['App','AuthService', function(AppService, AuthService) {
 	var map; 
     var mapOptions = {
 		zoom: 6,
@@ -153,19 +153,15 @@ angular.module('MapService', []).factory('Map', ['App', function(appService) {
 			    var lat = e.latLng.lat();
 			    var lng = e.latLng.lng();
 
-			    console.log(lat + ' ' + lng); 
-
-			    appService.getTrendsWithCoordinates(lat, lng)
-			    .success(function(data, status, headers, config) {
+			    AppService.getTrendsWithCoordinates(lat, lng).success(function(data, status, headers, config) {
 					var latLng = new google.maps.LatLng(lat, lng);
-				   	console.log(data); 
+				   	//TODO:felhantering
  				    var marker = new google.maps.Marker({
 						position: latLng,
 						map: map,
 						title: data[0]['locations'][0]['name']
 					});
-					console.log(data); 
-    				console.log(data[0]['locations'][0]['name']); 
+					console.log(data);
 
   				}).error(function(data, status, headers, config) {
     				console.log(data);

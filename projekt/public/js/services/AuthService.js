@@ -3,7 +3,7 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
 	//Every application has a single root scope. All other scopes are descendant scopes of the root scope. Scopes 
 	var user = {
 	    isAuthenticated: false,
-		data: {}
+		data: {} //El email
 	};
  
     $rootScope.user = user;
@@ -34,21 +34,18 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
             }); 
         },
         register : function (registerModel) {
-
-
+            return $http.post('/signup', registerModel); 
         },
-        getUserProfile : function(){
-            $http.get('/userprofile')
-            .then(function (response) {
-                console.log(response); 
+        getUserProfile : function() {
+            return $http.get('/userprofile').then(function (response) {
                 var data = response.data; 
                 if (data.loginOk === true){
                     user.isAuthenticated = true;
                     user.data = data.user;
                 }
-            });
-        }
-    };
 
-}]
-);
+                return data; 
+            });
+        },
+    }
+}]);
