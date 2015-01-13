@@ -1,5 +1,4 @@
-angular.module('TwitterCtrl', []).controller('TwitterController', function($scope) {
-
-    $scope.tagline = 'Nothing beats a pocket protector!';
-
-});
+angular.module('TwitterCtrl', []).controller('TwitterController', ['$scope', '$rootScope', 
+	function($scope, $rootScope) {
+	$scope.user = $rootScope.user; 
+}]);

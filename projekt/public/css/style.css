@@ -1,16 +1,95 @@
+html { 
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */ }
+html, html a { 
+    -webkit-font-smoothing: antialiased; 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); 
+}
+/* * Addresses `font-family` inconsistency between `textarea` and other form
+* elements. */
+html, button, input, select, textarea { 
+    font-family: 'Varela Round', sans-serif; 
+}
+/* * Addresses margins handled incorrectly in IE 6/7. */
+body { 
+    margin: 0; 
+    font-family: 'Varela Round', sans-serif; 
+    color: #353638; 
+
+    background-image: url('../img/bg_color.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #ddd;
+    background-position: left bottom; 
+    -webkit-background-size: 
+    cover; -moz-background-size: 
+    cover; -o-background-size: cover; 
+    background-size: cover; 
+}
+
 html{
 	overflow-x: hidden;
-	overflow-y: hidden;
-
 }
-html, body, .container {
+
+.container {
     height: 100%;
     width: 100%;
 }
+/* ==========================================================================
+Typography
+========================================================================== */
+a:focus { 
+    outline: thin dotted; 
+}
+/* * Improves readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { 
+    outline: 0; 
+}
+a { 
+    color: #353535;
+     -webkit-transition: all 0.5s; 
+     -moz-transition: all 0.5s; 
+     -o-transition: all 0.5s; 
+     transition: all 0.5s; 
+}
+a:hover, a:focus { 
+    color: #a53930; 
+    text-decoration: none; 
+}
+/* ==========================================================================
+    Hero
+========================================================================== */
+.hero { 
+    padding: 65px 0 100px 0; height: auto; 
+}
+.hero h1 {
+     font-size: 40px; 
+     letter-spacing: 12px; 
+     margin: 10px; 
+    }
+.hero h1 span { 
+    color: #a1a9b0; 
+    display: inline-block; 
+}
+.hero p { 
+    letter-spacing: 1px; 
+}
+
+
+.body-container{
+    width: 75%;     
+    margin:0px auto;
+}
+.block{
+    background-color: #f2f3f7;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
 .container {
 	margin:0;
-	padding: 0;
-    background-color: #67747B; 
+	padding: 0; 
 }
 #map-canvas { 
     height: 100%;
@@ -45,3 +124,42 @@ html, body, .container {
 .slide.ng-leave-active {
     left: -100%;
 }
+
+
+/* ==========================================================================
+Footer
+========================================================================== */
+footer {
+    margin-top: 20px; 
+}
+footer a { 
+    color: #a1a9b0; 
+}
+footer { 
+    padding: 40px 0 30px; 
+}
+footer p { 
+    color: #fff; 
+    font-size: 12px;
+}
+ul.links { 
+    list-style: none; 
+    color: #fff; 
+    line-height: 25px; }
+ul.links li { 
+    display: inline-block; 
+}
+ul.links li::after { 
+    content: " |"; 
+}
+ul.links li:last-child::after { 
+    content: ""; 
+}
+.links { 
+    text-align: left; 
+}
+.credit { 
+    text-align: right; 
+    font-size: 8px;
+}
+

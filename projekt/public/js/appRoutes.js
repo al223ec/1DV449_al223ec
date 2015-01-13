@@ -27,13 +27,9 @@ angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$loca
                     templateUrl: 'views/home.html',
                     controller: 'MainController'
                 })
-                .when('/twitter', {
+                .whenAuthenticated('/twitter', {
                     templateUrl: 'views/twitter.html',
                     controller: 'TwitterController'
-                })
-                .when('/authenticate', {
-                    templateUrl: 'views/auth.html',
-                    controller: 'AuthController'
                 })
                 .when('/login', {
                     templateUrl: 'views/login.html',
@@ -59,6 +55,5 @@ angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$loca
                 .otherwise({redirectTo: '/'});
         // to configure how the application deep linking paths are stored.
         $locationProvider.html5Mode(true); 
-
        // $httpProvider.interceptors.push('processErrorHttpInterceptor');
 }]);

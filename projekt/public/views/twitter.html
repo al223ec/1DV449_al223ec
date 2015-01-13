@@ -1,5 +1,51 @@
-<div class="jumbotron text-center">
-    <h1>Twitter </h1>
-
-    <p>{{ tagline }}</p>
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center inner">
+        <div class="col-sm-6 col-sm-offset-3">
+		<h1>Twitter - tidigare sökningar </h1>
+		<h2>Kort om applikationen </h2>
+		<p>
+			Vid klick på kartan genomför applikation en request till servern, som i sin tur genomför 2 request till twitters api. Det första för att ta reda på korrelerande WOEID till kordinaterna man har klickat på. <br />
+			Det andra anropet frågar med hjälp av WOEID efter de 10 högst trendande hashtagen som finns i det området som är närmast det hämtade WOEID. 
+		</p>
+		<p>
+			Twitter har begränsningar i antalet anrop man kan göra till dess api. 15 stycken var 15 de minut. 
+		</p>
+		</div>
+		</div>
+		</div>
+	</div>
+</section>
+<div class="row">
+    <div class="body-container">
+		<div class="col-sm-3" ng-repeat="query in user.data.trendQueries">
+			<div class="block">
+				<ul>
+					<li><h2>{{query.locations.name}}</h2> 
+					<ul ng-repeat="trend in query.trends">
+						<li>{{trend.name}} | sök på <a href="{{trend.url}}"> twitter </a></li>
+					</ul>
+					<span class="created_at">
+						skapades : {{query.created_at}} & <br />
+						lästes : {{query.as_of}}
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
+<footer>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <ul class="links">
+                </ul>
+            </div>
+            <div class="col-md-6 credit">
+                <p>Utvecklad av <a href="http://www.antonledstrom.se/">Anton Ledström</a> i kursen <em>Webbteknik 2</em></p>
+            </div>
+		</div>
+	</div>
+</footer>
