@@ -42,6 +42,7 @@ Prioriterat, måste göras härnäst
 	
 Projektrapporten
 ----------------
+Jag har gjort en applikation, 
 Inledning där du kort beskriver vad du gjort och bakgrunden till din applikation. Finns det liknande applikationer redan?
 
 Inkludera en schematisk bild över applikationens beståndsdelar så att läsaren har enklare att förstå applikationens dataflöde.
@@ -57,7 +58,31 @@ Egen reflektion kring projektet: Här tar du upp hur projektet har gått. Vilka 
 Risker med din applikation: Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
 
 NPM 
-
+MEAN, detta är för mig helt nytt
 Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
 
+Policy
+----------------
+https://dev.twitter.com/overview/terms/policy
+----------------
+2. i
+------
+Do not (and do not allow others to) aggregate, cache, or store location data and other geographic information contained in the Content, except as part of a Tweet. Any use of location data or geographic information on a standalone basis is prohibited.
 
+
+
+
+Inledning
+----------------
+
+Klientsida
+----------------
+
+Offline-first
+----------------
+
+Risker
+----------------
+
+Betygshöjande
+----------------

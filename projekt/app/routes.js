@@ -1,5 +1,6 @@
-var TrendQuery = require('./models/trend_query');
+//var TrendQuery = require('./models/trend_query');
 var TwitterService = require('./services/twitter_service');
+var User = require('./models/user');
 
 module.exports = function(app, passport) {
     //Middleware, Detta sker vid varje request mot /servern
@@ -9,7 +10,8 @@ module.exports = function(app, passport) {
     });
 
     app.post('/loginUser', 
-        passport.authenticate('local-login', { failureRedirect: '/login', }), function(req, res) {
+        passport.authenticate('local-login', { failureRedirect: '/login', }), 
+        function(req, res) {
             res.json({ 
                 loginOk: true,
                 user : req.user 
@@ -68,18 +70,60 @@ module.exports = function(app, passport) {
          });
 
     app.get('/api/trends/:lat/:lng', isLoggedIn, function(req, res){
-            console.log(req.user); 
+            //console.log(req.user); 
             var woeidSuccess = function(data){
                 data = JSON.parse(data)[0];
                 var woeid = data['woeid'];
-                service.getTrendsWithWoeid(woeid, error(res), success(res));   
+                console.log("get woeidSuccess"); 
+
+                service.getTrendsWithWoeid(woeid, error(res), 
+                    successGetTrendsWithWoeid(res, req.user, req.params.lat, req.params.lng));      
             }
             service.getTrendsClosest(req.params.lat, req.params.lng, error(res), woeidSuccess);
+
         });
 
     function error(res){
         return function(err, response, body){
             res.send(err);
+        }
+    }
+    function successGetTrendsWithWoeid(res, user, lat, lng){
+        return function(data){
+            data = JSON.parse(data)[0];
+            var trendQuery = {
+                as_of : new Date(data['as_of']),
+                created_at : new Date(data['created_at']),
+                trends : [],
+                locations :{
+                    name : data['locations'][0]['name'],
+                    woeid : data['locations'][0]['woeid'],
+                    lat : lat,
+                    lng : lng,
+                }
+            };
+
+            for (var i = 0; i < data['trends'].length; i++) {
+                trendQuery.trends.push({
+                    name : data['trends'][i]['name'],
+                    query : data['trends'][i]['query'],
+                    url : data['trends'][i]['url'],
+                });
+            }
+            user.trendQueries.push(trendQuery); 
+            console.log(user); 
+            console.log(trendQuery); 
+
+            var id = user._id;
+            delete user._id;
+            if (id) {
+                User.update({_id: id}, user, {upsert: true}, function (err) {
+                    if (err){
+                        //res.send(err);
+                    }
+                });
+            }
+            res.send(data);
         }
     }
     function success(res){

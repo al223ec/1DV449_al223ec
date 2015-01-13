@@ -11,7 +11,6 @@ angular.module('appRoutes', []).config(['$routeProvider','$httpProvider', '$loca
                     deferred.resolve();
                 }
             });
-
  
             return deferred.promise;
         }

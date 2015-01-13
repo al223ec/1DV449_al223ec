@@ -4,8 +4,6 @@ module.exports = function(app, router, passport) {
             res.json({ loginOk: true }); 
         }
     );
-
-
     // Registrera ==============================
     router.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/profile',

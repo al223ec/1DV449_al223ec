@@ -46,7 +46,6 @@ module.exports = function(app, router) {
         return function(data){
             res.send(data);
         }
-<<<<<<< HEAD
     }
     app.use('/api', router);
     // frontend routes =========================================================
@@ -148,7 +147,6 @@ module.exports = function(app, router) {
                         res.json({ message: 'no updates!' }); 
                     }
                 });
-
             };
             //service.getWorldwideTrends(error, success);
             //service.searchTweets(error, success);  
