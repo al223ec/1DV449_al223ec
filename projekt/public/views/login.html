@@ -5,14 +5,20 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-            <form class="simple-form">
+            <form class="simple-form" name="loginForm">
                 <div class="form-group">
                     <label>Email</label>
-                    <input ng-model="formData.email" type="text" class="form-control" name="email">
+                    <input ng-model="user.email" type="email" class="form-control" name="email" required>
+                    <span class="error" ng-show="loginForm.email.$error.required">
+                      Måste ange en email!</span>
+                    <span class="error" ng-show="loginForm.email.$error.email">
+                      Inte en giltig email!</span>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input ng-model="formData.password" type="password" class="form-control" name="password">
+                    <input ng-model="user.password" type="password" class="form-control" name="password" required>
+                    <span class="error" ng-show="loginForm.password.$error.required">
+                    Måste ange ett lösenord!</span><br>
                 </div>
                 <input type="submit" ng-click="login(formData)" class="btn btn-warning btn-lg" value="Login">
             </form>

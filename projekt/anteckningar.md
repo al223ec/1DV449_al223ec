@@ -70,6 +70,7 @@ https://dev.twitter.com/overview/terms/policy
 Do not (and do not allow others to) aggregate, cache, or store location data and other geographic information contained in the Content, except as part of a Tweet. Any use of location data or geographic information on a standalone basis is prohibited.
 
 
+Facebook kakor, kan leda till buggar
 
 
 Inledning

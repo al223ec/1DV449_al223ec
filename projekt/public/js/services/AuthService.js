@@ -12,10 +12,21 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
         isAuthenticated : function () {
             return user.isAuthenticated; 
         },
-        login : function (loginModel) {
-            var loginResponse = $http.post('/loginUser', loginModel); 
-            loginResponse.then(function (response) {
+        login : function (loginModel, failCallback) {
+            var loginRequest = $http.post('/loginUser', loginModel)
+
+            loginRequest.error(function(data, status, headers, config){
+                if(data == "Unauthorized"){
+                    //felaktiga uppgifter
+                    console.log("felaktiga uppgifter"); 
+                    failCallback(); 
+                    $location.path('/login'); 
+                }
+            }); 
+
+            loginRequest.then(function (response) {
                 var data = response.data; 
+                console.log(data); 
 
                 if (data.loginOk === true){
                     user.isAuthenticated = true;

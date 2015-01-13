@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     });
 
     app.post('/loginUser', 
-        passport.authenticate('local-login', { failureRedirect: '/login', }), 
+        passport.authenticate('local-login'), 
         function(req, res) {
             res.json({ 
                 loginOk: true,
@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
         if (req.isAuthenticated()){
             return next();
         }
-        res.redirect('/');
+        res.redirect('/');//Eller 401
     }
     // Api routes ==============================
     var service = new TwitterService();

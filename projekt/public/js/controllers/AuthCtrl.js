@@ -2,13 +2,22 @@ angular.module('AuthCtrl', []).controller('AuthController', ['$scope', 'AuthServ
 	function($scope, AuthService) {
 
     $scope.tagline = 'login!';
+    $scope.user = { email : "", password : "" }; 
 
-    $scope.login = function(formData){
-    	console.log("Logging in!"); 
- 		AuthService.login(formData); 
+    $scope.login = function(){
+    	console.log($scope.user); 
+    	if($scope.loginForm.$valid === true){
+	    	console.log("Logging in!"); 
+	 		AuthService.login($scope.user, wrongLoginCredentials); 
+ 		}
     };
 
     $scope.register = function(formData){
-    	AuthService.register(formData); 
+    	console.log(formData); 
+    	//AuthService.register(formData); 
     };
+
+    function wrongLoginCredentials(){
+
+    }
 }]);
