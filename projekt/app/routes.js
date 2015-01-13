@@ -123,7 +123,9 @@ module.exports = function(app, passport) {
                     }
                 });
             }
-            res.send(data);
+            res.json({ 
+                data : trendQuery 
+            }); 
         }
     }
     function success(res){

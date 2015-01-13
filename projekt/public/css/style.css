@@ -47,7 +47,7 @@ a:active, a:hover {
     outline: 0; 
 }
 a { 
-    color: #353535;
+    color: #0e171d;
      -webkit-transition: all 0.5s; 
      -moz-transition: all 0.5s; 
      -o-transition: all 0.5s; 
@@ -76,17 +76,25 @@ a:hover, a:focus {
     letter-spacing: 1px; 
 }
 
-
 .body-container{
     width: 75%;     
     margin:0px auto;
+}
+.twitter-link{
+    font-size: 10px; 
 }
 .block{
     background-color: #f2f3f7;
     padding: 5px;
     margin-bottom: 10px;
 }
+.block ul li{
+    font-size: 13px; 
+}
 
+.block ul li a{
+    font-size: 13px; 
+}
 .container {
 	margin:0;
 	padding: 0; 
@@ -139,7 +147,6 @@ footer {
     padding: 40px 0 30px; 
 }
 footer p { 
-    color: #fff; 
     font-size: 12px;
 }
 ul.links { 

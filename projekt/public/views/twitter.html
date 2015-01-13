@@ -19,12 +19,18 @@
 </section>
 <div class="row">
     <div class="body-container">
-		<div class="col-sm-3" ng-repeat="query in user.data.trendQueries">
+
+    <form class="form-inline">
+      <input ng-model="filterQuery" type="text" placeholder="Sök på namn" autofocus>
+    </form>
+    <hr>
+		<div class="col-sm-3" ng-repeat="query in user.data.trendQueries | filter:filterQuery | orderBy: 'name'">
+
 			<div class="block">
 				<ul>
 					<li><h2>{{query.locations.name}}</h2> 
 					<ul ng-repeat="trend in query.trends">
-						<li>{{trend.name}} | sök på <a href="{{trend.url}}"> twitter </a></li>
+						<li>{{trend.name}} <a href="{{trend.url}}"> <span class="twitter-link">| sök på </span> <img alt="twitter-icon" src="../img/twitter_icon.png"></a></li>
 					</ul>
 					<span class="created_at">
 						skapades : {{query.created_at}} & <br />

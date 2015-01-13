@@ -1,4 +1,4 @@
-angular.module('MapService', []).factory('Map', ['App','AuthService', function(AppService, AuthService) {
+angular.module('MapService', []).factory('Map', ['App','$rootScope', function(AppService, $rootScope) {
 	var map; 
 	var infowindow = new google.maps.InfoWindow();
 
@@ -143,13 +143,13 @@ angular.module('MapService', []).factory('Map', ['App','AuthService', function(A
 	    }
 	]};
 
-	function getContent(data){
+	function getContent(query){
 		var ret = ""; 
-		ret += '<div id="content">'+ getHtmlStringTag("h1", data['locations'][0]['name']);
-		for(var i = 0; i < data.trends.length; i++){
-			ret += getHtmlStringTag("li", data.trends[i].name + '<a href="'+ data.trends[i].url +'">Twitter </a>'); 
+		ret += '<div id="content">'+ getHtmlStringTag("h1", query.locations.name);
+		for(var i = 0; i < query.trends.length; i++){
+			ret += getHtmlStringTag("li", query.trends[i].name + 
+				'<a href="'+ query.trends[i].url +'"> <span class="twitter-link">| sök på </span><img alt="twitter-icon" src="../img/twitter_icon.png"> </a>'); 
 		} 
-		//Exempel Object {trends: Array[10], as_of: "2015-01-13T14:13:42Z", created_at: "2015-01-13T14:06:15Z", locations: Array[1]}as_of: "2015-01-13T14:13:42Z"created_at: "2015-01-13T14:06:15Z"locations: Array[1]trends: Array[10]0: Objectname: "Oslo"promoted_content: nullquery: "Oslo"url: "http://twitter.com/search?q=Oslo"__proto__: Objectname
 		return ret; 
 
 	};
@@ -157,16 +157,18 @@ angular.module('MapService', []).factory('Map', ['App','AuthService', function(A
 		return '<' + tag + '>' + value + "</" + tag + '>'; 
 	}; 
 
-	function createMarker(lat, lng, data){
+	function createMarker(lat, lng, query){
 		var latLng = new google.maps.LatLng(lat, lng);
 	    var marker = new google.maps.Marker({
 			position: latLng,
 			map: map,
-			title: data['locations'][0]['name']
+			title: query.locations.name,
+			icon: '../img/tweet_marker.png',     
+			draggable:true,
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {
-	        infowindow.setContent(getContent(data))
+	        infowindow.setContent(getContent(query))
 	        infowindow.open(map, marker);
 	    });
 	}; 
@@ -176,21 +178,22 @@ angular.module('MapService', []).factory('Map', ['App','AuthService', function(A
         get : function() {
             return map; 
         },
-        infowindow : infowindow,
-        
 	    create : function(callback) {
 	    	map = new google.maps.Map($('#map-canvas')[0], mapOptions);
+	    	var queries = $rootScope.user.data.trendQueries; 
+	    	if(queries){
+		    	for(var i = 0; i < queries.length; i++){
+		    		createMarker(queries[i].locations.lat, queries[i].locations.lng, queries[i]); 
+		    	}
+	    	}
 
 		    google.maps.event.addListener(map, "rightclick", function(e) {
 			    var lat = e.latLng.lat();
 			    var lng = e.latLng.lng();
 
-			    console.log("Clicked"); 
-
-			    AppService.getTrendsWithCoordinates(lat, lng).success(function(data, status, headers, config) {
-					console.log(data);
-					createMarker(lat, lng, data);
-
+			    AppService.getTrendsWithCoordinates(lat, lng).success(function(response, status, headers, config) {
+					createMarker(lat, lng, response.data);
+					console.log(response.data); 
   				}).error(function(data, status, headers, config) {
     				console.log(data);
   				});
