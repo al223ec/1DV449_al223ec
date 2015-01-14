@@ -3,21 +3,26 @@ angular.module('AuthCtrl', []).controller('AuthController', ['$scope', 'AuthServ
 
     $scope.tagline = 'login!';
     $scope.user = { email : "", password : "" }; 
+    $scope.errorMessage = null; 
 
     $scope.login = function(){
     	console.log($scope.user); 
     	if($scope.loginForm.$valid === true){
-	    	console.log("Logging in!"); 
 	 		AuthService.login($scope.user, wrongLoginCredentials); 
  		}
     };
 
-    $scope.register = function(formData){
-    	console.log(formData); 
-    	//AuthService.register(formData); 
+    $scope.register = function(){
+    	if($scope.registerForm.$valid === true){
+    		AuthService.register($scope.user, failedRegisterForm); 
+    	}
     };
 
     function wrongLoginCredentials(){
+    	$scope.errorMessage = "Felaktig inlogg! Vg försök igen!";
+    };
 
-    }
+    function failedRegisterForm(){
+    	$scope.errorMessage = "Uppgifterna har inte kunnat registreras! Vg försök igen!";
+    };
 }]);

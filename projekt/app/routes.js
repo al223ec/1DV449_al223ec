@@ -20,11 +20,14 @@ module.exports = function(app, passport) {
     );
 
     // Registrera ==============================
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile',
-        failureRedirect : '/signup', 
-        failureFlash : true // allow flash messages
-    }));
+    app.post('/signup', passport.authenticate('local-signup'), 
+        function(req, res) {
+            res.json({ 
+                loginOk: true,
+                user : req.user 
+            }); 
+        }
+    );
 
     // PROFIL  ===================== kan endast nås om isLoggedin är true
     app.get('/userprofile', isLoggedIn, function(req, res) {

@@ -33,7 +33,9 @@ module.exports = function(passport) {
                         return done(err);
                     }
                     if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                        //fattar inte hur jag får ut dessa till klienten passport per default 
+                        //returnerar en 401 vid misslyckande
+                        return done(null, false, { message : 'Emailen finns redan registrerad.' });
                     } else {
                         var newUser            = new User();
                         newUser.local.email    = email;
@@ -64,10 +66,10 @@ module.exports = function(passport) {
                 }
 
                 if (!user){
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false, { message : "Emailen finns inte!"}); 
                 }
                 if (!user.validPassword(password)){
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    return done(null, false, {message : "Fel lösenord"}); 
                 }
                 //success
                 return done(null, user);

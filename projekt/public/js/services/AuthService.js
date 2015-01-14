@@ -8,32 +8,34 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
  
     $rootScope.user = user;
 
-    return {
-        isAuthenticated : function () {
-            return user.isAuthenticated; 
-        },
-        login : function (loginModel, failCallback) {
-            var loginRequest = $http.post('/loginUser', loginModel)
-
-            loginRequest.error(function(data, status, headers, config){
+    function performRequest(url, model, failCallback){
+        var request = $http.post(url, model)
+            request.error(function(data, status, headers, config){
                 if(data == "Unauthorized"){
                     //felaktiga uppgifter
                     console.log("felaktiga uppgifter"); 
                     failCallback(); 
-                    $location.path('/login'); 
                 }
             }); 
 
-            loginRequest.then(function (response) {
+            request.then(function (response) {
                 var data = response.data; 
                 console.log(data); 
-
                 if (data.loginOk === true){
                     user.isAuthenticated = true;
                     user.data = data.user; 
                     $location.path('/profile'); 
                 }
             });
+            return request; 
+    }
+
+    return {
+        isAuthenticated : function () {
+            return user.isAuthenticated; 
+        },
+        login : function (loginModel, failCallback) {
+            return performRequest('/loginUser', loginModel, failCallback); 
         },
         logout : function () {
             user = {
@@ -44,8 +46,8 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
                 $location.path('/'); 
             }); 
         },
-        register : function (registerModel) {
-            return $http.post('/signup', registerModel); 
+        register : function (registerModel, failCallback) {
+            return performRequest('/signup', registerModel, failCallback); 
         },
         getUserProfile : function() {
             return $http.get('/userprofile').then(function (response) {
@@ -54,7 +56,6 @@ angular.module('AuthService', []).factory('AuthService', ['$rootScope', '$http',
                     user.isAuthenticated = true;
                     user.data = data.user;
                 }
-
                 return data; 
             });
         },
